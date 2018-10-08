@@ -1,6 +1,7 @@
 body {
     margin: 0px;
-    font-family: 'Muli', sans-serif;    
+    font-family: 'Muli', sans-serif;   
+    color: rgb(240, 112, 14); 
 }
 nav a{
     text-decoration: none;
@@ -133,16 +134,15 @@ input[type="submit"] {
     float: left;
     display: inline-block;
 }
-.card p{
+.card .text{
     float: right;
     display: inline-block;
     padding-top: 5px;
 
 }
 #page{
-    margin: 10px 0 10px 0;
-    padding: 10px;
-    height: 700px;
+    margin: 1px 0 1px 0;
+    height: 850px;
     clear: both;
 }
 .card img {
@@ -175,4 +175,16 @@ input[type="submit"] {
     background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);
     background: linear-gradient(to right, #f7b733, #fc4a1a); 
 
+}
+/* ************Admin page************* */
+
+.admin-page .card{
+    background: #f3efef;
+}
+hr{
+    color:rgb(214, 210, 207);
+}
+.admin-page p{
+    color: rgb(121, 54, 4);
+    
 }
