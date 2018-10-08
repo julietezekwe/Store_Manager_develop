@@ -1,0 +1,55 @@
+body {
+    margin: 0px;
+    font-family: 'Muli', sans-serif;    
+}
+nav a{
+    text-decoration: none;
+    color: rgb(240, 119, 14);
+}
+nav {
+    padding: 20px 50px;
+    border-bottom: 1px solid ;
+    border-color: rgb(252, 229, 188);
+    color: rgb(240, 119, 14);
+}
+nav ul {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    float: right;
+    list-style: none;
+}
+ nav div {
+     display: inline-block;
+     font-size: 2em;
+ }
+nav li {
+    padding: 10px;
+    margin: 5px;
+    display: inline;
+}
+
+
+@media screen and (max-width: 600px) {
+    nav div {
+        display: block
+    }
+    nav ul {
+        display: block;
+        float: none;
+    }
+
+    nav li {
+        display: block;
+    }
+}
+
+#footer{
+    text-align:center;
+    padding: 20px;
+    color: wheat;
+    background: rgb(240, 119, 14);  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);
+    background: linear-gradient(to right, #f7b733, #fc4a1a); 
+
+}
