@@ -100,7 +100,15 @@ input[type="submit"] {
     cursor: pointer;
     font-size: 20px;
 }
-
+select{
+    width: 341px;
+    height: 50px;
+    margin-bottom: 26px;
+    border: none;
+    background: #f3efef;
+    padding-left: 15px;
+    outline: none;
+}
 #page-banner{
   width: 100%;
   height: 350px;
@@ -134,23 +142,29 @@ input[type="submit"] {
     float: left;
     display: inline-block;
 }
-.card .text{
+.text{
     float: right;
-    display: inline-block;
-    padding-top: 5px;
+    display: inline-block; 
+    
+}
 
+.text-left{
+    float:left;
+    display: inline-block; 
+   
 }
 #page{
     margin: 1px 0 1px 0;
-    height: 850px;
+    /* height: 850px; */
     clear: both;
 }
+
 .card img {
     display: block;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    max-height: 200px;
+    height: 180px;
     
 }
 
@@ -169,6 +183,7 @@ input[type="submit"] {
 
 #footer{
     text-align:center;
+    height: 60px;
     padding: 20px;
     color: wheat;
     background: rgb(240, 119, 14);  /* fallback for old browsers */
@@ -177,7 +192,12 @@ input[type="submit"] {
 
 }
 /* ************Admin page************* */
+.admin-page{
+    padding:1px;
+    margin: 1px auto 1px auto;
+    width: 100%;
 
+}
 .admin-page .card{
     background: #f3efef;
 }
@@ -188,3 +208,30 @@ hr{
     color: rgb(121, 54, 4);
     
 }
+.active{
+    color: rgb(218, 51, 5) !important;
+}
+
+/* ****button***** */
+
+.button {
+    display: inline-block;
+    padding: 12px 23px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color:rgba(218, 51, 5, 0.7);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #999;
+  }
+  
+  .button:hover {background-color:rgb(218, 51, 5)}
+  
+  .button:active {
+    box-shadow: -5px 5px 5px #999;
+    transform: translateY(0.5px);
+  }
