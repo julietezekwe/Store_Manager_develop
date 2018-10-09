@@ -1,7 +1,16 @@
+html{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden scroll;
+}
+
 body {
-    margin: 0px;
+    margin-left: auto;
+    margin-right: auto;
     font-family: 'Muli', sans-serif;   
     color: rgb(240, 112, 14); 
+    max-width: 100%;
 }
 nav a{
     text-decoration: none;
@@ -61,7 +70,12 @@ nav li {
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
 
-.login-page,{background: #f5f9f7; width: 100%; padding: 55px 0px;}
+.login-page {
+    background: #f5f9f7; 
+    width: 100%; 
+    padding: 55px 0px; 
+    padding-bottom: 50px;
+}
 .login-form{
     margin: 30px auto 30px auto;
     width: 400px; 
@@ -159,8 +173,8 @@ select{
 }
 #page{
     margin: 1px 0 1px 0;
-    /* height: 850px; */
-    clear: both;
+  
+    
 }
 
 .card img {
@@ -182,19 +196,15 @@ select{
     
 }   
 
-
-
-
 #footer{
     text-align:center;
     height: 40px;
     padding: 15px;
     color: wheat;
-    background: rgb(240, 119, 14);  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);
+    background: rgb(240, 119, 14); 
     background: linear-gradient(to right, #f7b733, #fc4a1a); 
     overflow: hidden;
-    max-width: 100%;
+    width: 100%;
 
 }
 /* ************Admin page************* */
@@ -202,6 +212,7 @@ select{
     padding:1px;
     margin: 1px auto 1px auto;
     width: 100%;
+    min-height: 500px;
 
 }
 .admin-page .card{
