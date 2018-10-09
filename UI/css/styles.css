@@ -187,12 +187,14 @@ select{
 
 #footer{
     text-align:center;
-    height: 60px;
-    padding: 20px;
+    height: 40px;
+    padding: 15px;
     color: wheat;
     background: rgb(240, 119, 14);  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);
     background: linear-gradient(to right, #f7b733, #fc4a1a); 
+    overflow: hidden;
+    max-width: 100%;
 
 }
 /* ************Admin page************* */
@@ -271,4 +273,28 @@ th {
 }
 .dashboard{
     margin-top: 53px;
+}
+
+/* Product  */
+
+.description p{
+    color: #9b8b85;
+    display: inline-block;
+    text-align: justify;
+    font-style: italic;
+    margin: 0;
+    padding: 0;
+}
+.description h3{
+    display: inline-block;
+    margin: 5px;
+    padding: 0;
+}
+.description img{
+    max-height: 450px;
+    max-width: 100%;
+}
+.description img:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    border-radius: 10px;
 }
