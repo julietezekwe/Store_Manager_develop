@@ -69,7 +69,11 @@ nav li {
     padding: 10px 0 30px 0; 
     background: white;
 }
+ a{
+     text-decoration: none;
+     color: inherit;
 
+ }
 .forgotpassword a {
     color: rgb(224, 191, 147);
 }
@@ -227,6 +231,7 @@ hr{
     border: none;
     border-radius: 10px;
     box-shadow: 5px 5px 5px #999;
+    margin-bottom: 10px;
   }
   
   .button:hover {background-color:rgb(218, 51, 5)}
@@ -235,3 +240,35 @@ hr{
     box-shadow: -5px 5px 5px #999;
     transform: translateY(0.5px);
   }
+
+  /* ****Tables***** */
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    color: rgb(121, 54, 4);
+    
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: rgba(218, 51, 5, 0.7);
+    color: #ffffff;
+    margin-top: 10px;
+}
+.table-caption{
+   display: inline-block;
+   color: rgb(121, 54, 4);
+   padding: 5px;
+   margin: 0;
+   text-align: center;
+}
+.dashboard{
+    margin-top: 53px;
+}
