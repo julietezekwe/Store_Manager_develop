@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Muli:200i,400" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+        <link rel="stylesheet" href="css/modal.css">
     </head>
     <body>
         <header id="header" >
@@ -25,24 +26,63 @@
                         
                             <div class="card col-2">
                                 <h3>Dashboard</h3>
-                                <p>Products(100)</p>
+                                <p class="active">Products(100)</p>
                                 <hr>
                                 <p>Sales Record(1000)</p>
                                 <hr>
                                 <p>Store Attendants(35)</p>
-                                <hr>
-                                <p>Create Attendant</p>
-                                <hr>
-                                <p>Create Products</p>
+                              
                             </div>
                             <div class="col-8">
-                                <p>Search by <select name="category" id="">
-                                    <option value="all">All</option>
-                                    <option value="Slippers">Flat</option>
-                                    <option value="Shoes">Shoes</option>
-                                </select></p>
+                                <div class="col-11">
+                                        <p class="text-left">Search by <select name="category" id="">
+                                            <option value="all">All</option>
+                                                <option value="Slippers">Flat</option>
+                                                <option value="Shoes">Shoes</option>
+                                            </select></p> 
+                                         <button onClick="toggleModal()" class="trigger text button">Add Product</button>
+                                         <div class="modal-panel"  >
+                                                <div class="content">
+                                                    <span class="close" onClick="toggleModal()">×</span>
+                                                    
+                                                            <h1 class="login-heading">Add Product</h1>
+                                                            <div class="form">
+                                                                <form class="login"  action="">
+                                                                    <div>
+                                                                        <input type="text" placeholder="Name" required>
+                                                                    </div>
+                                                                    <div>
+                                                                        <input type="text" placeholder="Quantity" required>
+                                                                    </div>
+                                                                    <div>
+                                                                        <input type="text" placeholder="Description" required>
+                                                                    </div>
+                                                                    <div>
+                                                                        <input type="text" placeholder="Unit Prize" required>
+                                                                    </div>
+                                                                    <div >
+                                                                        <select name="category" id="">category
+                                                                            <option value="flat">Flat</option>
+                                                                            <option value="hill">Hills</option>
+                                                                            <option value="casuals">Casuals</option>
+                                                                        </select>
+                                                                    </div>
+                                                                   
+                                                                    <div>
+                                                                        <input type="submit" value="ADD">
+                                                                    </div>
+                                                                
+                                                                </form>
+                                                            </div>
+                                                        
+                                                </div>
+                                            </div>
+                                    </div>
+                                   
+                                   
+                                
                                     <div class="card col-3">
-                                           <img src="img/pro1.jpg" alt="Avatar">
+                                           <img src="img/pro3.jpg" alt="Avatar">
                                         <div class="product-detail">
                                                 <h3 style="text-align: center">Silver Shoe</h3>
                                                 <h4>-N- 599.00</h4> 
@@ -50,7 +90,7 @@
                                         </div>
                                     </div>
                                     <div class="card col-3">
-                                        <img src="img/pro2.jpg" alt="Avatar">
+                                        <img src="img/pro5.jpg" alt="Avatar">
                                         <div class="product-detail">
                                                 <h3 style="text-align: center">Silver Shoe</h3>
                                                 <h4>-N- 599.00</h4> 
@@ -58,7 +98,7 @@
                                         </div>
                                     </div>
                                     <div class="card col-3">
-                                        <img src="img/pro1.jpg" alt="Avatar">
+                                        <img src="img/pro6.jpg" alt="Avatar">
                                         <div class="product-detail">
                                                 <h3 style="text-align: center">Silver Shoe</h3>
                                                 <h4>-N- 599.00</h4>
@@ -66,7 +106,7 @@
                                         </div>
                                     </div>
                                     <div class="card col-3">
-                                        <img src="img/pro2.jpg" alt="Avatar">
+                                        <img src="img/pro3.jpg" alt="Avatar">
                                         <div class="product-detail">
                                                 <h3 style="text-align: center">Silver Shoe</h3>
                                                 <h4>-N- 599.00</h4> 
@@ -74,20 +114,30 @@
                                         </div>
                                     </div>
                                     <div class="card col-3">
-                                            <img src="img/pro2.jpg" alt="Avatar">
+                                            <img src="img/pro4.jpg" alt="Avatar">
                                             <div class="product-detail">
                                                 <h3 style="text-align: center">Silver Shoe</h3>
                                                 <h4>-N- 599.00</h4> 
                                                 <p class="text"><i class="far fa-edit"></i> <i class="far fa-trash-alt"></i></p> 
                                             </div>
-                                        </div>
+                                    </div>
+                                    <div class="card col-3">
+                                            <img src="img/pro1.jpg" alt="Avatar">
+                                            <div class="product-detail">
+                                                <h3 style="text-align: center">Silver Shoe</h3>
+                                                <h4>-N- 599.00</h4> 
+                                                <p class="text"><i class="far fa-edit"></i> <i class="far fa-trash-alt"></i></p> 
+                                            </div>
+                                    </div>
+    
     
                             </div>
                    
          </section>
-        <footer id="footer">
+        <footer id="footer" class="col-12">
             <p>Copyright © 2018 Store managers Design. All rights reserved.</p>            
         </footer>
         <!-- <script src="js/app.js"></script> -->
+        <script src="js/modals.js"></script>
     </body>
 </html>
