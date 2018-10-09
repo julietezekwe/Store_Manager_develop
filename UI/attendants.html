@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Store | Manager</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Muli:200i,400" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+        <link rel="stylesheet" href="css/modal.css">
+    </head>
+    <body>
+        <header id="header" >
+            <nav>
+                <a href="index.html"> <div class="logo"><i class="fab fa-stripe-s"></i>tore <i class="fab fa-medium-m"></i>anager</div></a>
+                <ul>
+            
+                    <li><a href=""><i class="fas fa-user-lock"></i></i> Admin</a></li>
+                    <li><a href=""><i class="fas fa-sign-in-alt"></i> Logout </a></li>
+                </ul>
+            </nav>
+        </header>
+         <section id="page" class="admin-page">
+                        
+                            <div class=" dashboard card col-2">
+                                <h3>Dashboard</h3>
+                                <p><a href="admin.html">Products(100)</a></p>
+                                <hr>
+                                <p><a href="sales-record.html">Sales Record(1000)</a></p>
+                                <hr>
+                                <p  class="active"><a href="#">Store Attendants(35)</a></p>
+                              
+                            </div>
+                            <div class="col-8">
+                                <div class="col-11">
+                                        
+                                    </div>
+                                   
+                                    <div class="card col-11">
+                                            <h2 class="table-caption">Store Attendants</h2>
+                                            <button onClick="toggleModal()" class="trigger text button">Create Attendant</button>
+                                            
+                                            <div class="modal-panel"  >
+                                                    <div class="content">
+                                                        <span class="close" onClick="toggleModal()">×</span>
+                                                        
+                                                                <h1 class="login-heading">Create Attendant</h1>
+                                                                <div class="form">
+                                                                    <form class="login"  action="">
+                                                                        <div>
+                                                                            <input type="text" placeholder="Name" required>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input type="text" placeholder="Username" required>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input type="text" placeholder="Password" required>
+                                                                        </div>
+                                                                        <div >
+                                                                            <select name="role" id="">Role
+                                                                                <option value="admin">Admin</option>
+                                                                                <option value="attendant">Attendant</option>
+                                                                            </select>
+                                                                        </div>
+                                                                       
+                                                                        <div>
+                                                                            <input type="submit" value="Create">
+                                                                        </div>
+                                                                    
+                                                                    </form>
+                                                                </div>
+                                                            
+                                                    </div>
+                                                </div>
+                                            <table class="table">
+                                                    <tr>
+                                                      <th>Name</th>
+                                                      <th>Username</th>
+                                                      <th>Password</th>
+                                                      <th>Permission</th>
+                                                      <th>Joined</th>
+                                                      <th>Action</th>
+                                                    </tr>
+                                                    <tr>
+                                                      <td>Seyi Jerry</td>
+                                                      <td>Seyichukwu</td>
+                                                      <td>12345</td>
+                                                      <td>Admin</td>
+                                                      <td>12/12/2018</td>
+                                                      <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Oge Juliet</td>
+                                                        <td>ogeeze</td>
+                                                        <td>12345</td>
+                                                        <td>Attendant</td>
+                                                        <td>12/12/2018</td>
+                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Juliet Ezekwe</td>
+                                                        <td>EzekweJuliet</td>
+                                                        <td>12345</td>
+                                                        <td>Attendant</td>
+                                                        <td>12/12/2018</td>
+                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Chinedu Ibe</td>
+                                                        <td>chineduibe</td>
+                                                        <td>12345</td>
+                                                        <td>Attendant</td>
+                                                        <td>12/12/2018</td>
+                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jules Chidimma</td>
+                                                        <td>juleschidimma</td>
+                                                        <td>12345</td>
+                                                        <td>Admin</td>
+                                                        <td>12/12/2018</td>
+                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Biodu Joseph</td>
+                                                        <td>biodun1234</td>
+                                                        <td>12345</td>
+                                                        <td>Attendant</td>
+                                                        <td>12/12/2018</td>
+                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                    </tr>
+                                                  </table>
+                                    </div>
+                                  
+    
+    
+                            </div>
+                   
+         </section>
+        <footer id="footer" class="col-12">
+            <p>Copyright © 2018 Store managers Design. All rights reserved.</p>            
+        </footer>
+        <!-- <script src="js/app.js"></script> -->
+        <script src="js/modals.js"></script>
+    </body>
+</html>
