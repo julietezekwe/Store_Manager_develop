@@ -6,6 +6,7 @@ html{
 }
 
 body {
+
     margin-left: auto;
     margin-right: auto;
     font-family: 'Muli', sans-serif;   
@@ -40,19 +41,6 @@ nav li {
 }
 
 
-@media screen and (max-width: 600px) {
-    nav div {
-        display: block
-    }
-    nav ul {
-        display: block;
-        float: none;
-    }
-
-    nav li {
-        display: block;
-    }
-}
 
 
 .container {width: 80%; margin: 0px auto;}
@@ -118,6 +106,15 @@ input[type="submit"] {
     cursor: pointer;
     font-size: 20px;
 }
+input[type="file"] {
+    width: 359px;
+    height: 50px;
+    border: none;
+    color: white;
+    margin-bottom: 26px;
+    cursor: pointer;
+    font-size: 20px;
+}
 select{
     width: 341px;
     height: 50px;
@@ -154,6 +151,7 @@ select{
     transition: 0.3s;
     color: rgb(240, 112, 14);
     margin: 15px;
+    position: relative;
     
 }
 .card h4{
@@ -309,3 +307,96 @@ th {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     border-radius: 10px;
 }
+
+/* ************ Instock Badge  *************** */
+
+.ribbon {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    position: absolute;
+  }
+  .ribbon::before,
+  .ribbon::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    display: block;
+    border: 5px solid rgb(240, 112, 14);;
+  }
+  .ribbon span {
+    position: absolute;
+    display: block;
+    width: 225px;
+    padding: 15px 0;
+    background-color: rgb(240, 112, 14);;
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  .ribbon-top-left {
+    top: -10px;
+    left: -10px;
+  }
+  .ribbon-top-left::before,
+  .ribbon-top-left::after {
+    border-top-color: transparent;
+    border-left-color: transparent;
+  }
+  .ribbon-top-left::before {
+    top: 0;
+    right: 0;
+  }
+  .ribbon-top-left::after {
+    bottom: 0;
+    left: 0;
+  }
+  .ribbon-top-left span {
+    right: -25px;
+    top: 30px;
+    transform: rotate(-45deg);
+  }
+
+
+
+
+  /* ******************   Page responsive media query***************************** */
+@media screen and (max-width: 850px){
+    [class*="col-"] {
+        
+        padding: 15px;
+        width: 65%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+  @media screen and (max-width: 700px) {
+      nav{
+          text-align: center
+      }
+    nav div {
+        display: block
+    }
+    nav ul {
+        display: block;
+        float: none;
+    }
+
+    nav li {
+        display: block;
+    }
+    
+    [class*="col-"] {
+        display: block; 
+        padding: 15px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+  
