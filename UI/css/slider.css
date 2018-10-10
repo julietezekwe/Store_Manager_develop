@@ -14,10 +14,15 @@ div#slider {
     font-size: 0;
     animation: 20s slider infinite;
   }
+
   div#slider div img {
     width: 20%;
     float: left;
+    height: 350px;
   }
+
+  
+
   @keyframes slider {
     0% {
       left: 0%;
