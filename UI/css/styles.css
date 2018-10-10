@@ -118,6 +118,15 @@ input[type="submit"] {
     cursor: pointer;
     font-size: 20px;
 }
+input[type="file"] {
+    width: 359px;
+    height: 50px;
+    border: none;
+    color: white;
+    margin-bottom: 26px;
+    cursor: pointer;
+    font-size: 20px;
+}
 select{
     width: 341px;
     height: 50px;
