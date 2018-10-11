@@ -37,10 +37,28 @@
                                 <div class="col-11">
                                         
                                     </div>
+                                   <!-- delete sale record modal -->
                                    
+                                    <div class="delete"  >
+                                            <div class="content">
+                                                <span class="close" onClick="toggleModalDelete()">×</span>
+                                                
+                                               
+                                                        <div class="card">                                  
+                                                            <div class="product-detail">
+                                                                <h3 style="text-align: center">Delete this sale?</h3>
+                                                               
+                                                                <p class="text-left"><a href=""><button class="button">Cancel</button></a></p> 
+                                                                <p class="text"> <a href=""><button class="button delete-btn">Delete</button></a></p> 
+                                                            </div>
+                                                        </div>
+                                                       
+                                                    
+                                            </div>
+                                        </div>
                                     <div class="card col-11">
                                             <h2 class="table-caption">Sales Record</h2>
-                                          
+                                          <!-- sales record table -->
                                             <table class="table">
                                                     <tr>
                                                       <th>Product Id</th>
@@ -56,7 +74,7 @@
                                                       <td>500</td>
                                                       <td>EzekweJuliet</td>
                                                       <td>12/12/2018</td>
-                                                      <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                      <td><i class="far fa-trash-alt" onClick="toggleModalDelete()"></i></td>
                                                     </tr>
                                                     <tr>
                                                         <td>701</td>
@@ -64,7 +82,7 @@
                                                         <td>899</td>
                                                         <td>chineduibe</td>
                                                         <td>12/12/2018</td>
-                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                        <td><i class="far fa-trash-alt" onClick="toggleModalDelete()"></i></td>
                                                     </tr>
                                                     <tr>
                                                         <td>1093</td>
@@ -72,7 +90,7 @@
                                                         <td>9999</td>
                                                         <td>biodun1234</td>
                                                         <td>12/12/2018</td>
-                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                        <td> <i class="far fa-trash-alt" onClick="toggleModalDelete()"></i></td>
                                                     </tr>
                                                     <tr>
                                                         <td>1987</td>
@@ -80,7 +98,7 @@
                                                         <td>8765</td>
                                                         <td>chineduibe</td>
                                                         <td>12/12/2018</td>
-                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                        <td><i class="far fa-trash-alt" onClick="toggleModalDelete()"></i></td>
                                                     </tr>
                                                     <tr>
                                                         <td>900</td>
@@ -88,7 +106,7 @@
                                                         <td>500</td>
                                                         <td>EzekweJuliet</td>
                                                         <td>12/12/2018</td>
-                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                        <td> <i class="far fa-trash-alt" onClick="toggleModalDelete()"></i></td>
                                                     </tr>
                                                     <tr>
                                                         <td>901</td>
@@ -96,7 +114,7 @@
                                                         <td>899</td>
                                                         <td>EzekweJuliet</td>
                                                         <td>12/12/2018</td>
-                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                        <td><i class="far fa-trash-alt" onClick="toggleModalDelete()"></i></td>
                                                     </tr>
                                                   </table>
                                     </div>
