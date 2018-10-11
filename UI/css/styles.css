@@ -399,4 +399,7 @@ th {
     }
 }
 
-  
+ .far, .link{
+     cursor: pointer;
+ } 
+ 
