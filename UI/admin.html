@@ -40,6 +40,7 @@
                                                 <option value="Slippers">Flat</option>
                                                 <option value="Shoes">Shoes</option>
                                             </select></p> 
+                                            <!-- create product modal -->
                                          <button onClick="toggleModal()" class="trigger text button">Add Product</button>
                                          <div class="modal-panel"  >
                                                 <div class="content">
@@ -81,16 +82,75 @@
                                             </div>
                                     </div>
                                    
-                                   
-                                
+                                   <!-- edit product modal -->
+                                   <div class="modal-panel-edit"  >
+                                        <div class="content">
+                                            <span class="close" onClick="toggleModalEdit()">×</span>
+                                            
+                                                    <h1 class="login-heading">Update Product</h1>
+                                                    <div class="form">
+                                                        <form class="login"  action="" >
+                                                            <div>
+                                                                <input type="text" value="Silver Shoe" placeholder="Product Name" required>
+                                                            </div>
+                                                            <div>
+                                                                <input type="text" value="12" placeholder="Quantity" required>
+                                                            </div>
+                                                            <div>
+                                                                <input type="text" value="fine good nice one beautiful shoe" placeholder="Description" required>
+                                                            </div>
+                                                            <div>
+                                                                <input type="text" value="600" placeholder="Unit Prize" required>
+                                                            </div>
+                                                            <div >
+                                                                <select name="category" id="">category
+                                                                    <option value="flat" selected>Flat</option>
+                                                                    <option value="hill">Hills</option>
+                                                                    <option value="casuals">Casuals</option>
+                                                                </select>
+                                                            </div>
+                                                           <div>
+                                                                <input type="file" id="" placeholder="Upload Image">
+                                                           </div>
+                                                            <div>
+                                                                <input type="submit" value="Update">
+                                                            </div>
+                                                        
+                                                        </form>
+                                                    </div>
+                                                
+                                        </div>
+                                        </div>
+                                            <!-- delete product modal -->
+                                            <div class="delete"  >
+                                                    <div class="content">
+                                                        <span class="close" onClick="toggleModalDelete()">×</span>
+                                                        
+                                                       
+                                                                <div class="card">                                  
+                                                                    <div class="product-detail">
+                                                                        <h3 style="text-align: center"><a href="product-detail.html">Delete this product?</a> </h3>
+                                                                        <!-- <button class="button">Proceed to checkout</button> -->
+                                                                        <p class="text-left"><a href=""><button class="button">Cancel</button></a></p> 
+                                                                        <p class="text"> <a href=""><button class="button delete-btn">Delete</button></a></p> 
+                                                                    </div>
+                                                                </div>
+                                                               
+                                                            
+                                                    </div>
+                                                </div>
+                                        <!-- product list -->
                                     <div class="card col-3">
                                         
                                     <div class="ribbon ribbon-top-left"><span> &nbsp; &nbsp; In Stock (90)</span></div>
                                            <img src="img/pro3.jpg" alt="Avatar">
                                         <div class="product-detail">
                                                 <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                                <h4>-N- 599.00</h4> 
-                                                <p class="text"><i class="far fa-edit"></i> <i class="far fa-trash-alt"></i></p> 
+                                                <p class="text-left">-N- 599.00</p> 
+                                                <p class="text">
+                                                    <i class="far fa-edit trigger" onClick ="toggleModalEdit()"></i> 
+                                                    <i class="far fa-trash-alt trigger" onClick ="toggleModalDelete()"></i>
+                                                </p> 
                                         </div>
                                     </div>
                                     <div class="card col-3">
@@ -99,8 +159,11 @@
                                         <img src="img/pro5.jpg" alt="Avatar">
                                         <div class="product-detail">
                                                 <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                                <h4>-N- 599.00</h4> 
-                                                <p class="text"><i class="far fa-edit"></i> <i class="far fa-trash-alt"></i></p>
+                                                <p class="text-left">-N- 599.00</p> 
+                                                <p class="text">
+                                                    <i class="far fa-edit trigger" onClick ="toggleModalEdit()"></i> 
+                                                    <i class="far fa-trash-alt trigger" onClick ="toggleModalDelete()"></i>
+                                                </p> 
                                         </div>
                                     </div>
                                     <div class="card col-3">
@@ -109,9 +172,12 @@
                                         <img src="img/pro6.jpg" alt="Avatar">
                                         <div class="product-detail">
                                                 <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                                <h4>-N- 599.00</h4>
-                                                <p class="text"><i class="far fa-edit"></i> <i class="far fa-trash-alt"></i></p> 
-                                        </div>
+                                                <p class="text-left">-N- 599.00</p> 
+                                                <p class="text">
+                                                    <i class="far fa-edit trigger" onClick ="toggleModalEdit()"></i> 
+                                                    <i class="far fa-trash-alt trigger" onClick ="toggleModalDelete()"></i>
+                                                </p> 
+                                            </div>
                                     </div>
                                     <div class="card col-3">
                                         
@@ -119,8 +185,11 @@
                                         <img src="img/pro3.jpg" alt="Avatar">
                                         <div class="product-detail">
                                                 <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                                <h4>-N- 599.00</h4> 
-                                                <p class="text"><i class="far fa-edit"></i> <i class="far fa-trash-alt"></i></p> 
+                                                <p class="text-left">-N- 599.00</p> 
+                                                <p class="text">
+                                                    <i class="far fa-edit trigger" onClick ="toggleModalEdit()"></i> 
+                                                    <i class="far fa-trash-alt trigger" onClick ="toggleModalDelete()"></i>
+                                                </p> 
                                         </div>
                                     </div>
                                     <div class="card col-3">
@@ -129,8 +198,11 @@
                                             <img src="img/pro4.jpg" alt="Avatar">
                                             <div class="product-detail">
                                                 <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                                <h4>-N- 599.00</h4> 
-                                                <p class="text"><i class="far fa-edit"></i> <i class="far fa-trash-alt"></i></p> 
+                                                <p class="text-left">-N- 599.00</p> 
+                                                <p class="text">
+                                                    <i class="far fa-edit trigger" onClick ="toggleModalEdit()"></i> 
+                                                    <i class="far fa-trash-alt trigger" onClick ="toggleModalDelete()"></i>
+                                                </p> 
                                             </div>
                                     </div>
                                     <div class="card col-3">
@@ -139,8 +211,11 @@
                                             <img src="img/pro1.jpg" alt="Avatar">
                                             <div class="product-detail">
                                                 <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                                <h4>-N- 599.00</h4> 
-                                                <p class="text"><i class="far fa-edit"></i> <i class="far fa-trash-alt"></i></p> 
+                                                <p class="text-left">-N- 599.00</p> 
+                                                <p class="text">
+                                                    <i class="far fa-edit trigger" onClick ="toggleModalEdit()"></i> 
+                                                    <i class="far fa-trash-alt trigger" onClick ="toggleModalDelete()"></i>
+                                                </p> 
                                             </div>
                                     </div>
     

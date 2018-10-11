@@ -1,4 +1,4 @@
-.modal-panel, .modal-panel-edit, .cart {
+.modal-panel, .modal-panel-edit, .cart, .delete {
     position: fixed;
     left: 0;
     top: 0;

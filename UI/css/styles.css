@@ -402,4 +402,10 @@ th {
  .far, .link{
      cursor: pointer;
  } 
+ .delete-btn{
+     background: #9b8b85;
+ }
+ .delete-btn:hover{
+     background: #3f1201;
+ }
  
