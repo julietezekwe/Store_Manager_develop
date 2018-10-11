@@ -39,6 +39,7 @@
                                     </div>
                                    
                                     <div class="card col-11">
+                                        <!-- create attendant modal -->
                                             <h2 class="table-caption">Store Attendants</h2>
                                             <button onClick="toggleModal()" class="trigger text button">Create Attendant</button>
                                             
@@ -74,6 +75,60 @@
                                                             
                                                     </div>
                                                 </div>
+                                                    
+                                   <!-- edit attendant detail modal -->
+                                   <div class="modal-panel-edit"  >
+                                        <div class="content">
+                                            <span class="close" onClick="toggleModalEdit()">×</span>
+                                            
+                                                    <h1 class="login-heading">Update Product</h1>
+                                                    <div class="form">
+                                                            <form class="login"  action="">
+                                                                    <div>
+                                                                        <input type="text" value="Chinedu Ibe" placeholder="Name" required>
+                                                                    </div>
+                                                                    <div>
+                                                                        <input type="text" value="chineduibe" placeholder="Username" required>
+                                                                    </div>
+                                                                    <div>
+                                                                        <input type="text" value="12345" placeholder="Password" required>
+                                                                    </div>
+                                                                    <div >
+                                                                        <select name="role" id="">Role
+                                                                            <option value="admin">Admin</option>
+                                                                            <option value="attendant" selected>Attendant</option>
+                                                                        </select>
+                                                                    </div>
+                                                                   
+                                                                    <div>
+                                                                        <input type="submit" value="Update">
+                                                                    </div>
+                                                                
+                                                                </form>
+                                                    </div>
+                                                
+                                        </div>
+                                        </div>
+                                            <!-- delete attendant modal -->
+                                            <div class="delete"  >
+                                                    <div class="content">
+                                                        <span class="close" onClick="toggleModalDelete()">×</span>
+                                                        
+                                                       
+                                                                <div class="card">                                  
+                                                                    <div class="product-detail">
+                                                                        <h3 style="text-align: center">Delete this attendant?</h3>
+                                                                       
+                                                                        <p class="text-left"><a href=""><button class="button">Cancel</button></a></p> 
+                                                                        <p class="text"> <a href=""><button class="button delete-btn">Delete</button></a></p> 
+                                                                    </div>
+                                                                </div>
+                                                               
+                                                            
+                                                    </div>
+                                                </div>
+                                      
+                                                <!-- attendants table -->
                                             <table class="table">
                                                     <tr>
                                                       <th>Name</th>
@@ -89,7 +144,10 @@
                                                       <td>12345</td>
                                                       <td>Admin</td>
                                                       <td>12/12/2018</td>
-                                                      <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                      <td>
+                                                          <i class="far fa-edit " onclick="toggleModalEdit()"></i> &nbsp; 
+                                                         <i class="far fa-trash-alt trigger" onclick="toggleModalDelete()"></i>
+                                                      </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Oge Juliet</td>
@@ -97,7 +155,10 @@
                                                         <td>12345</td>
                                                         <td>Attendant</td>
                                                         <td>12/12/2018</td>
-                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                        <td>
+                                                            <i class="far fa-edit " onclick="toggleModalEdit()"></i> &nbsp; 
+                                                            <i class="far fa-trash-alt trigger" onclick="toggleModalDelete()"></i>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Juliet Ezekwe</td>
@@ -105,7 +166,10 @@
                                                         <td>12345</td>
                                                         <td>Attendant</td>
                                                         <td>12/12/2018</td>
-                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                        <td>
+                                                            <i class="far fa-edit " onclick="toggleModalEdit()"></i> &nbsp; 
+                                                            <i class="far fa-trash-alt trigger" onclick="toggleModalDelete()"></i>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Chinedu Ibe</td>
@@ -113,7 +177,10 @@
                                                         <td>12345</td>
                                                         <td>Attendant</td>
                                                         <td>12/12/2018</td>
-                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                        <td><i class="far fa-edit " onclick="toggleModalEdit()"></i> &nbsp; 
+                                                        <i class="far fa-trash-alt trigger" onclick="toggleModalDelete()"></i>
+                                                    </td>
+
                                                     </tr>
                                                     <tr>
                                                         <td>Jules Chidimma</td>
@@ -121,7 +188,10 @@
                                                         <td>12345</td>
                                                         <td>Admin</td>
                                                         <td>12/12/2018</td>
-                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                        <td>
+                                                            <i class="far fa-edit " onclick="toggleModalEdit()"></i> &nbsp; 
+                                                            <i class="far fa-trash-alt trigger" onclick="toggleModalDelete()"></i>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Biodu Joseph</td>
@@ -129,7 +199,10 @@
                                                         <td>12345</td>
                                                         <td>Attendant</td>
                                                         <td>12/12/2018</td>
-                                                        <td><i class="far fa-edit"></i> &nbsp; <i class="far fa-trash-alt"></i></td>
+                                                        <td>
+                                                            <i class="far fa-edit " onclick="toggleModalEdit()"></i> &nbsp; 
+                                                            <i class="far fa-trash-alt trigger" onclick="toggleModalDelete()"></i>
+                                                        </td>
                                                     </tr>
                                                   </table>
                                     </div>

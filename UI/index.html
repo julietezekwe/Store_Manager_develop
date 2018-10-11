@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Muli:200i,400" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
         <link rel="stylesheet" href="css/slider.css">
+        <link rel="stylesheet" href="css/modal.css">
     </head>
     <body>
         <header id="header" >
@@ -39,17 +40,35 @@
                         
                     </div>
         </section>
-
+ 
          <div id="page">
             <div class="container">
-                
+                <!-- add to cart modal -->
+
+                <div class="modal-panel"  >
+                    <div class="content">
+                        <span class="close" onClick="toggleModal()">×</span>
+                        
+                       
+                                <div class="card">                                  
+                                    <div class="product-detail">
+                                        <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe Added to cart</a> </h3>
+                                        <!-- <button class="button">Proceed to checkout</button> -->
+                                        <p class="text-left"><a href=""><button class="button">checkout</button></a></p> 
+                                        <p class="text"> <a href=""><button class="button">back to shop</button></a></p> 
+                                    </div>
+                                </div>
+                               
+                            
+                    </div>
+                </div>
                 <div class="card col-3">
                     <div class="ribbon ribbon-top-left"><span> &nbsp; &nbsp; In Stock (20)</span></div>
                     <img src="img/pro1.jpg" alt="Avatar">
                     <div class="product-detail">
                         <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                        <h4>-N- 599.00</h4> 
-                        <p class="text">Add to cart</p> 
+                        <p class="text-left">-N- 599.00</p> 
+                        <p class="text trigger link" onClick="toggleModal()">Add to cart</p> 
                     </div>
                 </div>
             </div>
@@ -60,8 +79,8 @@
                     <img src="img/pro2.jpg" alt="Avatar">
                     <div class="product-detail">
                         <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                        <h4>-N- 599.00</h4> 
-                        <p class="text">Add to cart</p> 
+                        <p class="text-left">-N- 599.00</p> 
+                        <p class="text trigger link" onClick="toggleModal()">Add to cart</p> 
                     </div>
                 </div>
             </div>
@@ -71,8 +90,8 @@
                         <img src="img/pro3.jpg" alt="Avatar">
                         <div class="product-detail">
                             <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                            <h4>-N- 599.00</h4> 
-                            <p class="text">Add to cart</p> 
+                            <p class="text-left">-N- 599.00</p> 
+                            <p class="text trigger link" onClick="toggleModal()">Add to cart</p> 
                         </div>
                     </div>
                 </div>
@@ -82,8 +101,8 @@
                     <img src="img/pro4.jpg" alt="Avatar">
                     <div class="product-detail">
                         <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                        <h4>-N- 599.00</h4> 
-                        <p class="text">Add to cart</p> 
+                        <p class="text-left">-N- 599.00</p> 
+                        <p class="text trigger link" onClick="toggleModal()">Add to cart</p> 
                     </div>
                 </div>
             </div>
@@ -93,8 +112,8 @@
                         <img src="img/pro5.jpg" alt="Avatar">
                         <div class="product-detail">
                             <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                            <h4>-N- 599.00</h4> 
-                            <p class="text">Add to cart</p> 
+                            <p class="text-left">-N- 599.00</p> 
+                            <p class="text trigger link" onClick="toggleModal()">Add to cart</p> 
                            
                            
                         </div>
@@ -106,8 +125,8 @@
                             <img src="img/pro6.jpg" alt="Avatar">
                             <div class="product-detail">
                                 <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                <h4>-N- 599.00</h4> 
-                                <p class="text">Add to cart</p> 
+                                <p class="text-left">-N- 599.00</p> 
+                                <p class="text trigger link" onClick="toggleModal()">Add to cart</p> 
                             </div>
                         </div>
                     </div>

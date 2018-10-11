@@ -19,6 +19,7 @@
                     <li><a href="#"><i class="fas fa-shopping-cart"></i>(2)</a></li>
                     <li><a href="#"><i class="fas fa-user-lock"></i></i> ChineduIbe </a></li>
                     <li><a href="index.html"><i class="fas fa-sign-in-alt"></i> Logout </a></li>
+
                 </ul>
             </nav>
         </header>
@@ -78,16 +79,62 @@
                                             </div>
                                     </div>
                                    
-                                   
-                                
+                                   <!-- edit modal to add product to category -->
+                                 
+                                   <div class="modal-panel-edit"  >
+                                        <div class="editContent">
+                                           
+                                            <span class="close" onClick="toggleModalEdit()">×</span>
+                                            
+                                                    <h1 class="login-heading">Edit Product category</h1>
+                                                    <div class="form">
+                                                        <form class="login"  action="" >
+                                                            <div >
+                                                                <select name="category" id="">category
+                                                                    <option value="flat">Flat</option>
+                                                                    <option value="hill">Hills</option>
+                                                                    <option value="casuals">Casuals</option>
+                                                                </select>
+                                                            </div>
+                                                            <div>
+                                                                <input type="submit" value="Add to category">
+                                                            </div>
+                                                        
+                                                        </form>
+                                                    </div>
+                                                
+                                        </div>
+                                    </div>
+                                    <!-- add to cart modal -->
+
+                                    <div class="cart"  >
+                                            <div class="editContent">
+                                               
+                                                <span class="close" onClick="addToCart()">×</span>
+                                                
+                                                <div class="card">                                  
+                                                        <div class="product-detail">
+                                                            <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe Added to cart</a> </h3>
+                                                            <!-- <button class="button">Proceed to checkout</button> -->
+                                                            <p class="text-left"><a href=""><button class="button">checkout</button></a></p> 
+                                                            <p class="text"> <a href=""><button class="button">back to shop</button></a></p> 
+                                                        </div>
+                                                    </div>
+                                                    
+                                            </div>
+                                        </div>
                                     <div class="card col-3">
                                          <div class="ribbon ribbon-top-left"><span> &nbsp; &nbsp; In Stock (20)</span></div>
                                         
                                            <img src="img/pro3.jpg" alt="Avatar">
                                         <div class="product-detail">
                                                 <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                                <h4>-N- 599.00</h4> 
-                                                <p class="text"><a href=""><i class="far fa-edit"></i></a><a href=""> &nbsp; &nbsp; <i class="fas fa-shopping-cart"></i></a></p> 
+                                                <p class="text-left">-N- 599.00</p> 
+                                                <p class="text"><a href="#" class="trigger-edit" onClick="toggleModalEdit()">
+                                                        <i class="far fa-edit" ></i></a><a href="#"> &nbsp; &nbsp; 
+                                                        <i class="fas fa-shopping-cart trigger" onClick="addToCart()"></i></i>
+                                                    </a>
+                                                </p> 
                                         </div>
                                     </div>
                                     <div class="card col-3">
@@ -95,26 +142,38 @@
                                         <img src="img/pro5.jpg" alt="Avatar">
                                         <div class="product-detail">
                                                 <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                                <h4>-N- 599.00</h4> 
-                                                <p class="text"><a href=""><i class="far fa-edit"></i></a><a href=""> &nbsp; &nbsp; <i class="fas fa-shopping-cart"></i></a></p> 
+                                                <p class="text-left">-N- 599.00</p> 
+                                                <p class="text"><a href="#" class="trigger-edit" onClick="toggleModalEdit()">
+                                                        <i class="far fa-edit" ></i></a><a href="#"> &nbsp; &nbsp; 
+                                                        <i class="fas fa-shopping-cart trigger" onClick="addToCart()"></i></i>
+                                                    </a>
+                                                </p> 
                                         </div>
                                     </div>
                                     <div class="card col-3">
                                         <div class="ribbon ribbon-top-left"><span> &nbsp; &nbsp; In Stock (20)</span></div>
                                         <img src="img/pro6.jpg" alt="Avatar">
                                         <div class="product-detail">
-                                                <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                                <h4>-N- 599.00</h4>
-                                                <p class="text"><a href=""><i class="far fa-edit"></i></a><a href=""> &nbsp; &nbsp; <i class="fas fa-shopping-cart"></i></a></p>
-                                         </div>
+                                            <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
+                                            <p class="text-left">-N- 599.00</p> 
+                                            <p class="text"><a href="#" class="trigger-edit" onClick="toggleModalEdit()">
+                                                    <i class="far fa-edit" ></i></a><a href="#"> &nbsp; &nbsp; 
+                                                    <i class="fas fa-shopping-cart trigger" onClick="addToCart()"></i></i>
+                                                </a>
+                                            </p>   
+                                    </div>
                                     </div>
                                     <div class="card col-3">
                                         <div class="ribbon ribbon-top-left"><span> &nbsp; &nbsp; In Stock (20)</span></div>
                                         <img src="img/pro3.jpg" alt="Avatar">
                                         <div class="product-detail">
                                                 <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                                <h4>-N- 599.00</h4> 
-                                                <p class="text"><a href=""><i class="far fa-edit"></i></a><a href=""> &nbsp; &nbsp; <i class="fas fa-shopping-cart"></i></a></p>
+                                                <p class="text-left">-N- 599.00</p> 
+                                                <p class="text"><a href="#" class="trigger-edit" onClick="toggleModalEdit()">
+                                                        <i class="far fa-edit" ></i></a><a href="#"> &nbsp; &nbsp; 
+                                                        <i class="fas fa-shopping-cart trigger" onClick="addToCart()"></i></i>
+                                                    </a>
+                                                </p> 
                                         </div>
                                     </div>
                                     <div class="card col-3">
@@ -123,8 +182,12 @@
                                             <img src="img/pro4.jpg" alt="Avatar">
                                             <div class="product-detail">
                                                 <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                                <h4>-N- 599.00</h4> 
-                                                <p class="text"><a href=""><i class="far fa-edit"></i></a><a href=""> &nbsp; &nbsp; <i class="fas fa-shopping-cart"></i></a></p>
+                                                <p class="text-left">-N- 599.00</p> 
+                                                <p class="text"><a href="#" class="trigger-edit" onClick="toggleModalEdit()">
+                                                        <i class="far fa-edit" ></i></a><a href="#"> &nbsp; &nbsp; 
+                                                        <i class="fas fa-shopping-cart trigger" onClick="addToCart()"></i></i>
+                                                    </a>
+                                                </p> 
                                             </div>
                                     </div>
                                     <div class="card col-3">
@@ -133,8 +196,12 @@
                                             <img src="img/pro1.jpg" alt="Avatar">
                                             <div class="product-detail">
                                                 <h3 style="text-align: center"><a href="product-detail.html">Silver Shoe</a> </h3>
-                                                <h4>-N- 599.00</h4> 
-                                                <p class="text"><a href=""><i class="far fa-edit"></i></a><a href=""> &nbsp; &nbsp; <i class="fas fa-shopping-cart"></i></a></p>
+                                                <p class="text-left">-N- 599.00</p> 
+                                                <p class="text"><a href="#" class="trigger-edit" onClick="toggleModalEdit()">
+                                                        <i class="far fa-edit" ></i></a><a href="#"> &nbsp; &nbsp; 
+                                                        <i class="fas fa-shopping-cart trigger" onClick="addToCart()"></i></i>
+                                                    </a>
+                                                </p> 
                                             </div>
                                     </div>
     
