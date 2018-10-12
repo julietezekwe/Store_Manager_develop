@@ -24,7 +24,7 @@ nav {
     color: rgb(240, 112, 14);
 }
 nav ul {
-    margin: 0;
+    margin:10px 0 5px 0;
     padding: 0;
     display: inline-block;
     float: right;
@@ -34,6 +34,7 @@ nav ul {
      display: inline-block;
      font-size: 2em;
  }
+
 nav li {
     padding: 10px;
     margin: 5px;
