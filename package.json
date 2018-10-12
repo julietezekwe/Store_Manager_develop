@@ -1,0 +1,35 @@
+{
+  "name": "store_manager_develop",
+  "version": "1.0.0",
+  "description": "Store Manager is a web application that helps store owners manage sales and product inventory",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon --exec babel-node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julietezekwe/Store_Manager_develop.git"
+  },
+  "keywords": [
+    "store",
+    "manager"
+  ],
+  "author": "Juliet Ezekwe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julietezekwe/Store_Manager_develop/issues"
+  },
+  "homepage": "https://github.com/julietezekwe/Store_Manager_develop#readme",
+  "dependencies": {
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^9.0.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "nodemon": "^1.18.4"
+  }
+}
