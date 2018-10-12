@@ -97,6 +97,15 @@ input[type="text"], input[type="password"] {
     padding-left: 15px;
     outline: none;
 }
+input[type="search"] {
+    width: 339px;
+    height: 40px;
+    margin-left: 14px;
+    border: none;
+    background: #f3efef;
+    padding-left: 15px;
+    outline: none;
+}
 input[type="submit"] {
     width: 359px;
     height: 50px;
@@ -409,4 +418,16 @@ th {
  .delete-btn:hover{
      background: #3f1201;
  }
- 
+ td{
+     font-weight: bold;
+ }
+ tfoot td{
+   
+    font-weight: bolder;
+    font-size: 1.1em;
+ }
+ .center{
+     text-align: center;
+     font-size: 1.2em;
+     font-weight: bold;
+ }
