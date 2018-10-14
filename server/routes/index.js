@@ -24,7 +24,7 @@ const {
   getAllProducts,
 } = products;
 
-const { addSaleRecord } = sales;
+const { addSaleRecord, getAllSalesRecords } = sales;
 // deconstruct middlewares
 const { idChecker } = paramsChecker;
 const { createUserChecker, userLoginChecker } = userValidator;
@@ -44,7 +44,11 @@ router.post('/auth/login', userLoginChecker, loginUser);
 
 // products endpoints
 router.post('/products', authenticate, isAdmin, addProductValidator, addProduct);
-router.post('/sales', authenticate, isAttendant, addSalesValidator, addSaleRecord);
 router.get('/products/:productId', idChecker, authenticate, getProduct);
 router.get('/products', authenticate, getAllProducts);
+
+// sales record enpoints
+router.post('/sales', authenticate, isAttendant, addSalesValidator, addSaleRecord);
+router.get('/sales', authenticate, isAdmin, getAllSalesRecords);
+
 export default router;

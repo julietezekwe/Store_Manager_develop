@@ -30,6 +30,16 @@ class sales {
       })
     );
   }
+
+  static getAllSalesRecords(req, res) {
+    return (
+      res.status(200).json({
+        SalesModel,
+        message: 'Success',
+        error: false,
+      })
+    );
+  }
 }
 
 export default sales;
