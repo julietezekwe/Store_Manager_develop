@@ -77,21 +77,12 @@ class Users {
   }
 
   static createUser(req, res) {
-    const creatorRole = req.authData.role;
     const {
       name, username, email, password, role,
     } = req.body;
     let userExist = false;
     let userDetail;
 
-    if (creatorRole !== 'admin') {
-      return (
-        res.status(401).json({
-          message: 'Only Admin can create users',
-          error: true,
-        })
-      );
-    }
     UsersModel.map((user) => {
       if (user.username === username) {
         userExist = true;
