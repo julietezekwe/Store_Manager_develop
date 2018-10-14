@@ -17,6 +17,7 @@ const {
 
 const {
   addProduct,
+  getProduct,
 } = products;
 
 // deconstruct middlewares
@@ -29,11 +30,13 @@ const { addProductValidator } = productValidator;
 const router = express.Router();
 
 // user endpoints
-router.get('/auth/users', getAllUsers);
-router.get('/auth/:userId', idChecker, getUser);
+router.get('/auth/users', authenticate, isAdmin, getAllUsers);
+router.get('/auth/:userId', authenticate, idChecker, getUser);
 router.post('/auth/createUser', authenticate, isAdmin, createUserChecker, createUser);
 router.post('/auth/login', userLoginChecker, loginUser);
 
 // products endpoints
 router.post('/products', authenticate, isAdmin, addProductValidator, addProduct);
+router.get('/products/:productId', idChecker, authenticate, getProduct);
+
 export default router;

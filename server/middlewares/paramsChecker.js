@@ -1,6 +1,6 @@
 class paramsChecker {
   static idChecker(req, res, next) {
-    const { userId } = req.params;
+    const { userId, productId } = req.params;
     const validId = /^[0-9]+$/;
     // check if id is valid
     const checkParam = (param) => {
@@ -13,6 +13,7 @@ class paramsChecker {
       return true;
     };
     if (userId) checkParam(userId);
+    if (productId) checkParam(productId);
     return next();
   }
 }
