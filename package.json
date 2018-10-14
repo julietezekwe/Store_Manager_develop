@@ -7,7 +7,7 @@
     "build": "babel app.js -d dist && babel server -d dist/server ",
     "test": "npm run migration && nyc mocha --exit --timeout 25000 ./server/test/**/*.js --compilers js:babel-core/register",
     "babel-node": "babel-node app --presets=env",
-    "start": "node dist/app.js", 
+    "start": "node dist/app.js",
     "start:dev": "nodemon --exec babel-node app.js"
   },
   "repository": {
@@ -25,8 +25,10 @@
   },
   "homepage": "https://github.com/julietezekwe/Store_Manager_develop#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "dotenv": "^6.1.0",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "express-validator": "^5.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
