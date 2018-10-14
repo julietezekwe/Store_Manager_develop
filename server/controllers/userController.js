@@ -59,7 +59,7 @@ class Users {
 
   static createUser(req, res) {
     const {
-      name, username, password, role,
+      name, username, email, password, role,
     } = req.body;
     let userExist = false;
     let userDetail;
@@ -81,6 +81,7 @@ class Users {
         id,
         name,
         username,
+        email,
         password,
         role,
         created: new Date(),
