@@ -18,6 +18,7 @@ const {
 const {
   addProduct,
   getProduct,
+  getAllProducts,
 } = products;
 
 // deconstruct middlewares
@@ -38,5 +39,5 @@ router.post('/auth/login', userLoginChecker, loginUser);
 // products endpoints
 router.post('/products', authenticate, isAdmin, addProductValidator, addProduct);
 router.get('/products/:productId', idChecker, authenticate, getProduct);
-
+router.get('/products', authenticate, getAllProducts);
 export default router;
