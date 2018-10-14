@@ -1,6 +1,16 @@
 import ProductsModel from '../dummyModel/ProductsModel';
 
 class products {
+  static getAllProducts(req, res) {
+    return (
+      res.status(200).json({
+        ProductsModel,
+        message: 'Success',
+        error: false,
+      })
+    );
+  }
+
   static addProduct(req, res) {
     const {
       productName,
