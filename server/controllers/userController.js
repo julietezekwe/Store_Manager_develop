@@ -1,4 +1,11 @@
+import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 import UsersModel from '../dummyModel/UsersModel';
+
+dotenv.config();
+
+const secret = process.env.SECRETE_KEY;
 
 class Users {
   static getAllUsers(req, res) {
@@ -35,13 +42,25 @@ class Users {
 
   static loginUser(req, res) {
     const { username, password } = req.body;
-    let userDetail;
+    let authDetail;
     UsersModel.map((user) => {
-      if (user.username === username && user.password === password) {
-        userDetail = user;
+      if (user.username === username && bcrypt.compareSync(password, user.password)) {
+        const {
+          id, name, email, role, created,
+        } = user;
+        authDetail = {
+          id,
+          name,
+          username,
+          email,
+          role,
+          created,
+        };
+        const token = jwt.sign(authDetail, secret, { expiresIn: '1hr' });
         return (
           res.status(200).json({
-            userDetail,
+            authDetail,
+            token,
             message: 'Success',
             error: false,
           })
@@ -58,11 +77,21 @@ class Users {
   }
 
   static createUser(req, res) {
+    const creatorRole = req.authData.role;
     const {
       name, username, email, password, role,
     } = req.body;
     let userExist = false;
     let userDetail;
+
+    if (creatorRole !== 'admin') {
+      return (
+        res.status(401).json({
+          message: 'Only Admin can create users',
+          error: true,
+        })
+      );
+    }
     UsersModel.map((user) => {
       if (user.username === username) {
         userExist = true;
@@ -76,13 +105,14 @@ class Users {
       return true;
     });
     if (!userExist) {
+      const hash = bcrypt.hashSync(password, 10);
       const id = UsersModel.length + 1;
       userDetail = {
         id,
         name,
         username,
         email,
-        password,
+        password: hash,
         role,
         created: new Date(),
       };
@@ -90,7 +120,7 @@ class Users {
       return (
         res.status(201).json({
           userDetail,
-          message: 'Success',
+          message: 'User created successfully',
           error: false,
         })
       );
