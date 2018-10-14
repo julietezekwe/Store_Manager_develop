@@ -71,6 +71,33 @@ class sales {
       })
     );
   }
+
+  static getAttendantSaleRecord(req, res) {
+    const { id } = req.authData;
+    const saleDetail = [];
+    SalesModel.map((sale) => {
+      if (sale.sellerId === Number(id)) {
+        saleDetail.push(sale);
+      }
+      return false;
+    });
+
+    if (saleDetail.length > 1) {
+      return (
+        res.status(200).json({
+          saleDetail,
+          message: 'Success',
+          error: false,
+        })
+      );
+    }
+    return (
+      res.status(401).json({
+        message: 'No sales made yet',
+        error: true,
+      })
+    );
+  }
 }
 
 export default sales;
