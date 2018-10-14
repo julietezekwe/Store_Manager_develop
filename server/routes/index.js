@@ -1,8 +1,11 @@
 import express from 'express';
 import Users from '../controllers/userController';
+import products from '../controllers/productController';
 import paramsChecker from '../middlewares/paramsChecker';
 import userValidator from '../middlewares/userValidator';
+import productValidator from '../middlewares/productValidator';
 import verifyToken from '../middlewares/verifyToken';
+import verifyAdmin from '../middlewares/verifyAdmin';
 
 // destructure controllers
 const {
@@ -12,17 +15,25 @@ const {
   getUser,
 } = Users;
 
+const {
+  addProduct,
+} = products;
+
 // deconstruct middlewares
 const { idChecker } = paramsChecker;
 const { createUserChecker, userLoginChecker } = userValidator;
 const { authenticate } = verifyToken;
+const { isAdmin } = verifyAdmin;
+const { addProductValidator } = productValidator;
 
 const router = express.Router();
 
 // user endpoints
 router.get('/auth/users', getAllUsers);
 router.get('/auth/:userId', idChecker, getUser);
-router.post('/auth/createUser', authenticate, createUserChecker, createUser);
+router.post('/auth/createUser', authenticate, isAdmin, createUserChecker, createUser);
 router.post('/auth/login', userLoginChecker, loginUser);
 
+// products endpoints
+router.post('/products', authenticate, isAdmin, addProductValidator, addProduct);
 export default router;
