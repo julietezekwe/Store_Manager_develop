@@ -1,7 +1,7 @@
 const Sales = [
   {
     id: 1,
-    sellerId: 1,
+    sellerId: 3,
     productId: 2,
     productName: 'Red shoes',
     prize: 1000,
@@ -21,7 +21,7 @@ const Sales = [
   },
   {
     id: 3,
-    sellerId: 1,
+    sellerId: 3,
     productId: 3,
     productName: 'Sneakers',
     prize: 1000,

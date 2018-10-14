@@ -40,6 +40,37 @@ class sales {
       })
     );
   }
+
+  static getSaleRecord(req, res) {
+    const { id, role } = req.authData;
+    const { salesId } = req.params;
+    let validUser = false;
+    let saleDetail;
+    SalesModel.map((sale) => {
+      if (sale.id === Number(salesId) && (sale.sellerId === Number(id) || role === 'admin')) {
+        saleDetail = sale;
+        validUser = true;
+        return true;
+      }
+      return false;
+    });
+
+    if (validUser) {
+      return (
+        res.status(200).json({
+          saleDetail,
+          message: 'Success',
+          error: false,
+        })
+      );
+    }
+    return (
+      res.status(401).json({
+        message: 'Unauthorized',
+        error: true,
+      })
+    );
+  }
 }
 
 export default sales;
