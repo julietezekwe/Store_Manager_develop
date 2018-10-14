@@ -19,19 +19,24 @@ class Users {
   static getUser(req, res) {
     const { userId } = req.params;
     let userDetail;
+    let found = false;
     UsersModel.map((user) => {
       if (Number(userId) === user.id) {
         userDetail = user;
-        return (
-          res.status(200).json({
-            userDetail,
-            message: 'Success',
-            error: false,
-          })
-        );
+        found = true;
+        return true;
       }
       return false;
     });
+    if (found) {
+      return (
+        res.status(200).json({
+          userDetail,
+          message: 'Success',
+          error: false,
+        })
+      );
+    }
     return (
       res.status(404).json({
         message: 'No user found',
@@ -43,6 +48,7 @@ class Users {
   static loginUser(req, res) {
     const { username, password } = req.body;
     let authDetail;
+    let found = false;
     UsersModel.map((user) => {
       if (user.username === username && bcrypt.compareSync(password, user.password)) {
         const {
@@ -56,18 +62,22 @@ class Users {
           role,
           created,
         };
-        const token = jwt.sign(authDetail, secret, { expiresIn: '1hr' });
-        return (
-          res.status(200).json({
-            authDetail,
-            token,
-            message: 'Success',
-            error: false,
-          })
-        );
+        found = true;
+        return true;
       }
       return false;
     });
+    if (found) {
+      const token = jwt.sign(authDetail, secret, { expiresIn: '1hr' });
+      return (
+        res.status(200).json({
+          authDetail,
+          token,
+          message: 'Success',
+          error: false,
+        })
+      );
+    }
     return (
       res.status(401).json({
         message: 'Invalid Credentials',
@@ -82,16 +92,10 @@ class Users {
     } = req.body;
     let userExist = false;
     let userDetail;
-
     UsersModel.map((user) => {
       if (user.username === username) {
         userExist = true;
-        return (
-          res.status(403).json({
-            message: 'Username is taken',
-            error: true,
-          })
-        );
+        return false;
       }
       return true;
     });
@@ -116,7 +120,12 @@ class Users {
         })
       );
     }
-    return true;
+    return (
+      res.status(403).json({
+        message: 'Username is taken',
+        error: true,
+      })
+    );
   }
 }
 

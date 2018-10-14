@@ -29,6 +29,31 @@ class products {
       })
     );
   }
+
+  static getProduct(req, res) {
+    const { productId } = req.params;
+    let found = false;
+    let productDetail;
+    ProductsModel.map((product) => {
+      if (product.id === Number(productId)) {
+        productDetail = product;
+        found = true;
+        return true;
+      }
+      return false;
+    });
+    if (found) {
+      return (res.status(200).json({
+        productDetail,
+        message: 'Success',
+        error: false,
+      }));
+    }
+    return (res.status(404).json({
+      message: 'This product does not exist',
+      error: true,
+    }));
+  }
 }
 
 export default products;
