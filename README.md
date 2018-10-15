@@ -1,8 +1,8 @@
 # Store_Manager_develop
 
-[![Build Status](https://travis-ci.org/julietezekwe/Store_Manager_develop.svg?branch=develop)](https://travis-ci.org/julietezekwe/Store_Manager_develop)
+[![Build Status](https://travis-ci.org/julietezekwe/Store_Manager_develop.svg?branch=ft-code-climate-badge-161205472)](https://travis-ci.org/julietezekwe/Store_Manager_develop)
 
-[![Coverage Status](https://coveralls.io/repos/github/julietezekwe/Store_Manager_develop/badge.svg?branch=develop)](https://coveralls.io/github/julietezekwe/Store_Manager_develop)
+[![Coverage Status](https://coveralls.io/repos/github/julietezekwe/Store_Manager_develop/badge.svg?branch=ft-travis-CI-161205470)](https://coveralls.io/github/julietezekwe/Store_Manager_develop?branch=ft-travis-CI-161205470)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/675204b94a8eef52f333/maintainability)](https://codeclimate.com/github/julietezekwe/Store_Manager_develop/maintainability)
 
