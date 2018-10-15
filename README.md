@@ -1,5 +1,10 @@
 # Store_Manager_develop
 
+[![Build Status](https://travis-ci.org/julietezekwe/Store_Manager_develop.svg?branch=develop)](https://travis-ci.org/julietezekwe/Store_Manager_develop)
+
+[![Coverage Status](https://coveralls.io/repos/github/julietezekwe/Store_Manager_develop/badge.svg?branch=develop)](https://coveralls.io/github/julietezekwe/Store_Manager_develop)
+
+
 Store Manager is a web application that helps store owners manage sales and product inventory
 
 ## Table of Contents
