@@ -11,14 +11,8 @@ class verifyAdmin {
           })
         );
       }
-      return next();
     }
-    return (
-      res.status(401).json({
-        message: 'Something went wrong',
-        error: true,
-      })
-    );
+    return next();
   }
 }
 

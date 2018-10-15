@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "babel app.js -d dist && babel server -d dist/server ",
-    "test": "npm run migration && nyc mocha --exit --timeout 25000 ./server/test/**/*.js --compilers js:babel-core/register",
+    "test": "nyc mocha --exit --timeout 25000 ./server/test/**/*.js --compilers js:babel-core/register",
     "babel-node": "babel-node app --presets=env",
     "start": "node dist/app.js",
     "start:dev": "nodemon --exec babel-node app.js"
@@ -30,7 +30,9 @@
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "express-validator": "^5.3.0",
-    "jsonwebtoken": "^8.3.0"
+    "jsonwebtoken": "^8.3.0",
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -45,8 +47,6 @@
     "eslint-plugin-react": "^7.11.1",
     "mocha": "^5.2.0",
     "nyc": "^13.0.1",
-    "request": "^2.88.0",
-    "chai": "^4.1.2",
-    "chai-http": "^4.2.0"
+    "request": "^2.88.0"
   }
 }

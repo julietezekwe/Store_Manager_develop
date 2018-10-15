@@ -9,7 +9,7 @@ const secret = process.env.SECRETE_KEY;
 
 class Users {
   static getAllUsers(req, res) {
-    res.status(201).json({
+    res.status(200).json({
       UsersModel,
       message: 'Success',
       error: false,
@@ -24,7 +24,6 @@ class Users {
       if (Number(userId) === user.id) {
         userDetail = user;
         found = true;
-        return true;
       }
       return false;
     });
