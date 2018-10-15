@@ -92,7 +92,7 @@ class sales {
       );
     }
     return (
-      res.status(401).json({
+      res.status(404).json({
         message: 'No sales made yet',
         error: true,
       })

@@ -26,6 +26,15 @@ const Users = [
     role: 'attendant',
     created: new Date(),
   },
+  {
+    id: 4,
+    name: 'chinedu',
+    username: 'chinedu',
+    email: 'chinedu@gmail.com',
+    password: '$2a$10$hEILSbo95yLJTQm5h0VgkeLaCDSQTDcCMt9gEZLqSJf66MYKpHYpK',
+    role: 'attendant',
+    created: new Date(),
+  },
 ];
 
 export default Users;

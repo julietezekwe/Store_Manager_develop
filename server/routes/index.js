@@ -12,10 +12,7 @@ import salesValidator from '../middlewares/salesValidator';
 
 // destructure controllers
 const {
-  getAllUsers,
-  createUser,
-  loginUser,
-  getUser,
+  getAllUsers, createUser, loginUser, getUser,
 } = Users;
 
 const {
