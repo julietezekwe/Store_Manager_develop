@@ -1,3 +1,5 @@
+import ErrorBag from '../error';
+
 const salesValidator = {
   addSalesValidator: (req, res, next) => {
     req.check('productId', 'Product ID is required').notEmpty();
@@ -9,7 +11,7 @@ const salesValidator = {
     if (errors) {
       errors.map(err => validationErrors.push(err.msg));
       return res.status(400).json({
-        errors: validationErrors,
+        errors: new ErrorBag(errors),
       });
     }
     return next();

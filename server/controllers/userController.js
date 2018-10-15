@@ -50,19 +50,9 @@ class Users {
     let found = false;
     UsersModel.map((user) => {
       if (user.username === username && bcrypt.compareSync(password, user.password)) {
-        const {
-          id, name, email, role, created,
-        } = user;
-        authDetail = {
-          id,
-          name,
-          username,
-          email,
-          role,
-          created,
-        };
+        const { id, name, email, role, created } = user;
+        authDetail = { id, name, username, email, role, created };
         found = true;
-        return true;
       }
       return false;
     });
@@ -70,60 +60,36 @@ class Users {
       const token = jwt.sign(authDetail, secret, { expiresIn: '1hr' });
       return (
         res.status(200).json({
-          authDetail,
-          token,
-          message: 'Success',
-          error: false,
+          authDetail, token, message: 'Success', error: false,
         })
       );
     }
     return (
       res.status(401).json({
-        message: 'Invalid Credentials',
-        error: true,
+        message: 'Invalid Credentials', error: true,
       })
     );
   }
 
   static createUser(req, res) {
-    const {
-      name, username, email, password, role,
-    } = req.body;
+    const { name, username, email, password, role } = req.body;
     let userExist = false;
     let userDetail;
     UsersModel.map((user) => {
-      if (user.username === username) {
-        userExist = true;
-        return false;
-      }
+      if (user.username === username) { userExist = true; }
       return true;
     });
     if (!userExist) {
       const hash = bcrypt.hashSync(password, 10);
       const id = UsersModel.length + 1;
-      userDetail = {
-        id,
-        name,
-        username,
-        email,
-        password: hash,
-        role,
-        created: new Date(),
-      };
+      userDetail = { id, name, username, email, password: hash, role, created: new Date() };
       UsersModel.push(userDetail);
       return (
-        res.status(201).json({
-          userDetail,
-          message: 'User created successfully',
-          error: false,
-        })
+        res.status(201).json({ userDetail, message: 'User created successfully' })
       );
     }
     return (
-      res.status(403).json({
-        message: 'Username is taken',
-        error: true,
-      })
+      res.status(403).json({ message: 'Username is taken', error: true })
     );
   }
 }

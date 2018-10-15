@@ -5,28 +5,17 @@ class sales {
     const sellerId = req.authData.id;
 
     const {
-      productId,
-      productName,
-      prize,
-      quantity,
+      productId, productName, prize, quantity,
     } = req.body;
     const totalPrize = Number(prize) * Number(quantity);
     const id = SalesModel.length + 1;
     const saleDetail = {
-      id,
-      sellerId,
-      productId,
-      productName,
-      prize,
-      quantity,
-      totalPrize,
-      created: new Date(),
+      id, sellerId, productId, productName, prize, quantity, totalPrize, created: new Date(),
     };
     SalesModel.push(saleDetail);
     return (
       res.status(201).json({
-        saleDetail,
-        message: 'Successfully added sale(s)',
+        saleDetail, message: 'Successfully added sale(s)',
       })
     );
   }
@@ -50,7 +39,6 @@ class sales {
       if (sale.id === Number(salesId) && (sale.sellerId === Number(id) || role === 'admin')) {
         saleDetail = sale;
         validUser = true;
-        return true;
       }
       return false;
     });
@@ -58,16 +46,12 @@ class sales {
     if (validUser) {
       return (
         res.status(200).json({
-          saleDetail,
-          message: 'Success',
-          error: false,
+          saleDetail, message: 'Success', error: false,
         })
       );
     }
     return (
-      res.status(401).json({
-        message: 'Unauthorized',
-        error: true,
+      res.status(401).json({ message: 'Unauthorized', error: true,
       })
     );
   }
