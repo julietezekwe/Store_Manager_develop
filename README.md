@@ -4,6 +4,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/julietezekwe/Store_Manager_develop/badge.svg?branch=develop)](https://coveralls.io/github/julietezekwe/Store_Manager_develop)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/675204b94a8eef52f333/maintainability)](https://codeclimate.com/github/julietezekwe/Store_Manager_develop/maintainability)
 
 Store Manager is a web application that helps store owners manage sales and product inventory
 
