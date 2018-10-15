@@ -1,3 +1,5 @@
+import ErrorBag from '../error';
+
 const userValidator = {
   createUserChecker: (req, res, next) => {
     req.check('name', 'Name is required').notEmpty();
@@ -13,7 +15,7 @@ const userValidator = {
     if (errors) {
       errors.map(err => validationErrors.push(err.msg));
       return res.status(400).json({
-        errors: validationErrors,
+        errors: new ErrorBag(errors),
       });
     }
     return next();
@@ -31,7 +33,7 @@ const userValidator = {
     if (errors) {
       errors.map(err => validationErrors.push(err.msg));
       return res.status(400).json({
-        errors: validationErrors,
+        errors: new ErrorBag(errors),
       });
     }
     return next();
