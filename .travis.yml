@@ -6,7 +6,5 @@ install: npm install
 script:
   - npm test
 
-deploy:
-  on:
-    branch: develop
 after_script: npm run coverage
+
