@@ -12,7 +12,7 @@ const {
   admin, attendant, attendant2,
 } = userDetails;
 const {
-  emptyField, validSale,
+  emptyField, validSale, spacedField,
 } = saleDetails;
 describe('Sales', () => {
   before((done) => {
@@ -104,6 +104,17 @@ describe('Sales', () => {
       .send(emptyField)
       .end((err, res) => {
         expect(res.body.errors[0]).to.eql('Product ID is required');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+  it('it should not post sales with only spaces in the field', (done) => {
+    chai.request(app)
+      .post('/api/v1/sales')
+      .set('Authorization', authToken2)
+      .send(spacedField)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('Please fill in all fields');
         expect(res.status).to.equal(400);
         done();
       });

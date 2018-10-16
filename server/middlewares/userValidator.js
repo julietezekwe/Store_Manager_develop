@@ -18,6 +18,18 @@ const userValidator = {
         errors: new ErrorBag(errors),
       });
     }
+    const {
+      name, username, email, password, role,
+    } = req.body;
+    const fieldValues = [name, username, email, password, role];
+    fieldValues.map((fieldValue) => {
+      if (fieldValue.trim() === '') {
+        return res.status(400).json({
+          message: 'Please fill in all fields',
+          error: true,
+        });
+      }
+    });
     return next();
   },
 

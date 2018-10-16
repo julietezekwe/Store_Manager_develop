@@ -14,6 +14,18 @@ const salesValidator = {
         errors: new ErrorBag(errors),
       });
     }
+    const {
+      productId, productName, prize, quantity,
+    } = req.body;
+    const fieldValues = [productId, productName, prize, quantity];
+    fieldValues.map((fieldValue) => {
+      if (fieldValue.toString().trim() === '') {
+        return res.status(400).json({
+          message: 'Please fill in all fields',
+          error: true,
+        });
+      }
+    });
     return next();
   },
 };

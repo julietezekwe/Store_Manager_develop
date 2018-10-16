@@ -15,6 +15,7 @@ class products {
     const {
       productName,
       description,
+      image,
       prize,
       quantity,
       min,
@@ -25,6 +26,7 @@ class products {
       id,
       productName,
       description,
+      image,
       prize,
       quantity,
       min,

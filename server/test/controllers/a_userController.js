@@ -8,7 +8,7 @@ let authToken2;
 chai.use(chaiHttp);
 const { expect } = chai;
 const {
-  admin, attendant, newAttendant, wrongPassword, emptyField,
+  admin, attendant, newAttendant, wrongPassword, emptyField, spacedField,
 } = userDetails;
 describe('User', () => {
   before((done) => {
@@ -137,6 +137,17 @@ describe('User', () => {
       .send(emptyField)
       .end((err, res) => {
         expect(res.body.errors[0]).to.eql('Password is required');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+  it('it should not create user with spaces in the field', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/createUser')
+      .set('Authorization', authToken)
+      .send(spacedField)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('Please fill in all fields');
         expect(res.status).to.equal(400);
         done();
       });
