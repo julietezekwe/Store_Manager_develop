@@ -2,6 +2,9 @@
   "name": "store_manager_develop",
   "version": "1.0.0",
   "description": "Store Manager is a web application that helps store owners manage sales and product inventory",
+  "engines": {
+    "node": "8.0"
+  },
   "main": "app.js",
   "scripts": {
     "build": "babel app.js -d dist && babel server -d dist/server ",
