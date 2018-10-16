@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../../app';
-import { userDetails, saleDetails } from '../testData';
+import { userDetails, saleDetails } from '../mocks/testData';
 
 let authToken;
 let authToken2;

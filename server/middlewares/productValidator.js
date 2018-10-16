@@ -1,7 +1,5 @@
-import ErrorBag from '../error';
-
-const productValidator = {
-  addProductValidator: (req, res, next) => {
+class productValidator {
+  static addProductValidator(req, res, next) {
     req.check('productName', 'Product name is required').notEmpty();
     req.check('description', 'Description is required').notEmpty();
     req.check('description', 'Description should be more than 5 words')
@@ -17,7 +15,7 @@ const productValidator = {
     if (errors) {
       errors.map(err => validationErrors.push(err.msg));
       return res.status(400).json({
-        errors: new ErrorBag(errors),
+        errors: validationErrors,
       });
     }
     const {
@@ -33,7 +31,7 @@ const productValidator = {
       }
     });
     return next();
-  },
-};
+  }
+}
 
 export default productValidator;

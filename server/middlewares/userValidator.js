@@ -1,7 +1,5 @@
-import ErrorBag from '../error';
-
-const userValidator = {
-  createUserChecker: (req, res, next) => {
+class userValidator {
+  static createUserChecker(req, res, next) {
     req.check('name', 'Name is required').notEmpty();
     req.check('username', 'Username is required').notEmpty();
     req.check('email', 'Email is required').notEmpty();
@@ -15,7 +13,7 @@ const userValidator = {
     if (errors) {
       errors.map(err => validationErrors.push(err.msg));
       return res.status(400).json({
-        errors: new ErrorBag(errors),
+        errors: validationErrors,
       });
     }
     const {
@@ -31,9 +29,9 @@ const userValidator = {
       }
     });
     return next();
-  },
+  }
 
-  userLoginChecker: (req, res, next) => {
+  static userLoginChecker(req, res, next) {
     req.check('username', 'Username is required').notEmpty();
     req.check('password', 'Password is required').notEmpty();
     req
@@ -45,11 +43,11 @@ const userValidator = {
     if (errors) {
       errors.map(err => validationErrors.push(err.msg));
       return res.status(400).json({
-        errors: new ErrorBag(errors),
+        errors: validationErrors,
       });
     }
     return next();
-  },
-};
+  }
+}
 
 export default userValidator;
