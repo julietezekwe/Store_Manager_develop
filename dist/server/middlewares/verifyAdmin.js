@@ -15,17 +15,26 @@ var verifyAdmin = function () {
 
   _createClass(verifyAdmin, null, [{
     key: 'isAdmin',
+
+    /**
+    * @description - Checks if the authenticated user is admin
+    * @param  {Object} req - request
+    * @param  {object} res - response
+    * @param {Object} next - Call back function
+    * @return {object} - status code and error message or next()
+    * @static
+    * @memberof verifyAdmin
+    */
+
     value: function isAdmin(req, res, next) {
-      if (req.authData) {
-        var role = req.authData.role;
+      var role = req.authData.role;
 
 
-        if (role !== 'admin') {
-          return res.status(401).json({
-            message: 'You are not an Admin',
-            error: true
-          });
-        }
+      if (role !== 'admin') {
+        return res.status(401).json({
+          message: 'You are not an Admin',
+          error: true
+        });
       }
       return next();
     }

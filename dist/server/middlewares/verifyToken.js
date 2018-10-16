@@ -29,23 +29,28 @@ var verifyToken = function () {
 
   _createClass(verifyToken, null, [{
     key: 'authenticate',
+
+    /**
+     * @description - Checks if the user authenticated
+     * @param  {Object} req - request
+     * @param  {object} res - response
+     * @param {Object} next - Call back function
+     * @return {object} - status code and error message or next()
+     * @static
+     * @memberof verifyToken
+     */
+
     value: function authenticate(req, res, next) {
-      // Get auth header value
       var bearerHeader = req.headers.authorization;
 
       if (!bearerHeader) {
-        // Forbidden
         return res.status(401).json({
           message: 'Kindly sign in',
           error: true
         });
       }
-      // req.token = bearerHeader;
-
       _jsonwebtoken2.default.verify(bearerHeader, secret, function (err, authData) {
         if (err) {
-          // Wrong token
-
           return res.status(401).json({
             message: 'Kindly sign in',
             error: true
@@ -53,7 +58,6 @@ var verifyToken = function () {
         }
         req.authData = authData;
         return true;
-        //   = authData;
       });
       return next();
     }

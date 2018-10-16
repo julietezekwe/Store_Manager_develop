@@ -15,6 +15,16 @@ var paramsChecker = function () {
 
   _createClass(paramsChecker, null, [{
     key: 'idChecker',
+
+    /**
+     * @description - Checks if the request parameters are valid numbers
+     * @param  {Object} req - request
+     * @param  {object} res - response
+     * @param {Object} next - Call back function
+     * @return {object} - status code and error message or next()
+     * @static
+     * @memberof paramsChecker
+     */
     value: function idChecker(req, res, next) {
       var _req$params = req.params,
           userId = _req$params.userId,

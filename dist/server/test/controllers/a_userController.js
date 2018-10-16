@@ -12,7 +12,7 @@ var _app = require('../../../app');
 
 var _app2 = _interopRequireDefault(_app);
 
-var _testData = require('../testData');
+var _testData = require('../mocks/testData');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24,7 +24,8 @@ var admin = _testData.userDetails.admin,
     attendant = _testData.userDetails.attendant,
     newAttendant = _testData.userDetails.newAttendant,
     wrongPassword = _testData.userDetails.wrongPassword,
-    emptyField = _testData.userDetails.emptyField;
+    emptyField = _testData.userDetails.emptyField,
+    spacedField = _testData.userDetails.spacedField;
 
 describe('User', function () {
   before(function (done) {
@@ -115,6 +116,13 @@ describe('User', function () {
   it('it should not login user with empty field', function (done) {
     _chai2.default.request(_app2.default).post('/api/v1/auth/login').send(emptyField).end(function (err, res) {
       expect(res.body.errors[0]).to.eql('Password is required');
+      expect(res.status).to.equal(400);
+      done();
+    });
+  });
+  it('it should not create user with spaces in the field', function (done) {
+    _chai2.default.request(_app2.default).post('/api/v1/auth/createUser').set('Authorization', authToken).send(spacedField).end(function (err, res) {
+      expect(res.body.message).to.eql('Please fill in all fields');
       expect(res.status).to.equal(400);
       done();
     });

@@ -14,6 +14,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ *
+ * @description Defines the actions to for the sales records endpoints
+ * @class sales
+ */
 var sales = function () {
   function sales() {
     _classCallCheck(this, sales);
@@ -21,6 +26,17 @@ var sales = function () {
 
   _createClass(sales, null, [{
     key: 'addSaleRecord',
+
+    /**
+      *Add sales record
+      *@description Adds a new sale order
+      *@static
+      *@param  {Object} req - request
+      *@param  {object} res - response
+      *@return {object} - status code, message and the added sale record detail
+      *@memberof sales
+      */
+
     value: function addSaleRecord(req, res) {
       var sellerId = req.authData.id;
 
@@ -33,21 +49,23 @@ var sales = function () {
       var totalPrize = Number(prize) * Number(quantity);
       var id = _SalesModel2.default.length + 1;
       var saleDetail = {
-        id: id,
-        sellerId: sellerId,
-        productId: productId,
-        productName: productName,
-        prize: prize,
-        quantity: quantity,
-        totalPrize: totalPrize,
-        created: new Date()
+        id: id, sellerId: sellerId, productId: productId, productName: productName, prize: prize, quantity: quantity, totalPrize: totalPrize, created: new Date()
       };
       _SalesModel2.default.push(saleDetail);
       return res.status(201).json({
-        saleDetail: saleDetail,
-        message: 'Successfully added sale(s)'
+        saleDetail: saleDetail, message: 'Successfully added sale(s)'
       });
     }
+    /**
+      *Get all sales records
+      *@description Retrieves all the sales from the data source
+      *@static
+      *@param  {Object} req - request
+      *@param  {object} res - response
+      *@return {object} - status code, message and all existing sale orders
+      *@memberof sales
+      */
+
   }, {
     key: 'getAllSalesRecords',
     value: function getAllSalesRecords(req, res) {
@@ -57,6 +75,16 @@ var sales = function () {
         error: false
       });
     }
+    /**
+    *Get a sale record
+    *@description Retrieves a sale record by id
+    *@static
+    *@param  {Object} req - request
+    *@param  {object} res - response
+    *@return {object} - status code, message and the retrieved sales record detail
+    *@memberof sales
+    */
+
   }, {
     key: 'getSaleRecord',
     value: function getSaleRecord(req, res) {
@@ -71,23 +99,28 @@ var sales = function () {
         if (sale.id === Number(salesId) && (sale.sellerId === Number(id) || role === 'admin')) {
           saleDetail = sale;
           validUser = true;
-          return true;
         }
         return false;
       });
 
       if (validUser) {
         return res.status(200).json({
-          saleDetail: saleDetail,
-          message: 'Success',
-          error: false
+          saleDetail: saleDetail, message: 'Success', error: false
         });
       }
-      return res.status(401).json({
-        message: 'Unauthorized',
-        error: true
+      return res.status(401).json({ message: 'Unauthorized', error: true
       });
     }
+    /**
+    *Get all attendants sales records
+    *@description Retrieves sales records
+    *@static
+    *@param  {Object} req - request
+    *@param  {object} res - response
+    *@return {object} - status code, message and the retrieved sales records array
+    *@memberof sales
+    */
+
   }, {
     key: 'getAttendantSaleRecord',
     value: function getAttendantSaleRecord(req, res) {

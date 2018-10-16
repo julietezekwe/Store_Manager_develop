@@ -30,6 +30,12 @@ _dotenv2.default.config();
 
 var secret = process.env.SECRETE_KEY;
 
+/**
+ *
+ * @description Defines the actions to for the users endpoints
+ * @class users
+ */
+
 var Users = function () {
   function Users() {
     _classCallCheck(this, Users);
@@ -37,6 +43,17 @@ var Users = function () {
 
   _createClass(Users, null, [{
     key: 'getAllUsers',
+
+    /**
+      *Gets all Users
+      *@description Retrieves all the users from the data source
+      *@static
+      *@param  {Object} req - request
+      *@param  {object} res - response
+      *@return {object} - status code, message and all existing users
+      *@memberof Users
+      */
+
     value: function getAllUsers(req, res) {
       res.status(200).json({
         UsersModel: _UsersModel2.default,
@@ -44,6 +61,16 @@ var Users = function () {
         error: false
       });
     }
+    /**
+    *Gets User
+    *@description Retrieves a user by id
+    *@static
+    *@param  {Object} req - request
+    *@param  {object} res - response
+    *@return {object} - status code, message and the retrieved user detail
+    *@memberof Users
+    */
+
   }, {
     key: 'getUser',
     value: function getUser(req, res) {
@@ -70,6 +97,16 @@ var Users = function () {
         error: true
       });
     }
+    /**
+    *Login user
+    *@description Logins in an existing user
+    *@static
+    *@param  {Object} req - request
+    *@param  {object} res - response
+    *@return {object} - status code, message and the authentication detail
+    *@memberof Users
+    */
+
   }, {
     key: 'loginUser',
     value: function loginUser(req, res) {
@@ -87,33 +124,31 @@ var Users = function () {
               role = user.role,
               created = user.created;
 
-          authDetail = {
-            id: id,
-            name: name,
-            username: username,
-            email: email,
-            role: role,
-            created: created
-          };
+          authDetail = { id: id, name: name, username: username, email: email, role: role, created: created };
           found = true;
-          return true;
         }
         return false;
       });
       if (found) {
         var token = _jsonwebtoken2.default.sign(authDetail, secret, { expiresIn: '1hr' });
         return res.status(200).json({
-          authDetail: authDetail,
-          token: token,
-          message: 'Success',
-          error: false
+          authDetail: authDetail, token: token, message: 'Success', error: false
         });
       }
       return res.status(401).json({
-        message: 'Invalid Credentials',
-        error: true
+        message: 'Invalid Credentials', error: true
       });
     }
+    /**
+    *Creats user
+    *@description Creates a new product
+    *@static
+    *@param  {Object} req - request
+    *@param  {object} res - response
+    *@return {object} - status code, message and the new users detail
+    *@memberof Users
+    */
+
   }, {
     key: 'createUser',
     value: function createUser(req, res) {
@@ -129,33 +164,17 @@ var Users = function () {
       _UsersModel2.default.map(function (user) {
         if (user.username === username) {
           userExist = true;
-          return false;
         }
         return true;
       });
       if (!userExist) {
         var hash = _bcryptjs2.default.hashSync(password, 10);
         var id = _UsersModel2.default.length + 1;
-        userDetail = {
-          id: id,
-          name: name,
-          username: username,
-          email: email,
-          password: hash,
-          role: role,
-          created: new Date()
-        };
+        userDetail = { id: id, name: name, username: username, email: email, password: hash, role: role, created: new Date() };
         _UsersModel2.default.push(userDetail);
-        return res.status(201).json({
-          userDetail: userDetail,
-          message: 'User created successfully',
-          error: false
-        });
+        return res.status(201).json({ userDetail: userDetail, message: 'User created successfully' });
       }
-      return res.status(403).json({
-        message: 'Username is taken',
-        error: true
-      });
+      return res.status(403).json({ message: 'Username is taken', error: true });
     }
   }]);
 

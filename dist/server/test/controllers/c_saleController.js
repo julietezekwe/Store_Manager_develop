@@ -12,7 +12,7 @@ var _app = require('../../../app');
 
 var _app2 = _interopRequireDefault(_app);
 
-var _testData = require('../testData');
+var _testData = require('../mocks/testData');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25,7 +25,8 @@ var admin = _testData.userDetails.admin,
     attendant = _testData.userDetails.attendant,
     attendant2 = _testData.userDetails.attendant2;
 var emptyField = _testData.saleDetails.emptyField,
-    validSale = _testData.saleDetails.validSale;
+    validSale = _testData.saleDetails.validSale,
+    spacedField = _testData.saleDetails.spacedField;
 
 describe('Sales', function () {
   before(function (done) {
@@ -86,6 +87,13 @@ describe('Sales', function () {
   it('it should not post sales with empty field', function (done) {
     _chai2.default.request(_app2.default).post('/api/v1/sales').set('Authorization', authToken2).send(emptyField).end(function (err, res) {
       expect(res.body.errors[0]).to.eql('Product ID is required');
+      expect(res.status).to.equal(400);
+      done();
+    });
+  });
+  it('it should not post sales with only spaces in the field', function (done) {
+    _chai2.default.request(_app2.default).post('/api/v1/sales').set('Authorization', authToken2).send(spacedField).end(function (err, res) {
+      expect(res.body.message).to.eql('Please fill in all fields');
       expect(res.status).to.equal(400);
       done();
     });
