@@ -1,4 +1,13 @@
 class salesValidator {
+/**
+ * @description - Checks the request parameters for creating sales records are of the right formart
+ * @param  {Object} req - request
+ * @param  {object} res - response
+ * @param {Object} next - Call back function
+ * @return {object} - status code and error message or next()
+ * @static
+ * @memberof salesValidator
+ */
   static addSalesValidator(req, res, next) {
     req.check('productId', 'Product ID is required').notEmpty();
     req.check('productName', 'Product name is required').notEmpty();

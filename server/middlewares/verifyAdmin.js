@@ -1,4 +1,14 @@
 class verifyAdmin {
+  /**
+ * @description - Checks if the authenticated user is admin
+ * @param  {Object} req - request
+ * @param  {object} res - response
+ * @param {Object} next - Call back function
+ * @return {object} - status code and error message or next()
+ * @static
+ * @memberof verifyAdmin
+ */
+
   static isAdmin(req, res, next) {
     const { role } = req.authData;
 
