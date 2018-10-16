@@ -1,6 +1,20 @@
 import SalesModel from '../dummyModel/SalesModel';
-
+/**
+ *
+ * @description Defines the actions to for the sales records endpoints
+ * @class sales
+ */
 class sales {
+/**
+  *Add sales record
+  *@description Adds a new sale order
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - status code, message and the added sale record detail
+  *@memberof sales
+  */
+
   static addSaleRecord(req, res) {
     const sellerId = req.authData.id;
 
@@ -19,6 +33,15 @@ class sales {
       })
     );
   }
+  /**
+    *Get all sales records
+    *@description Retrieves all the sales from the data source
+    *@static
+    *@param  {Object} req - request
+    *@param  {object} res - response
+    *@return {object} - status code, message and all existing sale orders
+    *@memberof sales
+    */
 
   static getAllSalesRecords(req, res) {
     return (
@@ -29,6 +52,15 @@ class sales {
       })
     );
   }
+  /**
+  *Get a sale record
+  *@description Retrieves a sale record by id
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - status code, message and the retrieved sales record detail
+  *@memberof sales
+  */
 
   static getSaleRecord(req, res) {
     const { id, role } = req.authData;
@@ -55,6 +87,15 @@ class sales {
       })
     );
   }
+  /**
+  *Get all attendants sales records
+  *@description Retrieves sales records
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - status code, message and the retrieved sales records array
+  *@memberof sales
+  */
 
   static getAttendantSaleRecord(req, res) {
     const { id } = req.authData;

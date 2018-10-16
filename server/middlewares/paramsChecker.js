@@ -1,4 +1,13 @@
 class paramsChecker {
+/**
+ * @description - Checks if the request parameters are valid numbers
+ * @param  {Object} req - request
+ * @param  {object} res - response
+ * @param {Object} next - Call back function
+ * @return {object} - status code and error message or next()
+ * @static
+ * @memberof paramsChecker
+ */
   static idChecker(req, res, next) {
     const { userId, productId, salesId } = req.params;
     const validId = /^[0-9]+$/;

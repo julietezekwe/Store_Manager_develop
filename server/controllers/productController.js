@@ -1,6 +1,19 @@
 import ProductsModel from '../dummyModel/ProductsModel';
-
+/**
+ *
+ * @description Defines the actions to for the products endpoints
+ * @class product
+ */
 class products {
+  /**
+    *Get all products
+    *@description Retrieves all the products from the data source
+    *@static
+    *@param  {Object} req - request
+    *@param  {object} res - response
+    *@return {object} - status code, message and all existing products
+    *@memberof product
+    */
   static getAllProducts(req, res) {
     return (
       res.status(200).json({
@@ -10,6 +23,15 @@ class products {
       })
     );
   }
+  /**
+  *Add product
+  *@description Adds a new product
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - status code, message and the added products detail
+  *@memberof product
+  */
 
   static addProduct(req, res) {
     const {
@@ -36,10 +58,20 @@ class products {
     ProductsModel.push(productDetail);
     return (
       res.status(201).json({
-        productDetail, message: 'Successfully added product(s)',
+        productDetail,
+        message: 'Successfully added product(s)',
       })
     );
   }
+  /**
+  *Get product
+  *@description Retrieves a product by id
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - status code, message and the retrieved products detail
+  *@memberof product
+  */
 
   static getProduct(req, res) {
     const { productId } = req.params;

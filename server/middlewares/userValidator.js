@@ -1,4 +1,13 @@
 class userValidator {
+  /**
+ * @description - Checks the request parameters for creating new user are of the right formart
+ * @param  {Object} req - request
+ * @param  {object} res - response
+ * @param {Object} next - Call back function
+ * @return {object} - status code and error message or next()
+ * @static
+ * @memberof userValidator
+ */
   static createUserChecker(req, res, next) {
     req.check('name', 'Name is required').notEmpty();
     req.check('username', 'Username is required').notEmpty();
@@ -30,6 +39,15 @@ class userValidator {
     });
     return next();
   }
+  /**
+ * @description - Checks the request parameters for login in users are of the right formart
+ * @param  {Object} req - request
+ * @param  {object} res - response
+ * @param {Object} next - Call back function
+ * @return {object} - status code and error message or next()
+ * @static
+ * @memberof userValidator
+ */
 
   static userLoginChecker(req, res, next) {
     req.check('username', 'Username is required').notEmpty();

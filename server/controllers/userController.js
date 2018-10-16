@@ -7,7 +7,23 @@ dotenv.config();
 
 const secret = process.env.SECRETE_KEY;
 
+/**
+ *
+ * @description Defines the actions to for the users endpoints
+ * @class users
+ */
+
 class Users {
+  /**
+    *Gets all Users
+    *@description Retrieves all the users from the data source
+    *@static
+    *@param  {Object} req - request
+    *@param  {object} res - response
+    *@return {object} - status code, message and all existing users
+    *@memberof Users
+    */
+
   static getAllUsers(req, res) {
     res.status(200).json({
       UsersModel,
@@ -15,6 +31,15 @@ class Users {
       error: false,
     });
   }
+  /**
+  *Gets User
+  *@description Retrieves a user by id
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - status code, message and the retrieved user detail
+  *@memberof Users
+  */
 
   static getUser(req, res) {
     const { userId } = req.params;
@@ -43,6 +68,15 @@ class Users {
       })
     );
   }
+  /**
+  *Login user
+  *@description Logins in an existing user
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - status code, message and the authentication detail
+  *@memberof Users
+  */
 
   static loginUser(req, res) {
     const { username, password } = req.body;
@@ -70,6 +104,15 @@ class Users {
       })
     );
   }
+  /**
+  *Creats user
+  *@description Creates a new product
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - status code, message and the new users detail
+  *@memberof Users
+  */
 
   static createUser(req, res) {
     const { name, username, email, password, role } = req.body;
