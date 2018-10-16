@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "babel app.js -d dist && babel server -d dist/server ",
-    "test": "nyc mocha --exit --timeout 25000 ./server/test/**/*.js --compilers js:babel-core/register",
+    "test": "nyc mocha --exit --timeout 10000 ./server/test/**/*.js --compilers js:babel-core/register",
     "babel-node": "babel-node app --presets=env",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",

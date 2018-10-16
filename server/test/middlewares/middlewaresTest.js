@@ -15,6 +15,9 @@ describe('VERIFY ADMIN AND ATTENDANTS', () => {
   it('should return a function()', () => {
     expect(isAdmin).to.be.a('function');
   });
+  it('should return a function()', () => {
+    expect(isAdmin).to.be.a('function');
+  });
 
   it('should accept three arguments', () => {
     expect(isAdmin.length).to.equal(3);

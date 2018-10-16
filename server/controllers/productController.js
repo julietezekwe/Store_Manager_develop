@@ -34,8 +34,7 @@ class products {
     ProductsModel.push(productDetail);
     return (
       res.status(201).json({
-        productDetail,
-        message: 'Successfully added product(s)',
+        productDetail, message: 'Successfully added product(s)',
       })
     );
   }
