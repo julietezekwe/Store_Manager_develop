@@ -15,17 +15,26 @@ var verifyAttendant = function () {
 
   _createClass(verifyAttendant, null, [{
     key: 'isAttendant',
+
+    /**
+    * @description - Checks if the authenticated user is attendant
+    * @param  {Object} req - request
+    * @param  {object} res - response
+    * @param {Object} next - Call back function
+    * @return {object} - status code and error message or next()
+    * @static
+    * @memberof verifyAttendant
+    */
+
     value: function isAttendant(req, res, next) {
-      if (req.authData) {
-        var role = req.authData.role;
+      var role = req.authData.role;
 
 
-        if (role !== 'attendant') {
-          return res.status(401).json({
-            message: 'You are not an Attendant',
-            error: true
-          });
-        }
+      if (role !== 'attendant') {
+        return res.status(401).json({
+          message: 'You are not an Attendant',
+          error: true
+        });
       }
       return next();
     }

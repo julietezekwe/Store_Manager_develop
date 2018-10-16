@@ -19,7 +19,7 @@ Store Manager is a web application that helps store owners manage sales and prod
 
 
 ## Link to Hosted App
-
+* [API link](https://store-manager-develop.herokuapp.com/)
 
 ## Templates
 * UI templates are hosted on Github pages [visit here](https://julietezekwe.github.io/store_manager_develop/ui/login.html)

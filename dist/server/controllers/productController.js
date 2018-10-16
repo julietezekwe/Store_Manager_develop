@@ -14,6 +14,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ *
+ * @description Defines the actions to for the products endpoints
+ * @class product
+ */
 var products = function () {
   function products() {
     _classCallCheck(this, products);
@@ -21,6 +26,16 @@ var products = function () {
 
   _createClass(products, null, [{
     key: 'getAllProducts',
+
+    /**
+      *Get all products
+      *@description Retrieves all the products from the data source
+      *@static
+      *@param  {Object} req - request
+      *@param  {object} res - response
+      *@return {object} - status code, message and all existing products
+      *@memberof product
+      */
     value: function getAllProducts(req, res) {
       return res.status(200).json({
         ProductsModel: _ProductsModel2.default,
@@ -28,12 +43,23 @@ var products = function () {
         error: false
       });
     }
+    /**
+    *Add product
+    *@description Adds a new product
+    *@static
+    *@param  {Object} req - request
+    *@param  {object} res - response
+    *@return {object} - status code, message and the added products detail
+    *@memberof product
+    */
+
   }, {
     key: 'addProduct',
     value: function addProduct(req, res) {
       var _req$body = req.body,
           productName = _req$body.productName,
           description = _req$body.description,
+          image = _req$body.image,
           prize = _req$body.prize,
           quantity = _req$body.quantity,
           min = _req$body.min,
@@ -44,6 +70,7 @@ var products = function () {
         id: id,
         productName: productName,
         description: description,
+        image: image,
         prize: prize,
         quantity: quantity,
         min: min,
@@ -56,6 +83,16 @@ var products = function () {
         message: 'Successfully added product(s)'
       });
     }
+    /**
+    *Get product
+    *@description Retrieves a product by id
+    *@static
+    *@param  {Object} req - request
+    *@param  {object} res - response
+    *@return {object} - status code, message and the retrieved products detail
+    *@memberof product
+    */
+
   }, {
     key: 'getProduct',
     value: function getProduct(req, res) {
