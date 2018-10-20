@@ -12,7 +12,7 @@ import salesValidator from '../middlewares/salesValidator';
 
 // destructure controllers
 const {
-  getAllUsers, createUser, loginUser, getUser,
+  getAllUsers, createUser, loginUser, getUser, updateUser, deleteUser,
 } = UsersController;
 
 const {
@@ -37,7 +37,9 @@ const router = express.Router();
 router.get('/auth/users', authenticate, isAdmin, getAllUsers);
 router.get('/auth/:userId', authenticate, idChecker, getUser);
 router.post('/auth/createUser', authenticate, isAdmin, createUserChecker, createUser);
+router.put('/auth/updateUser/:userId', authenticate, isAdmin, idChecker, createUserChecker, updateUser);
 router.post('/auth/login', userLoginChecker, loginUser);
+router.delete('/auth/deleteUser/:userId', authenticate, isAdmin, idChecker, deleteUser);
 
 // products endpoints
 router.post('/products', authenticate, isAdmin, addProductValidator, addProduct);
