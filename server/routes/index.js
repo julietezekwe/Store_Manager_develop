@@ -1,7 +1,7 @@
 import express from 'express';
-import Users from '../controllers/userController';
-import products from '../controllers/productController';
-import sales from '../controllers/salesController';
+import UsersController from '../controllers/UsersController';
+import ProductsController from '../controllers/ProductsController';
+import SalesController from '../controllers/salesController';
 import paramsChecker from '../middlewares/paramsChecker';
 import userValidator from '../middlewares/userValidator';
 import productValidator from '../middlewares/productValidator';
@@ -13,15 +13,15 @@ import salesValidator from '../middlewares/salesValidator';
 // destructure controllers
 const {
   getAllUsers, createUser, loginUser, getUser,
-} = Users;
+} = UsersController;
 
 const {
   addProduct, getProduct, getAllProducts,
-} = products;
+} = ProductsController;
 
 const {
   addSaleRecord, getAllSalesRecords, getSaleRecord, getAttendantSaleRecord,
-} = sales;
+} = SalesController;
 // deconstruct middlewares
 const { idChecker } = paramsChecker;
 const { createUserChecker, userLoginChecker } = userValidator;

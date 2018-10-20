@@ -2,9 +2,9 @@ import ProductsModel from '../dummyModel/ProductsModel';
 /**
  *
  * @description Defines the actions to for the products endpoints
- * @class product
+ * @class ProductsController
  */
-class products {
+class ProductsController {
   /**
     *Get all products
     *@description Retrieves all the products from the data source
@@ -12,7 +12,7 @@ class products {
     *@param  {Object} req - request
     *@param  {object} res - response
     *@return {object} - status code, message and all existing products
-    *@memberof product
+    *@memberof ProductsController
     */
   static getAllProducts(req, res) {
     return (
@@ -30,7 +30,7 @@ class products {
   *@param  {Object} req - request
   *@param  {object} res - response
   *@return {object} - status code, message and the added products detail
-  *@memberof product
+  *@memberof ProductsController
   */
 
   static addProduct(req, res) {
@@ -70,7 +70,7 @@ class products {
   *@param  {Object} req - request
   *@param  {object} res - response
   *@return {object} - status code, message and the retrieved products detail
-  *@memberof product
+  *@memberof ProductsController
   */
 
   static getProduct(req, res) {
@@ -99,38 +99,14 @@ class products {
   }
 
   /**
-  *Product sales check
-  *@description Checks for product availability
-  *@static
-  *@param  {Object} req - request
-  *@param  {object} res - response
-  *@return {object} - product detail
-  *@memberof products
-  */
-  static productsSales(productId, quantity) {
-    let productDetail;
-    let newQuantity;
-    ProductsModel.map((product, index) => {
-      if (Number(product.id) === Number(productId)) {
-        if (Number(product.quantity) >= Number(quantity)) {
-          productDetail = product;
-          newQuantity = Number(product.quantity) - Number(quantity);
-          ProductsModel[index].quantity = newQuantity;
-          return true;
-        } productDetail = 'The quantity is more than in stock';
-      }
-    });
-    return productDetail;
-  }
-  /**
   *Updates Product
   *@description Update product
   *@static
   *@param  {Object} req - request
   *@param  {object} res - response
   *@return {object} - product detail
-  *@memberof products
+  *@memberof ProductsController
   */
 }
 
-export default products;
+export default ProductsController;
