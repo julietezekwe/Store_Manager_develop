@@ -26,7 +26,9 @@ var admin = _testData.userDetails.admin,
     attendant2 = _testData.userDetails.attendant2;
 var emptyField = _testData.saleDetails.emptyField,
     validSale = _testData.saleDetails.validSale,
-    spacedField = _testData.saleDetails.spacedField;
+    spacedField = _testData.saleDetails.spacedField,
+    invalidSale = _testData.saleDetails.invalidSale,
+    invalidSale2 = _testData.saleDetails.invalidSale2;
 
 describe('Sales', function () {
   before(function (done) {
@@ -101,6 +103,20 @@ describe('Sales', function () {
   it('it should not post sales if user is not an attendant', function (done) {
     _chai2.default.request(_app2.default).post('/api/v1/sales').set('Authorization', authToken).send(validSale).end(function (err, res) {
       expect(res.body.message).to.eql('You are not an Attendant');
+      expect(res.status).to.equal(401);
+      done();
+    });
+  });
+  it('it should not post sales if product does not exist', function (done) {
+    _chai2.default.request(_app2.default).post('/api/v1/sales').set('Authorization', authToken2).send(invalidSale).end(function (err, res) {
+      expect(res.body.message).to.eql('This product does not exist');
+      expect(res.status).to.equal(404);
+      done();
+    });
+  });
+  it('it should not post sales the quantity being recorded is more than in stock', function (done) {
+    _chai2.default.request(_app2.default).post('/api/v1/sales').set('Authorization', authToken2).send(invalidSale2).end(function (err, res) {
+      expect(res.body.message).to.eql('The quantity is more than in stock');
       expect(res.status).to.equal(401);
       done();
     });
