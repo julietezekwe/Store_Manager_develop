@@ -8,7 +8,6 @@ dotenv.config();
 const secret = process.env.SECRETE_KEY;
 
 /**
- *
  * @description Defines the actions to for the users endpoints
  * @class UsersController
  */
@@ -133,6 +132,78 @@ class UsersController {
     }
     return (
       res.status(403).json({ message: 'Username is taken', error: true })
+    );
+  }
+
+  /**
+  *Update user
+  *@description Creates a new product
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - status code, message and the updated users detail
+  *@memberof UsersController
+  */
+
+  static updateUser(req, res) {
+    const { userId } = req.params;
+    const { name, username, email, password, role } = req.body;
+    let userExist = false;
+    let userIndex;
+    let userDetail;
+    UsersModel.map((user, index) => {
+      if (user.id === Number(userId)) { userExist = true; userIndex = index; }
+      return true;
+    });
+    if (userExist) {
+      const hash = bcrypt.hashSync(password, 10);
+      const { id } = UsersModel[userIndex];
+      userDetail = { id, name, username, email, password: hash, role, created: new Date() };
+      UsersModel[userIndex] = userDetail;
+      return (
+        res.status(201).json({ userDetail, message: 'User updated successfully' })
+      );
+    }
+    return (
+      res.status(404).json({ message: 'User does not exist', error: true })
+    );
+  }
+
+  /**
+  *Deletes User
+  *@description Deletes a user by id
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - status code and message
+  *@memberof UsersController
+  */
+
+  static deleteUser(req, res) {
+    const { userId } = req.params;
+    let found = false;
+    let userIndex;
+    UsersModel.map((user, index) => {
+      if (Number(userId) === user.id) {
+        userIndex = index;
+        found = true;
+      }
+      return false;
+    });
+    if (found) {
+      UsersModel.splice(userIndex, 1);
+      return (
+        res.status(200).json({
+          message: 'Successfully deleted user',
+          error: false,
+        })
+      );
+    }
+    return (
+      res.status(404).json({
+        message: 'User does not exist',
+        error: true,
+      })
     );
   }
 }

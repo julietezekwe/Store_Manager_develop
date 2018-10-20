@@ -12,7 +12,7 @@
 			"url": "https://opensource.org/licenses/ISC"
 		}
 	},
-	"host": "https://store-manager-develop.herokuapp.com",
+	"host": "store-manager-develop.herokuapp.com",
 	"basePath": "/api/v1/",
 	"tags": [
 		{
@@ -169,6 +169,78 @@
 						"description": "Invalid Credentials"
 					}
                     
+				}
+			}
+		},
+		"/auth/updateUser/{userId}": {
+			"put": {
+				"summary": "Update a user by ID",
+				"tags": [
+					"Users"
+				],
+				"description": "Update a user in the platform by the admin",
+				"parameters": [
+                        {
+                            "in": "header",
+                            "name": "Authorization",
+                            "description": "Enter token",
+                            "type": "string",
+                            "required": true
+                        },
+					{
+						"name": "user",
+						"in": "body",
+						"description": "The user that we want to update",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/UserCreate"
+						}
+					}
+				],
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"201": {
+						"description": "User updated successfully"
+					},
+					"404": {
+						"description": "User does not exist"
+					}
+				}
+			}
+		},
+		"/auth/deleteUser/{userId}" : {
+			"delete": {
+				"tags": [
+					"Users"
+				],
+                "summary": "Deletes a user with given ID",
+                "description": "This can only be done by admin.",
+				"parameters": [
+                        {
+                            "in": "header",
+                            "name": "Authorization",
+                            "description": "Enter token",
+                            "type": "string",
+                            "required": true
+                        },
+					{
+						"name": "userId",
+						"in": "path",
+						"description": "The id of the user to be deleted",
+						"required": "true",
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successfully deleted user"
+					},
+					"404": {
+						"description": "User does not exist"
+					}
 				}
 			}
 		},
