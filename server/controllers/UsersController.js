@@ -13,7 +13,7 @@ const secret = process.env.SECRETE_KEY;
  * @class users
  */
 
-class Users {
+class UsersController {
   /**
     *Gets all Users
     *@description Retrieves all the users from the data source
@@ -21,7 +21,7 @@ class Users {
     *@param  {Object} req - request
     *@param  {object} res - response
     *@return {object} - status code, message and all existing users
-    *@memberof Users
+    *@memberof UsersController
     */
 
   static getAllUsers(req, res) {
@@ -38,7 +38,7 @@ class Users {
   *@param  {Object} req - request
   *@param  {object} res - response
   *@return {object} - status code, message and the retrieved user detail
-  *@memberof Users
+  *@memberof UsersController
   */
 
   static getUser(req, res) {
@@ -75,7 +75,7 @@ class Users {
   *@param  {Object} req - request
   *@param  {object} res - response
   *@return {object} - status code, message and the authentication detail
-  *@memberof Users
+  *@memberof UsersController
   */
 
   static loginUser(req, res) {
@@ -111,7 +111,7 @@ class Users {
   *@param  {Object} req - request
   *@param  {object} res - response
   *@return {object} - status code, message and the new users detail
-  *@memberof Users
+  *@memberof UsersController
   */
 
   static createUser(req, res) {
@@ -137,4 +137,4 @@ class Users {
   }
 }
 
-export default Users;
+export default UsersController;
