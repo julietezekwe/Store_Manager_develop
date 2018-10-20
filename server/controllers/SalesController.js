@@ -1,13 +1,12 @@
 import SalesModel from '../dummyModel/SalesModel';
-import productController from './productController';
+import productsSales from './helpers/productsSales';
 
-const { productsSales } = productController;
 /**
  *
  * @description Defines the actions to for the sales records endpoints
- * @class sales
+ * @class SalesController
  */
-class sales {
+class SalesController {
   /**
   *Add sales record
   *@description Adds a new sale order
@@ -15,7 +14,7 @@ class sales {
   *@param  {Object} req - request
   *@param  {object} res - response
   *@return {object} - status code, message and the added sale record detail
-  *@memberof sales
+  *@memberof SalesController
   */
 
   static addSaleRecord(req, res) {
@@ -51,7 +50,7 @@ class sales {
     *@param  {Object} req - request
     *@param  {object} res - response
     *@return {object} - status code, message and all existing sale orders
-    *@memberof sales
+    *@memberof SalesController
     */
 
   static getAllSalesRecords(req, res) {
@@ -70,7 +69,7 @@ class sales {
   *@param  {Object} req - request
   *@param  {object} res - response
   *@return {object} - status code, message and the retrieved sales record detail
-  *@memberof sales
+  *@memberof SalesController
   */
 
   static getSaleRecord(req, res) {
@@ -105,7 +104,7 @@ class sales {
   *@param  {Object} req - request
   *@param  {object} res - response
   *@return {object} - status code, message and the retrieved sales records array
-  *@memberof sales
+  *@memberof SalesController
   */
 
   static getAttendantSaleRecord(req, res) {
@@ -136,4 +135,4 @@ class sales {
   }
 }
 
-export default sales;
+export default SalesController;

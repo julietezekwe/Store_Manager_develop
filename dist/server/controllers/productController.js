@@ -120,6 +120,44 @@ var products = function () {
         error: true
       });
     }
+
+    /**
+    *Product sales check
+    *@description Checks for product availability
+    *@static
+    *@param  {Object} req - request
+    *@param  {object} res - response
+    *@return {object} - product detail
+    *@memberof products
+    */
+
+  }, {
+    key: 'productsSales',
+    value: function productsSales(productId, quantity) {
+      var productDetail = void 0;
+      var newQuantity = void 0;
+      _ProductsModel2.default.map(function (product, index) {
+        if (Number(product.id) === Number(productId)) {
+          if (Number(product.quantity) >= Number(quantity)) {
+            productDetail = product;
+            newQuantity = Number(product.quantity) - Number(quantity);
+            _ProductsModel2.default[index].quantity = newQuantity;
+            return true;
+          }productDetail = 'The quantity is more than in stock';
+        }
+      });
+      return productDetail;
+    }
+    /**
+    *Updates Product
+    *@description Update product
+    *@static
+    *@param  {Object} req - request
+    *@param  {object} res - response
+    *@return {object} - product detail
+    *@memberof products
+    */
+
   }]);
 
   return products;
