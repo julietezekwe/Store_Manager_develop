@@ -10,27 +10,25 @@ var _SalesModel = require('../dummyModel/SalesModel');
 
 var _SalesModel2 = _interopRequireDefault(_SalesModel);
 
-var _productController = require('./productController');
+var _productsSales = require('./helpers/productsSales');
 
-var _productController2 = _interopRequireDefault(_productController);
+var _productsSales2 = _interopRequireDefault(_productsSales);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var productsSales = _productController2.default.productsSales;
 /**
  *
  * @description Defines the actions to for the sales records endpoints
- * @class sales
+ * @class SalesController
  */
-
-var sales = function () {
-  function sales() {
-    _classCallCheck(this, sales);
+var SalesController = function () {
+  function SalesController() {
+    _classCallCheck(this, SalesController);
   }
 
-  _createClass(sales, null, [{
+  _createClass(SalesController, null, [{
     key: 'addSaleRecord',
 
     /**
@@ -40,7 +38,7 @@ var sales = function () {
     *@param  {Object} req - request
     *@param  {object} res - response
     *@return {object} - status code, message and the added sale record detail
-    *@memberof sales
+    *@memberof SalesController
     */
 
     value: function addSaleRecord(req, res) {
@@ -51,7 +49,7 @@ var sales = function () {
           prize = _req$body.prize,
           quantity = _req$body.quantity;
 
-      var productDetail = productsSales(productId, quantity);
+      var productDetail = (0, _productsSales2.default)(productId, quantity);
       if (productDetail === undefined) {
         return res.status(404).json({ message: 'This product does not exist' });
       }
@@ -75,7 +73,7 @@ var sales = function () {
       *@param  {Object} req - request
       *@param  {object} res - response
       *@return {object} - status code, message and all existing sale orders
-      *@memberof sales
+      *@memberof SalesController
       */
 
   }, {
@@ -94,7 +92,7 @@ var sales = function () {
     *@param  {Object} req - request
     *@param  {object} res - response
     *@return {object} - status code, message and the retrieved sales record detail
-    *@memberof sales
+    *@memberof SalesController
     */
 
   }, {
@@ -130,7 +128,7 @@ var sales = function () {
     *@param  {Object} req - request
     *@param  {object} res - response
     *@return {object} - status code, message and the retrieved sales records array
-    *@memberof sales
+    *@memberof SalesController
     */
 
   }, {
@@ -160,7 +158,7 @@ var sales = function () {
     }
   }]);
 
-  return sales;
+  return SalesController;
 }();
 
-exports.default = sales;
+exports.default = SalesController;

@@ -8,17 +8,17 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
-var _userController = require('../controllers/userController');
+var _UsersController = require('../controllers/UsersController');
 
-var _userController2 = _interopRequireDefault(_userController);
+var _UsersController2 = _interopRequireDefault(_UsersController);
 
-var _productController = require('../controllers/productController');
+var _ProductsController = require('../controllers/ProductsController');
 
-var _productController2 = _interopRequireDefault(_productController);
+var _ProductsController2 = _interopRequireDefault(_ProductsController);
 
-var _salesController = require('../controllers/salesController');
+var _SalesController = require('../controllers/SalesController');
 
-var _salesController2 = _interopRequireDefault(_salesController);
+var _SalesController2 = _interopRequireDefault(_SalesController);
 
 var _paramsChecker = require('../middlewares/paramsChecker');
 
@@ -51,17 +51,17 @@ var _salesValidator2 = _interopRequireDefault(_salesValidator);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // destructure controllers
-var getAllUsers = _userController2.default.getAllUsers,
-    createUser = _userController2.default.createUser,
-    loginUser = _userController2.default.loginUser,
-    getUser = _userController2.default.getUser;
-var addProduct = _productController2.default.addProduct,
-    getProduct = _productController2.default.getProduct,
-    getAllProducts = _productController2.default.getAllProducts;
-var addSaleRecord = _salesController2.default.addSaleRecord,
-    getAllSalesRecords = _salesController2.default.getAllSalesRecords,
-    getSaleRecord = _salesController2.default.getSaleRecord,
-    getAttendantSaleRecord = _salesController2.default.getAttendantSaleRecord;
+var getAllUsers = _UsersController2.default.getAllUsers,
+    createUser = _UsersController2.default.createUser,
+    loginUser = _UsersController2.default.loginUser,
+    getUser = _UsersController2.default.getUser;
+var addProduct = _ProductsController2.default.addProduct,
+    getProduct = _ProductsController2.default.getProduct,
+    getAllProducts = _ProductsController2.default.getAllProducts;
+var addSaleRecord = _SalesController2.default.addSaleRecord,
+    getAllSalesRecords = _SalesController2.default.getAllSalesRecords,
+    getSaleRecord = _SalesController2.default.getSaleRecord,
+    getAttendantSaleRecord = _SalesController2.default.getAttendantSaleRecord;
 // deconstruct middlewares
 
 var idChecker = _paramsChecker2.default.idChecker;
