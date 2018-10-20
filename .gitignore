@@ -3,3 +3,5 @@
 
 .env
 .nyc_output
+/dist
+dist

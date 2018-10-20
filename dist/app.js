@@ -15,9 +15,8 @@ var _index2 = _interopRequireDefault(_index);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _dotenv2.default.config();
-var newLocal = process.env.PORT;
 // Listen for requests
-var port = newLocal;
+var port = process.env.PORT || 8000;
 _index2.default.listen(port, function () {
   console.log('App is running, check me out on http://localhost:' + port);
 });
