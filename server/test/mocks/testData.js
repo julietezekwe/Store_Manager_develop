@@ -100,6 +100,18 @@ const saleDetails = {
     prize: '1000',
     quantity: '2',
   },
+  invalidSale: {
+    productId: '30',
+    productName: 'Sneakers',
+    prize: '1000',
+    quantity: '2',
+  },
+  invalidSale2: {
+    productId: '1',
+    productName: 'Sneakers',
+    prize: '1000',
+    quantity: '200',
+  },
 };
 
 

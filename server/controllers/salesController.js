@@ -1,11 +1,14 @@
 import SalesModel from '../dummyModel/SalesModel';
+import productController from './productController';
+
+const { productsSales } = productController;
 /**
  *
  * @description Defines the actions to for the sales records endpoints
  * @class sales
  */
 class sales {
-/**
+  /**
   *Add sales record
   *@description Adds a new sale order
   *@static
@@ -17,10 +20,18 @@ class sales {
 
   static addSaleRecord(req, res) {
     const sellerId = req.authData.id;
-
-    const {
-      productId, productName, prize, quantity,
-    } = req.body;
+    const { productId, productName, prize, quantity } = req.body;
+    const productDetail = productsSales(productId, quantity);
+    if (productDetail === undefined) {
+      return (
+        res.status(404).json({ message: 'This product does not exist' })
+      );
+    }
+    if (productDetail === 'The quantity is more than in stock') {
+      return (
+        res.status(401).json({ message: productDetail })
+      );
+    }
     const totalPrize = Number(prize) * Number(quantity);
     const id = SalesModel.length + 1;
     const saleDetail = {
