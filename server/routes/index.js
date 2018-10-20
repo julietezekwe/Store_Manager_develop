@@ -2,6 +2,7 @@ import express from 'express';
 import UsersController from '../controllers/UsersController';
 import ProductsController from '../controllers/ProductsController';
 import SalesController from '../controllers/salesController';
+import SalesController from '../controllers/SalesController';
 import paramsChecker from '../middlewares/paramsChecker';
 import userValidator from '../middlewares/userValidator';
 import productValidator from '../middlewares/productValidator';
