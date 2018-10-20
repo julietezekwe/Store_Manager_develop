@@ -12,7 +12,7 @@ const {
   admin, attendant, attendant2,
 } = userDetails;
 const {
-  emptyField, validSale, spacedField,
+  emptyField, validSale, spacedField, invalidSale, invalidSale2,
 } = saleDetails;
 describe('Sales', () => {
   before((done) => {
@@ -126,6 +126,28 @@ describe('Sales', () => {
       .send(validSale)
       .end((err, res) => {
         expect(res.body.message).to.eql('You are not an Attendant');
+        expect(res.status).to.equal(401);
+        done();
+      });
+  });
+  it('it should not post sales if product does not exist', (done) => {
+    chai.request(app)
+      .post('/api/v1/sales')
+      .set('Authorization', authToken2)
+      .send(invalidSale)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('This product does not exist');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
+  it('it should not post sales the quantity being recorded is more than in stock', (done) => {
+    chai.request(app)
+      .post('/api/v1/sales')
+      .set('Authorization', authToken2)
+      .send(invalidSale2)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('The quantity is more than in stock');
         expect(res.status).to.equal(401);
         done();
       });

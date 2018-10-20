@@ -97,6 +97,40 @@ class products {
       error: true,
     }));
   }
+
+  /**
+  *Product sales check
+  *@description Checks for product availability
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - product detail
+  *@memberof products
+  */
+  static productsSales(productId, quantity) {
+    let productDetail;
+    let newQuantity;
+    ProductsModel.map((product, index) => {
+      if (Number(product.id) === Number(productId)) {
+        if (Number(product.quantity) >= Number(quantity)) {
+          productDetail = product;
+          newQuantity = Number(product.quantity) - Number(quantity);
+          ProductsModel[index].quantity = newQuantity;
+          return true;
+        } productDetail = 'The quantity is more than in stock';
+      }
+    });
+    return productDetail;
+  }
+  /**
+  *Updates Product
+  *@description Update product
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - product detail
+  *@memberof products
+  */
 }
 
 export default products;
