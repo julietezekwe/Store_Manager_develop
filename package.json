@@ -13,7 +13,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
     "start": "node dist/app.js",
-    "start:dev": "nodemon --exec babel-node app.js"
+    "start:dev": "nodemon --exec babel-node ./server/app.js"
   },
   "repository": {
     "type": "git",
