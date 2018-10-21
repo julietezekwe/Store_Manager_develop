@@ -16,7 +16,7 @@ const {
 } = UsersController;
 
 const {
-  addProduct, getProduct, getAllProducts,
+  addProduct, getProduct, getAllProducts, updateProduct, deleteProduct,
 } = ProductsController;
 
 const {
@@ -37,14 +37,16 @@ const router = express.Router();
 router.get('/auth/users', authenticate, isAdmin, getAllUsers);
 router.get('/auth/:userId', authenticate, idChecker, getUser);
 router.post('/auth/createUser', authenticate, isAdmin, createUserChecker, createUser);
-router.put('/auth/updateUser/:userId', authenticate, isAdmin, idChecker, createUserChecker, updateUser);
+router.put('/auth/:userId', authenticate, isAdmin, idChecker, createUserChecker, updateUser);
 router.post('/auth/login', userLoginChecker, loginUser);
-router.delete('/auth/deleteUser/:userId', authenticate, isAdmin, idChecker, deleteUser);
+router.delete('/auth/:userId', authenticate, isAdmin, idChecker, deleteUser);
 
 // products endpoints
 router.post('/products', authenticate, isAdmin, addProductValidator, addProduct);
 router.get('/products/:productId', idChecker, authenticate, getProduct);
 router.get('/products', authenticate, getAllProducts);
+router.put('/products/:productId', authenticate, isAdmin, addProductValidator, updateProduct);
+router.delete('/products/:productId', authenticate, isAdmin, idChecker, deleteProduct);
 
 // sales record enpoints
 router.post('/sales', authenticate, isAttendant, addSalesValidator, addSaleRecord);
