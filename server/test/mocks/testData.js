@@ -107,7 +107,7 @@ const saleDetails = {
     quantity: '2',
   },
   invalidSale2: {
-    productId: '1',
+    productId: '2',
     productName: 'Sneakers',
     prize: '1000',
     quantity: '200',

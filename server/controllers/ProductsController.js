@@ -100,13 +100,81 @@ class ProductsController {
 
   /**
   *Updates Product
-  *@description Update product
+  *@description Update product by ID
   *@static
   *@param  {Object} req - request
   *@param  {object} res - response
   *@return {object} - product detail
   *@memberof ProductsController
   */
+
+  static updateProduct(req, res) {
+    const { productId } = req.params;
+    const {
+      productName, description, image, prize, quantity, min, category,
+    } = req.body;
+    let productIndex;
+    let found = false;
+    ProductsModel.map((product, index) => {
+      if (product.id === Number(productId)) {
+        productIndex = index;
+        found = true;
+      }
+      return false;
+    });
+    if (found) {
+      const { id } = ProductsModel[productIndex];
+      const productDetail = {
+        id, productName, description, image, prize, quantity, min, category, created: new Date(),
+      };
+      ProductsModel[productDetail] = productDetail;
+      return (
+        res.status(201).json({
+          productDetail,
+          message: 'Successfully updated product',
+        })
+      );
+    }
+    return (
+      res.status(404).json({
+        message: 'Product does not exist',
+      })
+    );
+  }
+  /**
+*Delete product
+*@description Delete a product by id
+*@static
+*@param  {Object} req - request
+*@param  {object} res - response
+*@return {object} - status code and message
+*@memberof ProductsController
+*/
+
+  static deleteProduct(req, res) {
+    const { productId } = req.params;
+    let found = false;
+    let productIndex;
+    ProductsModel.map((product, index) => {
+      if (product.id === Number(productId)) {
+        productIndex = index;
+        found = true;
+        return true;
+      }
+      return false;
+    });
+    if (found) {
+      ProductsModel.splice(productIndex, 1);
+      return (res.status(200).json({
+        message: 'Successfully deletes product',
+        error: false,
+      }));
+    }
+    return (res.status(404).json({
+      message: 'This product does not exist',
+      error: true,
+    }));
+  }
 }
 
 export default ProductsController;

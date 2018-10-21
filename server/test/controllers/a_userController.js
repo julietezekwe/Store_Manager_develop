@@ -176,7 +176,7 @@ describe('User', () => {
   });
   it('should update a user successfully', (done) => {
     chai.request(app)
-      .put('/api/v1/auth/updateUser/5')
+      .put('/api/v1/auth/5')
       .set('Authorization', authToken)
       .send(newAttendant)
       .end((err, res) => {
@@ -188,7 +188,7 @@ describe('User', () => {
   });
   it('should not update a user if user does not exist', (done) => {
     chai.request(app)
-      .put('/api/v1/auth/updateUser/40')
+      .put('/api/v1/auth/40')
       .set('Authorization', authToken)
       .send(newAttendant)
       .end((err, res) => {
@@ -199,7 +199,7 @@ describe('User', () => {
   });
   it('should update a user successfully', (done) => {
     chai.request(app)
-      .delete('/api/v1/auth/deleteUser/5')
+      .delete('/api/v1/auth/5')
       .set('Authorization', authToken)
       .end((err, res) => {
         expect(res.body.message).to.eql('Successfully deleted user');
@@ -209,7 +209,7 @@ describe('User', () => {
   });
   it('should not update a user if user does not exist', (done) => {
     chai.request(app)
-      .delete('/api/v1/auth/deleteUser/40')
+      .delete('/api/v1/auth/40')
       .set('Authorization', authToken)
       .end((err, res) => {
         expect(res.body.message).to.eql('User does not exist');
