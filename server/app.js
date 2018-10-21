@@ -2,7 +2,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
 import swaggerUi from 'swagger-ui-express';
+import dotenv from 'dotenv';
 import routes from './routes/index';
+
 
 const swaggerDocument = require('../swagger.json');
 
@@ -28,5 +30,12 @@ app.use('*', (req, res, next) => {
     message: 'Page not found',
   });
   next();
+});
+
+dotenv.config();
+// Listen for requests
+const port = process.env.PORT || 8000;
+app.listen(port, () => {
+  console.log(`App is running, check me out on http://localhost:${port}`);
 });
 export default app;
