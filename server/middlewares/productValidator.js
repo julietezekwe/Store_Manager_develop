@@ -14,7 +14,7 @@ class productValidator {
     req.check('description', 'Description is required').notEmpty();
     req.check('description', 'Description should be more than 5 words')
       .isLength({ min: 15 });
-    req.check('image', 'Image is required').notEmpty();
+    req.check('image', 'Only Jpeg, Png or Gif is accepted image format').isImage(req.body.image);
     req.check('prize', 'Unit Prize is required').notEmpty();
     req.check('quantity', 'Quantity is required').notEmpty();
     req.check('min', 'Minimum inventory is required').notEmpty();
@@ -31,15 +31,19 @@ class productValidator {
     const {
       productName, description, image, prize, quantity, min, category,
     } = req.body;
+    let error = false;
     const fieldValues = [productName, description, image, prize, quantity, min, category];
     fieldValues.map((fieldValue) => {
-      if (fieldValue.toString().trim() === '') {
-        return res.status(400).json({
-          message: 'Please fill in all fields',
-          error: true,
-        });
+      if (fieldValue.trim() === '') {
+        error = true;
       }
     });
+    if (error) {
+      return res.status(400).json({
+        message: 'Please fill in all fields',
+        error: true,
+      });
+    }
     return next();
   }
 }

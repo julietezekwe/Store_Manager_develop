@@ -14,7 +14,7 @@ const {
 const {
   emptyField, validSale, spacedField, invalidSale, invalidSale2,
 } = saleDetails;
-describe('Sales', () => {
+describe('Sales Endpoint API Test', () => {
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/login')

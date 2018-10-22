@@ -25,11 +25,6 @@ Store Manager is a web application that helps store owners manage sales and prod
 * UI templates are hosted on Github pages [visit here](https://julietezekwe.github.io/Store_Manager_develop/UI/login.html)
 
 
-
-## Link to Pivotal Tracker
-
-* https://www.pivotaltracker.com/n/projects/2203034
-
 ## Tech Stack Used
 
 - [Node.js](https://nodejs.org/)

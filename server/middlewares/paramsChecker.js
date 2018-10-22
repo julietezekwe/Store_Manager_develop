@@ -19,12 +19,11 @@ class paramsChecker {
           error: true,
         });
       }
-      return true;
+      return next();
     };
     if (userId) checkParam(userId);
     if (productId) checkParam(productId);
     if (salesId) checkParam(salesId);
-    return next();
   }
 }
 

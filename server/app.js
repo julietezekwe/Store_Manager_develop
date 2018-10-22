@@ -4,7 +4,7 @@ import expressValidator from 'express-validator';
 import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
 import routes from './routes/index';
-
+import customValidator from './middlewares/customValidator';
 
 const swaggerDocument = require('../swagger.json');
 
@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Validator to check requests
-app.use(expressValidator());
+app.use(expressValidator(customValidator));
 
 // Versioning and Routes
 app.use('/api/v1/', routes);

@@ -11,7 +11,7 @@ const { isAdmin } = verifyAdmin;
 /*
   * Test Middlewares
   */
-describe('VERIFY ADMIN AND ATTENDANTS', () => {
+describe('VERIFY ADMIN AND ATTENDANTS MIDDLEWARE TEST', () => {
   it('should return a function()', () => {
     expect(isAdmin).to.be.a('function');
   });

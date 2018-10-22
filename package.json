@@ -15,6 +15,13 @@
     "start": "node dist/app.js",
     "start:dev": "nodemon --exec babel-node ./server/app.js"
   },
+  "nyc": {
+    "exclude": [
+      "server/app.js",
+      "server/middlewares/customValidator.js",
+      "dist"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/julietezekwe/Store_Manager_develop.git"
