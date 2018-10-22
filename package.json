@@ -18,6 +18,7 @@
   "nyc": {
     "exclude": [
       "server/app.js",
+      "server/middlewares/customValidator.js",
       "dist"
     ]
   },
