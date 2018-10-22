@@ -28,15 +28,19 @@ class userValidator {
     const {
       name, username, email, password, role,
     } = req.body;
+    let error = false;
     const fieldValues = [name, username, email, password, role];
     fieldValues.map((fieldValue) => {
       if (fieldValue.trim() === '') {
-        return res.status(400).json({
-          message: 'Please fill in all fields',
-          error: true,
-        });
+        error = true;
       }
     });
+    if (error) {
+      return res.status(400).json({
+        message: 'Please fill in all fields',
+        error: true,
+      });
+    }
     return next();
   }
   /**

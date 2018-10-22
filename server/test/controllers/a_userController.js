@@ -10,7 +10,7 @@ const { expect } = chai;
 const {
   admin, attendant, newAttendant, wrongPassword, emptyField, spacedField,
 } = userDetails;
-describe('User', () => {
+describe('Users Endpoint API Test', () => {
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/login')

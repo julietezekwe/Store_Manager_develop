@@ -13,7 +13,7 @@ const {
 const {
   emptyField, validProduct, spacedField,
 } = productDetails;
-describe('Products', () => {
+describe('Products Endpoint API Test', () => {
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/login')

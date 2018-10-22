@@ -116,7 +116,7 @@ input[type="submit"] {
     height: 50px;
     border: none;
     color: white;
-    background: rgb(240, 119, 14);
+    background: #fc4a1a;
     cursor: pointer;
     font-size: 20px;
 }
@@ -353,7 +353,8 @@ th {
     position: absolute;
     display: block;
     width: 225px;
-    padding: 15px 0;
+    font-size: 10px;
+    padding: 10px 0px 8px 5px;
     background-color: rgb(240, 112, 14);;
     box-shadow: 0 5px 10px rgba(0,0,0,.1);
     color: #fff;

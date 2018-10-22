@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
 import swaggerUi from 'swagger-ui-express';
+import path from 'path';
 import dotenv from 'dotenv';
 import routes from './routes/index';
 
@@ -16,7 +17,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Validator to check requests
-app.use(expressValidator());
+app.use(expressValidator({
+  customValidators: {
+    isImage(imageName) {
+      const imageExtension = (path.extname(imageName)).toLowerCase();
+      switch (imageExtension) {
+        case '.jpg':
+          return '.jpg';
+        case '.jpeg':
+          return '.jpeg';
+        case '.png':
+          return '.png';
+        default:
+          return false;
+      }
+    },
+  } }));
 
 // Versioning and Routes
 app.use('/api/v1/', routes);

@@ -54,7 +54,7 @@ const productDetails = {
   emptyField: {
     productName: 'Red Shoes',
     description: '',
-    image: 'imageurl',
+    image: 'imageurl.jpg',
     prize: '1000',
     quantity: '100',
     min: '10',
@@ -63,7 +63,7 @@ const productDetails = {
   spacedField: {
     productName: 'uhhh',
     description: 'ogechi oooo mmmmm',
-    image: 'image',
+    image: 'imageurl.jpg',
     prize: '5000',
     quantity: '  ',
     min: '10',
@@ -72,7 +72,7 @@ const productDetails = {
   validProduct: {
     productName: 'uhhh',
     description: 'ogechi oooo mmmmm',
-    image: 'image',
+    image: 'imageurl.jpg',
     prize: '5000',
     quantity: '12',
     min: '10',

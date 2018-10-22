@@ -32,9 +32,8 @@ class verifyToken {
         });
       }
       req.authData = authData;
-      return true;
+      return next();
     });
-    return next();
   }
 }
 
