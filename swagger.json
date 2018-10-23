@@ -421,6 +421,49 @@
 			}
 
 		},
+		"/products/{productId}/category": {
+			"put": {
+				"summary": "Update a product category by ID",
+				"tags": [
+					"Products"
+				],
+				"description": "Update a product in the platform by the authenticated user",
+				"parameters": [
+                        {
+                            "in": "header",
+                            "name": "Authorization",
+                            "description": "Enter token",
+                            "type": "string",
+                            "required": true
+                        },
+						{
+							"name": "product",
+							"in": "body",
+							"description": "The product that we want to update",
+							"required": true
+						},
+						{
+							"name": "productId",
+							"in": "path",
+							"description": "The id of the product to be updtated its category",
+							"required": "true",
+							"type": "integer",
+							"format": "int64"
+						}
+				],
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"201": {
+						"description": "Product category updated successfully"
+					},
+					"404": {
+						"description": "Product does not exist"
+					}
+				}
+			}
+		},
 
 		"/sales/{userId}/sales" : {
             "get": {

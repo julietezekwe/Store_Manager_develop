@@ -11,7 +11,7 @@ const {
   admin, attendant,
 } = userDetails;
 const {
-  emptyField, validProduct, spacedField,
+  emptyField, validProduct, spacedField, updateCategory,
 } = productDetails;
 describe('Products Endpoint API Test', () => {
   before((done) => {
@@ -126,11 +126,33 @@ describe('Products Endpoint API Test', () => {
         done();
       });
   });
-  it('it should update product if user is Admin', (done) => {
+  it('it should not update product if product does not exist', (done) => {
     chai.request(app)
       .put('/api/v1/products/40')
       .set('Authorization', authToken)
       .send(validProduct)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('Product does not exist');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
+  it('it should update product category ', (done) => {
+    chai.request(app)
+      .put('/api/v1/products/1/category')
+      .set('Authorization', authToken2)
+      .send(updateCategory)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('Successfully updated product category');
+        expect(res.status).to.equal(201);
+        done();
+      });
+  });
+  it('it should not update product category if product does not exist', (done) => {
+    chai.request(app)
+      .put('/api/v1/products/40/category')
+      .set('Authorization', authToken)
+      .send(updateCategory)
       .end((err, res) => {
         expect(res.body.message).to.eql('Product does not exist');
         expect(res.status).to.equal(404);
