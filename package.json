@@ -1,0 +1,66 @@
+{
+  "name": "store_manager_develop",
+  "version": "1.0.0",
+  "description": "Store Manager is a web application that helps store owners manage sales and product inventory",
+  "engines": {
+    "node": "8.0"
+  },
+  "main": "app.js",
+  "scripts": {
+    "build": "babel app.js -d dist && babel server -d dist/server ",
+    "test": "nyc mocha --exit --timeout 10000 ./server/test/**/*.js --compilers js:babel-core/register",
+    "babel-node": "babel-node app --presets=env",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
+    "start": "node dist/app.js",
+    "start:dev": "nodemon --exec babel-node ./server/app.js"
+  },
+  "nyc": {
+    "exclude": [
+      "server/app.js",
+      "server/middlewares/customValidator.js",
+      "dist"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julietezekwe/Store_Manager_develop.git"
+  },
+  "keywords": [
+    "store",
+    "manager"
+  ],
+  "author": "Juliet Ezekwe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julietezekwe/Store_Manager_develop/issues"
+  },
+  "homepage": "https://github.com/julietezekwe/Store_Manager_develop#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
+    "coveralls": "^3.0.2",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.0",
+    "jsonwebtoken": "^8.3.0",
+    "swagger-ui-express": "^4.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^9.0.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "nodemon": "^1.18.4",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
+    "request": "^2.88.0"
+  }
+}
