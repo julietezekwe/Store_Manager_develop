@@ -34,7 +34,7 @@ var _customValidator2 = _interopRequireDefault(_customValidator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var swaggerDocument = require('./swagger.json');
+var swaggerDocument = require('../swagger.json');
 
 // Set up the express app
 var app = (0, _express2.default)();
