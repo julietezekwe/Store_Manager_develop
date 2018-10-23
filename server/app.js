@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import routes from './routes/index';
 import customValidator from './middlewares/customValidator';
 
-const swaggerDocument = require('./swagger.json');
+const swaggerDocument = require('../swagger.json');
 
 // Set up the express app
 const app = express();

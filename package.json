@@ -12,7 +12,7 @@
     "babel-node": "babel-node app --presets=env",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
-    "start": "npm run build && node dist/app.js",
+    "start": "node dist/app.js",
     "start:dev": "nodemon --exec babel-node ./server/app.js"
   },
   "nyc": {
