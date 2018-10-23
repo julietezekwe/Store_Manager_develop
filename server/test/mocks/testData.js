@@ -78,6 +78,9 @@ const productDetails = {
     min: '10',
     category: 'flat',
   },
+  updateCategory: {
+    category: 'flat',
+  },
 
 };
 

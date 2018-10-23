@@ -109,6 +109,7 @@ class ProductsController {
   */
 
   static updateProduct(req, res) {
+
     const { productId } = req.params;
     const {
       productName, description, image, prize, quantity, min, category,
@@ -127,11 +128,47 @@ class ProductsController {
       const productDetail = {
         id, productName, description, image, prize, quantity, min, category, created: new Date(),
       };
-      ProductsModel[productDetail] = productDetail;
+      ProductsModel[productIndex] = productDetail;
       return (
         res.status(201).json({
           productDetail,
           message: 'Successfully updated product',
+        })
+      );
+    }
+    return (
+      res.status(404).json({
+        message: 'Product does not exist',
+      })
+    );
+  }
+  /**
+  *Updates Product Category
+  *@description Update product category by ID
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - message and status code
+  *@memberof ProductsController
+  */
+
+  static updateProductCategory(req, res) {  
+    const { productId } = req.params;
+    const { category } = req.body;
+    let productIndex;
+    let found = false;
+    ProductsModel.map((product, index) => {
+      if (product.id === Number(productId)) {
+        productIndex = index;
+        found = true;
+      }
+      return false;
+    });
+    if (found) {
+     ProductsModel[productIndex].category = category;
+      return (
+        res.status(201).json({
+          message: 'Successfully updated product category',
         })
       );
     }

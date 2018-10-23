@@ -16,7 +16,7 @@ const {
 } = UsersController;
 
 const {
-  addProduct, getProduct, getAllProducts, updateProduct, deleteProduct,
+  addProduct, getProduct, getAllProducts, updateProduct, updateProductCategory, deleteProduct,
 } = ProductsController;
 
 const {
@@ -39,14 +39,15 @@ router.get('/auth/:userId', authenticate, idChecker, getUser);
 router.post('/auth/createUser', authenticate, isAdmin, createUserChecker, createUser);
 router.put('/auth/:userId', authenticate, isAdmin, idChecker, createUserChecker, updateUser);
 router.post('/auth/login', userLoginChecker, loginUser);
-router.delete('/auth/:userId', authenticate, isAdmin, idChecker, deleteUser);
+router.delete('/auth/:userId', idChecker, authenticate, isAdmin, deleteUser);
 
 // products endpoints
 router.post('/products', authenticate, isAdmin, addProductValidator, addProduct);
 router.get('/products/:productId', idChecker, authenticate, getProduct);
 router.get('/products', authenticate, getAllProducts);
-router.put('/products/:productId', authenticate, isAdmin, addProductValidator, updateProduct);
-router.delete('/products/:productId', authenticate, isAdmin, idChecker, deleteProduct);
+router.put('/products/:productId', idChecker, authenticate, isAdmin, addProductValidator, updateProduct);
+router.put('/products/:productId/category', idChecker, authenticate, updateProductCategory);
+router.delete('/products/:productId', idChecker, authenticate, isAdmin, deleteProduct);
 
 // sales record enpoints
 router.post('/sales', authenticate, isAttendant, addSalesValidator, addSaleRecord);

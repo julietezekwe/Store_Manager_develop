@@ -49,9 +49,15 @@ Store Manager is a web application that helps store owners manage sales and prod
 ## Application Features
 
 * Admin can add a product
+* Admin can update a product
+* Admin can delete a product
+* Admin can add a store attendant
+* Admin can update a store attendant/give admin privilege
+* Admin can delete a store attendant
 * Admin/store attendant can get all products
 * Admin/store attendant can get a specific product
 * Store attendant can add a sale order
+* Store attendant can add product to a category
 * Admin can get all sale order records
 * Store attendant can view owned records
 
@@ -83,11 +89,16 @@ POST Request -> localhost:8080/api/v1/auth/createUser
 POST Request -> localhost:8080/api/v1/auth/login
 GET Request -> localhost:8080/api/v1/auth/:userId
 GET Request -> localhost:8080/api/v1/auth/users
+PUT Request -> localhost:8080/api/v1/auth/:userId
+DELETE Request -> localhost:8080/api/v1/auth/:userId
 POST Request -> localhost:8080/api/v1/products
 GET Request ->  localhost:8080/api/v1/products
-GET Request ->  localhost:8080/api/v1/products/:productId    
+GET Request ->  localhost:8080/api/v1/products/:productId
+PUT Request ->  localhost:8080/api/v1/products/:productId
+PUT Request ->  localhost:8080/api/v1/products/:productId/category   
+DELETE Request ->  localhost:8080/api/v1/products/:productId 
+POST Request ->  localhost:8080/api/v1/sales   
 GET Request ->  localhost:8080/api/v1/sales
-POST Request ->  localhost:8080/api/v1/sales
 GET Request -> localhost:8080/api/v1/sales/:saleId
 GET Request -> localhost:8080/api/v1/user/sales
 ```
