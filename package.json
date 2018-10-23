@@ -5,7 +5,7 @@
   "engines": {
     "node": "8.0"
   },
-  "main": "app.js",
+  "main": "dist/app.js",
   "scripts": {
     "build": "babel server -d dist/server ",
     "test": "nyc mocha --exit --timeout 10000 ./server/test/**/*.js --compilers js:babel-core/register",
