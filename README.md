@@ -1,12 +1,16 @@
 # Store_Manager_develop
 
-### Build Status
+## Build Status
 
 [![Build Status](https://travis-ci.org/julietezekwe/Store_Manager_develop.svg?branch=develop)](https://travis-ci.org/julietezekwe/Store_Manager_develop)
 [![Coverage Status](https://coveralls.io/repos/github/julietezekwe/Store_Manager_develop/badge.svg?branch=ft-travis-CI-161205470)](https://coveralls.io/github/julietezekwe/Store_Manager_develop?branch=ft-travis-CI-161205470)
 [![Maintainability](https://api.codeclimate.com/v1/badges/675204b94a8eef52f333/maintainability)](https://codeclimate.com/github/julietezekwe/Store_Manager_develop/maintainability)
 
-Store Manager is a web application that helps store owners manage sales and product inventory
+## Introduction
+Store Manager is a web application that helps store owners manage sales and product inventory. This application is meant for use in a single store.
+* This application should help store owners avoid selling products that have run out of
+stock.
+* The store owner is also referred to as the admin of the application.
 
 ## Table of Contents
 1. <a href="#hosted-app">Link to Hosted App</a>
@@ -44,7 +48,7 @@ Store Manager is a web application that helps store owners manage sales and prod
 
 ## API Documentation
 
-
+[Api Documentation](https://store-manager-develop.herokuapp.com/api-docs)
 
 ## Application Features
 
