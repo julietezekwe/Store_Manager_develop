@@ -2,13 +2,13 @@ import express from 'express';
 import UsersController from '../controllers/UsersController';
 import ProductsController from '../controllers/ProductsController';
 import SalesController from '../controllers/SalesController';
-import paramsChecker from '../middlewares/paramsChecker';
-import userValidator from '../middlewares/userValidator';
-import productValidator from '../middlewares/productValidator';
-import verifyToken from '../middlewares/verifyToken';
-import verifyAdmin from '../middlewares/verifyAdmin';
-import verifyAttendant from '../middlewares/verifyAttendant';
-import salesValidator from '../middlewares/salesValidator';
+import ParamsChecker from '../middlewares/ParamsChecker';
+import UserValidator from '../middlewares/UserValidator';
+import ProductValidator from '../middlewares/ProductValidator';
+import verifyToken from '../middlewares/VerifyToken';
+import VerifyAdmin from '../middlewares/VerifyAdmin';
+import VerifyAttendant from '../middlewares/VerifyAttendant';
+import SalesValidator from '../middlewares/SalesValidator';
 
 // destructure controllers
 const {
@@ -23,13 +23,13 @@ const {
   addSaleRecord, getAllSalesRecords, getSaleRecord, getAttendantSaleRecord,
 } = SalesController;
 // deconstruct middlewares
-const { idChecker } = paramsChecker;
-const { createUserChecker, userLoginChecker } = userValidator;
+const { idChecker } = ParamsChecker;
+const { createUserChecker, userLoginChecker } = UserValidator;
 const { authenticate } = verifyToken;
-const { isAdmin } = verifyAdmin;
-const { isAttendant } = verifyAttendant;
-const { addProductValidator } = productValidator;
-const { addSalesValidator } = salesValidator;
+const { isAdmin } = VerifyAdmin;
+const { isAttendant } = VerifyAttendant;
+const { addProductValidator } = ProductValidator;
+const { addSalesValidator } = SalesValidator;
 
 const router = express.Router();
 

@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import UsersModel from '../dummyModel/UsersModel';
+import usersModel from '../dummyModel/usersModel';
 
 dotenv.config();
 
@@ -25,7 +25,7 @@ class UsersController {
 
   static getAllUsers(req, res) {
     res.status(200).json({
-      UsersModel,
+      usersModel,
       message: 'Success',
       error: false,
     });
@@ -44,7 +44,7 @@ class UsersController {
     const { userId } = req.params;
     let userDetail;
     let found = false;
-    UsersModel.map((user) => {
+    usersModel.map((user) => {
       if (Number(userId) === user.id) {
         userDetail = user;
         found = true;
@@ -81,7 +81,7 @@ class UsersController {
     const { username, password } = req.body;
     let authDetail;
     let found = false;
-    UsersModel.map((user) => {
+    usersModel.map((user) => {
       if (user.username === username && bcrypt.compareSync(password, user.password)) {
         const { id, name, email, role, created } = user;
         authDetail = { id, name, username, email, role, created };
@@ -117,15 +117,15 @@ class UsersController {
     const { name, username, email, password, role } = req.body;
     let userExist = false;
     let userDetail;
-    UsersModel.map((user) => {
+    usersModel.map((user) => {
       if (user.username === username) { userExist = true; }
       return true;
     });
     if (!userExist) {
       const hash = bcrypt.hashSync(password, 10);
-      const id = UsersModel.length + 1;
+      const id = usersModel.length + 1;
       userDetail = { id, name, username, email, password: hash, role, created: new Date() };
-      UsersModel.push(userDetail);
+      usersModel.push(userDetail);
       return (
         res.status(201).json({ userDetail, message: 'User created successfully' })
       );
@@ -151,15 +151,15 @@ class UsersController {
     let userExist = false;
     let userIndex;
     let userDetail;
-    UsersModel.map((user, index) => {
+    usersModel.map((user, index) => {
       if (user.id === Number(userId)) { userExist = true; userIndex = index; }
       return true;
     });
     if (userExist) {
       const hash = bcrypt.hashSync(password, 10);
-      const { id } = UsersModel[userIndex];
+      const { id } = usersModel[userIndex];
       userDetail = { id, name, username, email, password: hash, role, created: new Date() };
-      UsersModel[userIndex] = userDetail;
+      usersModel[userIndex] = userDetail;
       return (
         res.status(201).json({ userDetail, message: 'User updated successfully' })
       );
@@ -183,7 +183,7 @@ class UsersController {
     const { userId } = req.params;
     let found = false;
     let userIndex;
-    UsersModel.map((user, index) => {
+    usersModel.map((user, index) => {
       if (Number(userId) === user.id) {
         userIndex = index;
         found = true;
@@ -191,7 +191,7 @@ class UsersController {
       return false;
     });
     if (found) {
-      UsersModel.splice(userIndex, 1);
+      usersModel.splice(userIndex, 1);
       return (
         res.status(200).json({
           message: 'Successfully deleted user',

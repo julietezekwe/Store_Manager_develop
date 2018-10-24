@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import verifyAdmin from '../../middlewares/verifyAdmin';
-import verifyAttendant from '../../middlewares/verifyAttendant';
+import verifyAdmin from '../../middlewares/VerifyAdmin';
+import verifyAttendant from '../../middlewares/VerifyAttendant';
 
 chai.use(chaiHttp);
 const { expect } = chai;

@@ -1,4 +1,4 @@
-import ProductsModel from '../dummyModel/ProductsModel';
+import productsModel from '../dummyModel/productsModel';
 /**
  *
  * @description Defines the actions to for the products endpoints
@@ -17,7 +17,7 @@ class ProductsController {
   static getAllProducts(req, res) {
     return (
       res.status(200).json({
-        ProductsModel,
+        productsModel,
         message: 'Success',
         error: false,
       })
@@ -43,7 +43,7 @@ class ProductsController {
       min,
       category,
     } = req.body;
-    const id = ProductsModel.length + 1;
+    const id = productsModel.length + 1;
     const productDetail = {
       id,
       productName,
@@ -55,7 +55,7 @@ class ProductsController {
       category,
       created: new Date(),
     };
-    ProductsModel.push(productDetail);
+    productsModel.push(productDetail);
     return (
       res.status(201).json({
         productDetail,
@@ -77,7 +77,7 @@ class ProductsController {
     const { productId } = req.params;
     let found = false;
     let productDetail;
-    ProductsModel.map((product) => {
+    productsModel.map((product) => {
       if (product.id === Number(productId)) {
         productDetail = product;
         found = true;
@@ -109,14 +109,13 @@ class ProductsController {
   */
 
   static updateProduct(req, res) {
-
     const { productId } = req.params;
     const {
       productName, description, image, prize, quantity, min, category,
     } = req.body;
     let productIndex;
     let found = false;
-    ProductsModel.map((product, index) => {
+    productsModel.map((product, index) => {
       if (product.id === Number(productId)) {
         productIndex = index;
         found = true;
@@ -124,11 +123,11 @@ class ProductsController {
       return false;
     });
     if (found) {
-      const { id } = ProductsModel[productIndex];
+      const { id } = productsModel[productIndex];
       const productDetail = {
         id, productName, description, image, prize, quantity, min, category, created: new Date(),
       };
-      ProductsModel[productIndex] = productDetail;
+      productsModel[productIndex] = productDetail;
       return (
         res.status(201).json({
           productDetail,
@@ -152,12 +151,12 @@ class ProductsController {
   *@memberof ProductsController
   */
 
-  static updateProductCategory(req, res) {  
+  static updateProductCategory(req, res) {
     const { productId } = req.params;
     const { category } = req.body;
     let productIndex;
     let found = false;
-    ProductsModel.map((product, index) => {
+    productsModel.map((product, index) => {
       if (product.id === Number(productId)) {
         productIndex = index;
         found = true;
@@ -165,7 +164,7 @@ class ProductsController {
       return false;
     });
     if (found) {
-     ProductsModel[productIndex].category = category;
+      productsModel[productIndex].category = category;
       return (
         res.status(201).json({
           message: 'Successfully updated product category',
@@ -192,7 +191,7 @@ class ProductsController {
     const { productId } = req.params;
     let found = false;
     let productIndex;
-    ProductsModel.map((product, index) => {
+    productsModel.map((product, index) => {
       if (product.id === Number(productId)) {
         productIndex = index;
         found = true;
@@ -201,7 +200,7 @@ class ProductsController {
       return false;
     });
     if (found) {
-      ProductsModel.splice(productIndex, 1);
+      productsModel.splice(productIndex, 1);
       return (res.status(200).json({
         message: 'Successfully deletes product',
         error: false,
