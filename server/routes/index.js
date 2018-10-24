@@ -5,7 +5,7 @@ import SalesController from '../controllers/SalesController';
 import ParamsChecker from '../middlewares/ParamsChecker';
 import UserValidator from '../middlewares/UserValidator';
 import ProductValidator from '../middlewares/ProductValidator';
-import verifyToken from '../middlewares/VerifyToken';
+import VerifyToken from '../middlewares/VerifyToken';
 import VerifyAdmin from '../middlewares/VerifyAdmin';
 import VerifyAttendant from '../middlewares/VerifyAttendant';
 import SalesValidator from '../middlewares/SalesValidator';
@@ -25,7 +25,7 @@ const {
 // deconstruct middlewares
 const { idChecker } = ParamsChecker;
 const { createUserChecker, userLoginChecker } = UserValidator;
-const { authenticate } = verifyToken;
+const { authenticate } = VerifyToken;
 const { isAdmin } = VerifyAdmin;
 const { isAttendant } = VerifyAttendant;
 const { addProductValidator } = ProductValidator;
