@@ -1,4 +1,4 @@
-import SalesModel from '../dummyModel/SalesModel';
+import salesModel from '../dummyModel/salesModel';
 import productsSales from './helpers/productsSales';
 
 /**
@@ -32,11 +32,11 @@ class SalesController {
       );
     }
     const totalPrize = Number(prize) * Number(quantity);
-    const id = SalesModel.length + 1;
+    const id = salesModel.length + 1;
     const saleDetail = {
       id, sellerId, productId, productName, prize, quantity, totalPrize, created: new Date(),
     };
-    SalesModel.push(saleDetail);
+    salesModel.push(saleDetail);
     return (
       res.status(201).json({
         saleDetail, message: 'Successfully added sale(s)',
@@ -56,7 +56,7 @@ class SalesController {
   static getAllSalesRecords(req, res) {
     return (
       res.status(200).json({
-        SalesModel,
+        salesModel,
         message: 'Success',
         error: false,
       })
@@ -77,7 +77,7 @@ class SalesController {
     const { salesId } = req.params;
     let validUser = false;
     let saleDetail;
-    SalesModel.map((sale) => {
+    salesModel.map((sale) => {
       if (sale.id === Number(salesId) && (sale.sellerId === Number(id) || role === 'admin')) {
         saleDetail = sale;
         validUser = true;
@@ -110,7 +110,7 @@ class SalesController {
   static getAttendantSaleRecord(req, res) {
     const { id } = req.authData;
     const saleDetail = [];
-    SalesModel.map((sale) => {
+    salesModel.map((sale) => {
       if (sale.sellerId === Number(id)) {
         saleDetail.push(sale);
       }

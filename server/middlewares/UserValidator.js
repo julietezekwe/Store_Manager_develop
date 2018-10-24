@@ -1,4 +1,4 @@
-class userValidator {
+class UserValidator {
   /**
  * @description - Checks the request parameters for creating new user are of the right formart
  * @param  {Object} req - request
@@ -6,7 +6,7 @@ class userValidator {
  * @param {Object} next - Call back function
  * @return {object} - status code and error message or next()
  * @static
- * @memberof userValidator
+ * @memberof UserValidator
  */
   static createUserChecker(req, res, next) {
     req.check('name', 'Name is required').notEmpty();
@@ -50,7 +50,7 @@ class userValidator {
  * @param {Object} next - Call back function
  * @return {object} - status code and error message or next()
  * @static
- * @memberof userValidator
+ * @memberof UserValidator
  */
 
   static userLoginChecker(req, res, next) {
@@ -72,4 +72,4 @@ class userValidator {
   }
 }
 
-export default userValidator;
+export default UserValidator;

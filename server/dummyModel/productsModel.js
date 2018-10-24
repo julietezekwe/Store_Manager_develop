@@ -1,4 +1,4 @@
-const Products = [
+const productsModel = [
   {
     id: 1,
     productName: 'Red Shoes',
@@ -45,4 +45,4 @@ const Products = [
   },
 ];
 
-export default Products;
+export default productsModel;

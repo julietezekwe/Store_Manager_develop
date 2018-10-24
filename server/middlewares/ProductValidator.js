@@ -1,18 +1,25 @@
-class salesValidator {
-/**
- * @description - Checks the request parameters for creating sales records are of the right formart
+class ProductValidator {
+  /**
+ * @description - Checks the request parameters for creating new product are of the right formart
  * @param  {Object} req - request
  * @param  {object} res - response
  * @param {Object} next - Call back function
  * @return {object} - status code and error message or next()
  * @static
- * @memberof salesValidator
+ * @memberof ProductValidator
  */
-  static addSalesValidator(req, res, next) {
-    req.check('productId', 'Product ID is required').notEmpty();
+
+  static addProductValidator(req, res, next) {
     req.check('productName', 'Product name is required').notEmpty();
+    req.check('description', 'Description is required').notEmpty();
+    req.check('description', 'Description should be more than 5 words')
+      .isLength({ min: 15 });
+    req.check('image', 'Only Jpeg, Png or Gif is accepted image format').isImage(req.body.image);
     req.check('prize', 'Unit Prize is required').notEmpty();
     req.check('quantity', 'Quantity is required').notEmpty();
+    req.check('min', 'Minimum inventory is required').notEmpty();
+    req.check('category', 'Category is required').notEmpty();
+
     const errors = req.validationErrors();
     const validationErrors = [];
     if (errors) {
@@ -21,13 +28,13 @@ class salesValidator {
         errors: validationErrors,
       });
     }
-    let error = false;
     const {
-      productId, productName, prize, quantity,
+      productName, description, image, prize, quantity, min, category,
     } = req.body;
-    const fieldValues = [productId, productName, prize, quantity];
+    let error = false;
+    const fieldValues = [productName, description, image, prize, quantity, min, category];
     fieldValues.map((fieldValue) => {
-      if (fieldValue.toString().trim() === '') {
+      if (fieldValue.trim() === '') {
         error = true;
       }
     });
@@ -41,4 +48,4 @@ class salesValidator {
   }
 }
 
-export default salesValidator;
+export default ProductValidator;

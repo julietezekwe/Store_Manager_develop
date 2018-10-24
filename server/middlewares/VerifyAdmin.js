@@ -1,21 +1,21 @@
-class verifyAttendant {
+class VerifyAdmin {
   /**
- * @description - Checks if the authenticated user is attendant
+ * @description - Checks if the authenticated user is admin
  * @param  {Object} req - request
  * @param  {object} res - response
  * @param {Object} next - Call back function
  * @return {object} - status code and error message or next()
  * @static
- * @memberof verifyAttendant
+ * @memberof VerifyAdmin
  */
 
-  static isAttendant(req, res, next) {
+  static isAdmin(req, res, next) {
     const { role } = req.authData;
 
-    if (role !== 'attendant') {
+    if (role !== 'admin') {
       return (
         res.status(401).json({
-          message: 'You are not an Attendant',
+          message: 'You are not an Admin',
           error: true,
         })
       );
@@ -24,4 +24,4 @@ class verifyAttendant {
   }
 }
 
-export default verifyAttendant;
+export default VerifyAdmin;

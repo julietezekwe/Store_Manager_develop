@@ -1,4 +1,4 @@
-class paramsChecker {
+class ParamsChecker {
 /**
  * @description - Checks if the request parameters are valid numbers
  * @param  {Object} req - request
@@ -6,7 +6,7 @@ class paramsChecker {
  * @param {Object} next - Call back function
  * @return {object} - status code and error message or next()
  * @static
- * @memberof paramsChecker
+ * @memberof ParamsChecker
  */
   static idChecker(req, res, next) {
     const { userId, productId, salesId } = req.params;
@@ -27,4 +27,4 @@ class paramsChecker {
   }
 }
 
-export default paramsChecker;
+export default ParamsChecker;
