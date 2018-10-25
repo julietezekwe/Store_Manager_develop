@@ -12,6 +12,9 @@
     "babel-node": "babel-node app --presets=env",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
+    "unmigrate": "babel-node server/model/unmigrate",
+    "migration": " npm run unmigrate && babel-node server/model/migration && npm run seed",
+    "seed": "babel-node server/model/seed",
     "start": "node ./dist/server/app.js",
     "start:dev": "nodemon --exec babel-node ./server/app.js"
   },
@@ -46,6 +49,7 @@
     "express": "^4.16.4",
     "express-validator": "^5.3.0",
     "jsonwebtoken": "^8.3.0",
+    "pg": "^7.5.0",
     "swagger-ui-express": "^4.0.1"
   },
   "devDependencies": {
