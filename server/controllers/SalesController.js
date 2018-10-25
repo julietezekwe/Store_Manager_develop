@@ -1,4 +1,3 @@
-import salesModel from '../dummyModel/salesModel';
 import pool from '../model/dbConfig';
 
 /**
@@ -46,13 +45,18 @@ class SalesController {
     */
 
   static getAllSalesRecords(req, res) {
-    return (
-      res.status(200).json({
-        salesModel,
-        message: 'Success',
-        error: false,
-      })
-    );
+    let SalesModel;
+    const query = { text: 'SELECT * FROM Sales' };
+    pool.query(query).then((Sales) => {
+      SalesModel = Sales.rows;
+      return (
+        res.status(200).json({
+          SalesModel,
+          message: 'Success',
+          error: false,
+        })
+      );
+    }).catch(/** istanbul ignore next */err => (res.status(500).json(err)));
   }
   /**
   *Get a sale record
