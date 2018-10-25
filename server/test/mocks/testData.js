@@ -23,6 +23,14 @@ const userDetails = {
     password: 'ogechi',
     role: 'attendant',
   },
+  update: {
+    id: 4,
+    name: 'chinedu Eze',
+    username: 'chinedu',
+    email: 'chinedu@gmail.com',
+    password: 'ogechi',
+    role: 'attendant',
+  },
   newAttendant: {
     name: 'Seyi Ibezim',
     username: 'ibezim',

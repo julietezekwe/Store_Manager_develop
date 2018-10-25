@@ -8,7 +8,7 @@ let authToken2;
 chai.use(chaiHttp);
 const { expect } = chai;
 const {
-  admin, attendant, newAttendant, wrongPassword, emptyField, spacedField,
+  admin, attendant, update, newAttendant, wrongPassword, emptyField, spacedField,
 } = userDetails;
 describe('Users Endpoint API Test', () => {
   before((done) => {
@@ -184,47 +184,53 @@ describe('Users Endpoint API Test', () => {
         done();
       });
   });
-  it('should update a user successfully', (done) => {
-    chai.request(app)
-      .put('/api/v1/auth/5')
-      .set('Authorization', authToken)
-      .send(newAttendant)
-      .end((err, res) => {
-        expect(res.body.message).to.eql('User updated successfully');
-        expect(res.body).to.have.property('userDetail');
-        expect(res.status).to.equal(201);
-        done();
-      });
+  describe('UPDATE USERS', () => {
+    it('should update a user successfully', (done) => {
+      chai.request(app)
+        .put('/api/v1/auth/4')
+        .set('Authorization', authToken)
+        .send(update)
+        .end((err, res) => {
+          expect(res.body.message).to.eql('User updated successfully');
+          expect(res.body).to.have.property('userDetail');
+          expect(res.status).to.equal(201);
+          done();
+        });
+    });
+    it('should not update a user that does not exist', (done) => {
+      chai.request(app)
+        .put('/api/v1/auth/10')
+        .set('Authorization', authToken)
+        .send(update)
+        .end((err, res) => {
+          expect(res.body.message).to.eql('User does not exist');
+          expect(res.status).to.equal(404);
+          done();
+        });
+    });
   });
-  it('should not update a user if user does not exist', (done) => {
-    chai.request(app)
-      .put('/api/v1/auth/40')
-      .set('Authorization', authToken)
-      .send(newAttendant)
-      .end((err, res) => {
-        expect(res.body.message).to.eql('User does not exist');
-        expect(res.status).to.equal(404);
-        done();
-      });
-  });
-  it('should update a user successfully', (done) => {
-    chai.request(app)
-      .delete('/api/v1/auth/5')
-      .set('Authorization', authToken)
-      .end((err, res) => {
-        expect(res.body.message).to.eql('Successfully deleted user');
-        expect(res.status).to.equal(200);
-        done();
-      });
-  });
-  it('should not update a user if user does not exist', (done) => {
-    chai.request(app)
-      .delete('/api/v1/auth/40')
-      .set('Authorization', authToken)
-      .end((err, res) => {
-        expect(res.body.message).to.eql('User does not exist');
-        expect(res.status).to.equal(404);
-        done();
-      });
+  describe('DELETE USERS', () => {
+    it('should delete a user', (done) => {
+      chai.request(app)
+        .delete('/api/v1/auth/4')
+        .set('Authorization', authToken)
+        .send(update)
+        .end((err, res) => {
+          expect(res.body.message).to.eql('Successfully deleted user');
+          expect(res.status).to.equal(200);
+          done();
+        });
+    });
+    it('should not delete a user that does not exist', (done) => {
+      chai.request(app)
+        .delete('/api/v1/auth/10')
+        .set('Authorization', authToken)
+        .send(update)
+        .end((err, res) => {
+          expect(res.body.message).to.eql('User does not exist');
+          expect(res.status).to.equal(404);
+          done();
+        });
+    });
   });
 });
