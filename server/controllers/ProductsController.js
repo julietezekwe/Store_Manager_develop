@@ -16,13 +16,18 @@ class ProductsController {
     *@memberof ProductsController
     */
   static getAllProducts(req, res) {
-    return (
-      res.status(200).json({
-        productsModel,
-        message: 'Success',
-        error: false,
-      })
-    );
+    let ProductsModel;
+    const query = { text: 'SELECT * FROM Products' };
+    pool.query(query).then((Products) => {
+      ProductsModel = Products.rows;
+      return (
+        res.status(200).json({
+          ProductsModel,
+          message: 'Success',
+          error: false,
+        })
+      );
+    }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
   }
   /**
   *Add product
@@ -75,27 +80,25 @@ class ProductsController {
 
   static getProduct(req, res) {
     const { productId } = req.params;
-    let found = false;
+    const query = {
+      text: 'SELECT * FROM Products WHERE id = $1',
+      values: [productId],
+    };
     let productDetail;
-    productsModel.map((product) => {
-      if (product.id === Number(productId)) {
-        productDetail = product;
-        found = true;
-        return true;
+    pool.query(query).then((product) => {
+      if (product.rowCount > 0) {
+        productDetail = product.rows;
+        return (res.status(200).json({
+          productDetail,
+          message: 'Success',
+          error: false,
+        }));
       }
-      return false;
-    });
-    if (found) {
-      return (res.status(200).json({
-        productDetail,
-        message: 'Success',
-        error: false,
+      return (res.status(404).json({
+        message: 'This product does not exist',
+        error: true,
       }));
-    }
-    return (res.status(404).json({
-      message: 'This product does not exist',
-      error: true,
-    }));
+    }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
   }
 
   /**
@@ -141,6 +144,39 @@ class ProductsController {
       })
     );
   }
+
+  /**
+  *Updates Product Category
+  *@description Search product category by string
+  *@static
+  *@param  {Object} req - request
+  *@param  {object} res - response
+  *@return {object} - message and status code
+  *@memberof ProductsController
+  */
+  static searchProduct(req, res) {
+    const { searchString } = req.params;
+    const query = {
+      text: 'SELECT * FROM Products WHERE productName ILIKE $1',
+      values: [`%${searchString}%`],
+    };
+    pool.query(query)
+      .then((product) => {
+        if (product.rowCount > 0) {
+          return (
+            res.status(200).json({
+              product: product.rows,
+              message: 'Success',
+            })
+          );
+        }
+        return res.status(404).json({
+          error: true,
+          message: 'no products found',
+        });
+      }).catch(/* istanbul ignore next */err => res.status(500).json(err));
+  }
+
   /**
   *Updates Product Category
   *@description Update product category by ID
@@ -150,7 +186,6 @@ class ProductsController {
   *@return {object} - message and status code
   *@memberof ProductsController
   */
-
   static updateProductCategory(req, res) {
     const { productId } = req.params;
     const { category } = req.body;

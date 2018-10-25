@@ -17,7 +17,8 @@ const {
 } = UsersController;
 
 const {
-  addProduct, getProduct, getAllProducts, updateProduct, updateProductCategory, deleteProduct,
+  addProduct, getProduct, getAllProducts,
+  updateProduct, updateProductCategory, deleteProduct, searchProduct,
 } = ProductsController;
 
 const {
@@ -49,6 +50,7 @@ router.get('/products', authenticate, getAllProducts);
 router.put('/products/:productId', idChecker, authenticate, isAdmin, addProductValidator, updateProduct);
 router.put('/products/:productId/category', idChecker, authenticate, updateProductCategory);
 router.delete('/products/:productId', idChecker, authenticate, isAdmin, deleteProduct);
+router.get('/products/:searchString/search', authenticate, searchProduct);
 
 // sales record enpoints
 router.post('/sales', authenticate, isAttendant, addSalesValidator, productsSales, addSaleRecord);
