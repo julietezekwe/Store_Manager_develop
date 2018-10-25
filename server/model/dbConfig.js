@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 let ssl = false;
-if (process.env.NODE_ENV === 'production') {
+if /* istanbul ignore next */ (process.env.NODE_ENV === 'production') {
   ssl = true;
 }
 const connectionString = process.env.DATABASE_URL;
