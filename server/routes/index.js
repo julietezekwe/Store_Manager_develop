@@ -9,6 +9,7 @@ import VerifyToken from '../middlewares/VerifyToken';
 import VerifyAdmin from '../middlewares/VerifyAdmin';
 import VerifyAttendant from '../middlewares/VerifyAttendant';
 import SalesValidator from '../middlewares/SalesValidator';
+import productsSales from '../controllers/helpers/productsSales';
 
 // destructure controllers
 const {
@@ -50,7 +51,7 @@ router.put('/products/:productId/category', idChecker, authenticate, updateProdu
 router.delete('/products/:productId', idChecker, authenticate, isAdmin, deleteProduct);
 
 // sales record enpoints
-router.post('/sales', authenticate, isAttendant, addSalesValidator, addSaleRecord);
+router.post('/sales', authenticate, isAttendant, addSalesValidator, productsSales, addSaleRecord);
 router.get('/sales', authenticate, isAdmin, getAllSalesRecords);
 router.get('/sales/:salesId', idChecker, authenticate, getSaleRecord);
 router.get('/user/sales', authenticate, getAttendantSaleRecord);
