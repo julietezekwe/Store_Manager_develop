@@ -116,29 +116,29 @@ class SalesController {
 
   static getAttendantSaleRecord(req, res) {
     const { id } = req.authData;
-    const saleDetail = [];
-    salesModel.map((sale) => {
-      if (sale.sellerId === Number(id)) {
-        saleDetail.push(sale);
+    let saleDetail;
+    const query = {
+      text: 'SELECT * FROM Sales WHERE sellerId = $1',
+      values: [id],
+    };
+    pool.query(query).then((attendantsSale) => {
+      if (attendantsSale.rowCount > 0) {
+        saleDetail = attendantsSale.rows;
+        return (
+          res.status(200).json({
+            saleDetail,
+            message: 'Success',
+            error: false,
+          })
+        );
       }
-      return false;
-    });
-
-    if (saleDetail.length > 1) {
       return (
-        res.status(200).json({
-          saleDetail,
-          message: 'Success',
-          error: false,
+        res.status(404).json({
+          message: 'No sales made yet',
+          error: true,
         })
       );
-    }
-    return (
-      res.status(404).json({
-        message: 'No sales made yet',
-        error: true,
-      })
-    );
+    }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
   }
 }
 
