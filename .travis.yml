@@ -1,10 +1,13 @@
 language: node_js
 node_js:
-  - "stable"
+- "stable"
 install: npm install
-
-script:
-  - npm test
-
-after_script: npm run coverage
-
+services:
+- postgresql
+env:
+- DB_USERNAME=chidimma DB_PASSWORD=password DBNAME=store_manager
+before_script:
+- psql -c 'create database store_manager;' -U postgres
+- psql -c "CREATE USER chidimma WITH PASSWORD 'password';" -U postgres
+script: npm test
+after_success: npm run coverage

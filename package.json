@@ -16,7 +16,7 @@
     "migration": " npm run unmigrate && babel-node server/model/migration && npm run seed",
     "seed": "babel-node server/model/seed",
     "start": "node ./dist/server/app.js",
-    "start:dev": "nodemon --exec babel-node ./server/app.js"
+    "start:dev": "npm run migration && nodemon --exec babel-node ./server/app.js"
   },
   "nyc": {
     "exclude": [

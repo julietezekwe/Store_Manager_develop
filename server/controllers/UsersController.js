@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import usersModel from '../dummyModel/usersModel';
+import pool from '../model/dbConfig';
 
 dotenv.config();
 
@@ -115,24 +116,25 @@ class UsersController {
 
   static createUser(req, res) {
     const { name, username, email, password, role } = req.body;
-    let userExist = false;
     let userDetail;
-    usersModel.map((user) => {
-      if (user.username === username) { userExist = true; }
-      return true;
-    });
-    if (!userExist) {
-      const hash = bcrypt.hashSync(password, 10);
-      const id = usersModel.length + 1;
-      userDetail = { id, name, username, email, password: hash, role, created: new Date() };
-      usersModel.push(userDetail);
-      return (
-        res.status(201).json({ userDetail, message: 'User created successfully' })
-      );
-    }
-    return (
-      res.status(403).json({ message: 'Username is taken', error: true })
-    );
+    const hash = bcrypt.hashSync(password, 10);
+    pool.query({ text: 'SELECT username from Users where username = $1', values: [username] })
+      .then((found) => {
+        if (found.rowCount === 0) {
+          const query = {
+            text: 'INSERT INTO Users(name, username, email, password, role) VALUES($1, $2, $3, $4, $5) RETURNING *',
+            values: [name, username, email, hash, role],
+          };
+          pool.query(query).then((user) => {
+            userDetail = user.rows[0];
+            return res.status(201).json({ userDetail, message: 'User created successfully' });
+          });
+        } else {
+          return res.status(403).json({ message: 'Username is taken', error: true });
+        }
+      }).catch(err => (
+        res.status(500).json(err)
+      ));
   }
 
   /**
