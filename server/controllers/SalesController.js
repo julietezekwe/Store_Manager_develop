@@ -1,4 +1,5 @@
 import salesModel from '../dummyModel/salesModel';
+import pool from '../model/dbConfig';
 import productsSales from './helpers/productsSales';
 
 /**
@@ -75,27 +76,33 @@ class SalesController {
   static getSaleRecord(req, res) {
     const { id, role } = req.authData;
     const { salesId } = req.params;
-    let validUser = false;
     let saleDetail;
-    salesModel.map((sale) => {
-      if (sale.id === Number(salesId) && (sale.sellerId === Number(id) || role === 'admin')) {
-        saleDetail = sale;
-        validUser = true;
+    let query;
+    /* istanbul ignore next */ if (role === 'admin') {
+      query = {
+        text: 'SELECT * FROM Sales WHERE id = $1',
+        values: [salesId],
+      };
+    } else {
+      query = {
+        text: 'SELECT * FROM Sales WHERE id = $1 AND sellerId = $2',
+        values: [salesId, id],
+      };
+    }
+    pool.query(query).then((sale) => {
+      if (sale.rowCount > 0) {
+        saleDetail = sale.rows;
+        return (
+          res.status(200).json({
+            saleDetail, message: 'Success', error: false,
+          })
+        );
       }
-      return false;
-    });
-
-    if (validUser) {
       return (
-        res.status(200).json({
-          saleDetail, message: 'Success', error: false,
+        res.status(401).json({ message: 'Unauthorized', error: true,
         })
       );
-    }
-    return (
-      res.status(401).json({ message: 'Unauthorized', error: true,
-      })
-    );
+    }).catch(/* istanbul ignore next */ err => (res.status(500).json(err)));
   }
   /**
   *Get all attendants sales records
