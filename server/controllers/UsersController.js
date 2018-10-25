@@ -14,6 +14,7 @@ const secret = process.env.SECRETE_KEY;
  */
 
 class UsersController {
+  /* istanbul ignore catch */
   /**
     *Gets all Users
     *@description Retrieves all the users from the data source
@@ -80,29 +81,32 @@ class UsersController {
 
   static loginUser(req, res) {
     const { username, password } = req.body;
-    let authDetail;
-    let found = false;
-    usersModel.map((user) => {
-      if (user.username === username && bcrypt.compareSync(password, user.password)) {
-        const { id, name, email, role, created } = user;
-        authDetail = { id, name, username, email, role, created };
-        found = true;
+    let userDetail;
+    const query = { text: 'SELECT * FROM users Where username = $1', values: [username] };
+    pool.query(query).then((user) => {
+      if (user.rowCount) {
+        userDetail = user.rows[0];
+        if (bcrypt.compareSync(password, userDetail.password)) {
+          const { id, name, role, joined } = userDetail;
+          const authDetail = {
+            id, name, username, role, joined,
+          };
+          const token = jwt.sign(authDetail, secret, { expiresIn: '1hr' });
+
+          return res.status(200).json({
+            message: 'Success',
+            token,
+            authDetail,
+          });
+        }
+        return res.status(401).json({
+          message: 'Invalid Credentials', error: true,
+        });
       }
-      return false;
-    });
-    if (found) {
-      const token = jwt.sign(authDetail, secret, { expiresIn: '1hr' });
-      return (
-        res.status(200).json({
-          authDetail, token, message: 'Success', error: false,
-        })
-      );
-    }
-    return (
-      res.status(401).json({
-        message: 'Invalid Credentials', error: true,
-      })
-    );
+      return res.status(404).json({ message: 'User does not exist', error: true });
+    }).catch(err => (
+      res.status(500).json(err)
+    ));
   }
   /**
   *Creats user
@@ -132,7 +136,7 @@ class UsersController {
         } else {
           return res.status(403).json({ message: 'Username is taken', error: true });
         }
-      }).catch(err => (
+      }).catch(/* istanbul ignore next */ err => (
         res.status(500).json(err)
       ));
   }

@@ -151,6 +151,16 @@ describe('Users Endpoint API Test', () => {
         done();
       });
   });
+  it('it should not login user that does not exist', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send({ username: 'add', password: 'ijeomaa' })
+      .end((err, res) => {
+        expect(res.body.message).to.eql('User does not exist');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
   it('it should not create user with spaces in the field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/createUser')
