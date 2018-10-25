@@ -1,4 +1,3 @@
-import productsModel from '../dummyModel/productsModel';
 import pool from '../model/dbConfig';
 /**
  *
@@ -177,30 +176,27 @@ class ProductsController {
   *@memberof ProductsController
   */
   static updateProductCategory(req, res) {
-    const { productId } = req.params;
     const { category } = req.body;
-    let productIndex;
-    let found = false;
-    productsModel.map((product, index) => {
-      if (product.id === Number(productId)) {
-        productIndex = index;
-        found = true;
-      }
-      return false;
-    });
-    if (found) {
-      productsModel[productIndex].category = category;
-      return (
-        res.status(201).json({
-          message: 'Successfully updated product category',
-        })
-      );
-    }
-    return (
-      res.status(404).json({
-        message: 'Product does not exist',
-      })
-    );
+    const { productId } = req.params;
+    let productDetail;
+
+    pool.query({ text: 'SELECT id from Products where id = $1', values: [productId] })
+      .then((found) => {
+        if (found.rowCount === 1) {
+          const query = {
+            text: 'UPDATE Products SET category = $1 WHERE id = $2 RETURNING *',
+            values: [category, productId],
+          };
+          pool.query(query).then((product) => {
+            productDetail = product.rows[0];
+            return res.status(201).json({ productDetail, message: 'Successfully updated product category' });
+          });
+        } else {
+          return res.status(404).json({ message: 'Product does not exist', error: true });
+        }
+      }).catch(/* istanbul ignore next */err => (
+        res.status(500).json(err)
+      ));
   }
   /**
 *Delete product
