@@ -22,6 +22,7 @@ class SalesController {
     const sellerId = req.authData.id;
     const { productId, productName, prize, quantity } = req.body;
     const productDetail = productsSales(productId, quantity);
+    console.log(productDetail);
     if (productDetail === undefined) {
       return (
         res.status(404).json({ message: 'This product does not exist' })
@@ -33,16 +34,19 @@ class SalesController {
       );
     }
     const totalPrize = Number(prize) * Number(quantity);
-    const id = salesModel.length + 1;
-    const saleDetail = {
-      id, sellerId, productId, productName, prize, quantity, totalPrize, created: new Date(),
+    let saleDetail;
+    const query = {
+      text: 'INSERT INTO Sales(sellerId, productId, productName, prize, quantity, totalPrize) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
+      values: [sellerId, productId, productName, prize, quantity, totalPrize],
     };
-    salesModel.push(saleDetail);
-    return (
-      res.status(201).json({
-        saleDetail, message: 'Successfully added sale(s)',
-      })
-    );
+    pool.query(query).then((sale) => {
+      saleDetail = sale.rows;
+      return (
+        res.status(201).json({
+          saleDetail, message: 'Successfully added sale(s)',
+        })
+      );
+    }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
   }
   /**
     *Get all sales records
