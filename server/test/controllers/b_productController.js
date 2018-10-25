@@ -69,6 +69,27 @@ describe('Products Endpoint API Test', () => {
         done();
       });
   });
+  it('it should not find product that does not exist', (done) => {
+    chai.request(app)
+      .get('/api/v1/products/not exist/search')
+      .set('Authorization', authToken2)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('no products found');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
+  it('it should find product that exist', (done) => {
+    chai.request(app)
+      .get('/api/v1/products/Red/search')
+      .set('Authorization', authToken2)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('Success');
+        expect(res.body).to.have.property('product');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
   it('it should not post product if user is not Admin', (done) => {
     chai.request(app)
       .post('/api/v1/products')
