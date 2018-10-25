@@ -14,7 +14,6 @@ const secret = process.env.SECRETE_KEY;
  */
 
 class UsersController {
-  /* istanbul ignore catch */
   /**
     *Gets all Users
     *@description Retrieves all the users from the data source
@@ -26,11 +25,20 @@ class UsersController {
     */
 
   static getAllUsers(req, res) {
-    res.status(200).json({
-      usersModel,
-      message: 'Success',
-      error: false,
-    });
+    const query = {
+      text: 'SELECT id, name, username, email, role, joined FROM Users',
+    };
+    pool.query(query).then((users) => {
+      if (users.rowCount > 0) {
+        return res.status(200).json({
+          UsersModel: users.rows,
+          message: 'Success',
+          error: false,
+        });
+      }
+    }).catch(/* istanbul ignore next */ err => (
+      res.status(500).json(err)
+    ));
   }
   /**
   *Gets User
@@ -45,29 +53,33 @@ class UsersController {
   static getUser(req, res) {
     const { userId } = req.params;
     let userDetail;
-    let found = false;
-    usersModel.map((user) => {
-      if (Number(userId) === user.id) {
-        userDetail = user;
-        found = true;
+    const query = {
+      text: 'SELECT * FROM Users Where id = $1',
+      values: [userId],
+    };
+    pool.query(query).then((user) => {
+      const { rowCount, rows } = user;
+      if (rowCount > 0) {
+        userDetail = rows[0];
+        return (
+          res.status(200).json({
+            userDetail,
+            message: 'Success',
+            error: false,
+          })
+        );
       }
-      return false;
-    });
-    if (found) {
       return (
-        res.status(200).json({
-          userDetail,
-          message: 'Success',
-          error: false,
+        res.status(404).json({
+          message: 'No user found',
+          error: true,
         })
       );
-    }
-    return (
-      res.status(404).json({
-        message: 'No user found',
-        error: true,
+    }).catch(/* istanbul ignore next */err => (
+      res.status(500).json({
+        err,
       })
-    );
+    ));
   }
   /**
   *Login user
@@ -104,7 +116,7 @@ class UsersController {
         });
       }
       return res.status(404).json({ message: 'User does not exist', error: true });
-    }).catch(err => (
+    }).catch(/* istanbul ignore next */ err => (
       res.status(500).json(err)
     ));
   }
