@@ -138,7 +138,7 @@ describe('Products Endpoint API Test', () => {
   });
   it('it should update product if user is Admin', (done) => {
     chai.request(app)
-      .put('/api/v1/products/5')
+      .put('/api/v1/products/4')
       .set('Authorization', authToken)
       .send(validProduct)
       .end((err, res) => {
@@ -182,7 +182,7 @@ describe('Products Endpoint API Test', () => {
   });
   it('it should delete product that exist', (done) => {
     chai.request(app)
-      .delete('/api/v1/products/5')
+      .delete('/api/v1/products/4')
       .set('Authorization', authToken)
       .end((err, res) => {
         expect(res.body.message).to.eql('Successfully deletes product');

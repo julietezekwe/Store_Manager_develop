@@ -35,6 +35,7 @@ migrateUser(4, 'chinedu', 'chinedu', 'chinedu@gmail.com', 'ogechi', 'attendant')
 migrateProduct(1, 'red shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 100, 100, 1, 'flat');
 migrateProduct(2, 'silver shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 500, 90, 1, 'hills');
 migrateProduct(3, 'green shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 500, 150, 1, 'ladies');
+migrateProduct(4, 'green shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 500, 150, 1, 'ladies');
 
 migrateSale(1, 3, 2, 'red shoe', 100, 2, 200);
 migrateSale(2, 2, 3, 'silver shoe', 500, 1, 500);

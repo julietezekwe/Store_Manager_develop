@@ -112,41 +112,31 @@ class ProductsController {
   */
 
   static updateProduct(req, res) {
+    const { productName, description, image, prize, quantity, min, category } = req.body;
     const { productId } = req.params;
-    const {
-      productName, description, image, prize, quantity, min, category,
-    } = req.body;
-    let productIndex;
-    let found = false;
-    productsModel.map((product, index) => {
-      if (product.id === Number(productId)) {
-        productIndex = index;
-        found = true;
-      }
-      return false;
-    });
-    if (found) {
-      const { id } = productsModel[productIndex];
-      const productDetail = {
-        id, productName, description, image, prize, quantity, min, category, created: new Date(),
-      };
-      productsModel[productIndex] = productDetail;
-      return (
-        res.status(201).json({
-          productDetail,
-          message: 'Successfully updated product',
-        })
-      );
-    }
-    return (
-      res.status(404).json({
-        message: 'Product does not exist',
-      })
-    );
+    let productDetail;
+
+    pool.query({ text: 'SELECT id from Products where id = $1', values: [productId] })
+      .then((found) => {
+        if (found.rowCount === 1) {
+          const query = {
+            text: 'UPDATE Products SET productName = $1, description = $2, image = $3, prize = $4, quantity = $5, min = $6, category = $7 WHERE id = $8 RETURNING *',
+            values: [productName, description, image, prize, quantity, min, category, productId],
+          };
+          pool.query(query).then((product) => {
+            productDetail = product.rows[0];
+            return res.status(201).json({ productDetail, message: 'Successfully updated product' });
+          });
+        } else {
+          return res.status(404).json({ message: 'Product does not exist', error: true });
+        }
+      }).catch(/* istanbul ignore next */err => (
+        res.status(500).json(err)
+      ));
   }
 
   /**
-  *Updates Product Category
+  *Search Product
   *@description Search product category by string
   *@static
   *@param  {Object} req - request
@@ -224,27 +214,27 @@ class ProductsController {
 
   static deleteProduct(req, res) {
     const { productId } = req.params;
-    let found = false;
-    let productIndex;
-    productsModel.map((product, index) => {
-      if (product.id === Number(productId)) {
-        productIndex = index;
-        found = true;
-        return true;
+    const query = {
+      text: 'DELETE FROM Products Where id = $1',
+      values: [productId],
+    };
+    pool.query(query).then((product) => {
+      const { rowCount } = product;
+      if (rowCount > 0) {
+        return (
+          res.status(200).json({
+            message: 'Successfully deletes product',
+            error: false,
+          })
+        );
       }
-      return false;
-    });
-    if (found) {
-      productsModel.splice(productIndex, 1);
-      return (res.status(200).json({
-        message: 'Successfully deletes product',
-        error: false,
-      }));
-    }
-    return (res.status(404).json({
-      message: 'This product does not exist',
-      error: true,
-    }));
+      return (
+        res.status(404).json({
+          message: 'This product does not exist',
+          error: true,
+        })
+      );
+    }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
   }
 }
 
