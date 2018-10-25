@@ -6,8 +6,8 @@ import pool from '../../model/dbConfig';
   *@param  {object} quantity - response
   *@return {object} - product detail
   */
-const productsSales = (productId, quantity) => {
-  let productDetail;
+const productsSales = (req, res, next) => {
+  const { productId, quantity } = req.body;
   let newQuantity;
   pool.query({
     text: 'SELECT * FROM Products WHERE id = $1',
@@ -15,17 +15,21 @@ const productsSales = (productId, quantity) => {
   }).then((product) => {
     if (product.rowCount > 0) {
       if (product.rows[0].quantity >= Number(quantity)) {
-        productDetail = product.rows[0];
         newQuantity = Number(product.rows[0].quantity) - Number(quantity);
         pool.query({
           text: 'UPDATE Products SET quantity = $1 WHERE id = $2',
           values: [newQuantity, productId],
         });
-        return true;
-      } productDetail = 'The quantity is more than in stock';
+        return next();
+      }
+      return (
+        res.status(401).json({ message: 'The quantity is more than in stock' })
+      );
     }
+    return (
+      res.status(404).json({ message: 'This product does not exist' })
+    );
   });
-  return productDetail;
 };
 
 export default productsSales;

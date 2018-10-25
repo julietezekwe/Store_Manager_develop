@@ -1,6 +1,5 @@
 import salesModel from '../dummyModel/salesModel';
 import pool from '../model/dbConfig';
-import productsSales from './helpers/productsSales';
 
 /**
  *
@@ -21,18 +20,6 @@ class SalesController {
   static addSaleRecord(req, res) {
     const sellerId = req.authData.id;
     const { productId, productName, prize, quantity } = req.body;
-    const productDetail = productsSales(productId, quantity);
-    console.log(productDetail);
-    if (productDetail === undefined) {
-      return (
-        res.status(404).json({ message: 'This product does not exist' })
-      );
-    }
-    if (productDetail === 'The quantity is more than in stock') {
-      return (
-        res.status(401).json({ message: productDetail })
-      );
-    }
     const totalPrize = Number(prize) * Number(quantity);
     let saleDetail;
     const query = {
