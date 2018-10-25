@@ -56,7 +56,7 @@ class SalesController {
           error: false,
         })
       );
-    }).catch(/** istanbul ignore next */err => (res.status(500).json(err)));
+    }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
   }
   /**
   *Get a sale record
