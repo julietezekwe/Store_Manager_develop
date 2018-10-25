@@ -1,4 +1,5 @@
 import productsModel from '../dummyModel/productsModel';
+import pool from '../model/dbConfig';
 /**
  *
  * @description Defines the actions to for the products endpoints
@@ -43,25 +44,24 @@ class ProductsController {
       min,
       category,
     } = req.body;
-    const id = productsModel.length + 1;
-    const productDetail = {
-      id,
-      productName,
-      description,
-      image,
-      prize,
-      quantity,
-      min,
-      category,
-      created: new Date(),
+    let productDetail;
+    const query = {
+      text: 'INSERT INTO Products(productName, description, image, prize, quantity, min, category) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+      values: [productName, description, image, prize, quantity, min, category],
     };
-    productsModel.push(productDetail);
-    return (
-      res.status(201).json({
-        productDetail,
-        message: 'Successfully added product(s)',
+    pool.query(query).then((product) => {
+      productDetail = product.rows;
+      return (
+        res.status(201).json({
+          productDetail,
+          message: 'Successfully added product(s)',
+        })
+      );
+    }).catch(/* istanbul ignore next */err => (
+      res.status(500).json({
+        err,
       })
-    );
+    ));
   }
   /**
   *Get product
