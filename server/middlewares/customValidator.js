@@ -1,6 +1,6 @@
 import path from 'path';
 
-export default {
+export default{
   customValidators: {
     isImage(imageName) {
       const imageExtension = (path.extname(imageName)).toLowerCase();

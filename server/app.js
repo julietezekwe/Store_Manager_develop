@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Validator to check requests
 app.use(expressValidator(customValidator));
 
+
 // Versioning and Routes
 app.use('/api/v1/', routes);
 
