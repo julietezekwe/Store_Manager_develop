@@ -18,12 +18,12 @@ class SalesController {
 
   static addSaleRecord(req, res) {
     const sellerId = req.authData.id;
-    const { productId, productName, prize, quantity } = req.body;
-    const totalPrize = Number(prize) * Number(quantity);
+    const { sales } = req.body;
+    const { totalPrize } = req;
     let saleDetail;
     const query = {
-      text: 'INSERT INTO Sales(sellerId, productId, productName, prize, quantity, totalPrize) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
-      values: [sellerId, productId, productName, prize, quantity, totalPrize],
+      text: 'INSERT INTO Sales(sellerId, sales, totalPrize) VALUES($1, $2, $3) RETURNING *',
+      values: [sellerId, JSON.stringify(sales), totalPrize],
     };
     pool.query(query).then((sale) => {
       saleDetail = sale.rows;

@@ -19,13 +19,26 @@ const migrateProduct = (id, productName, description, image, prize, quantity, mi
   pool.query(query);
 };
 
-const migrateSale = (id, sellerId, productId, productName, prize, quantity, totalPrize) => {
+const migrateSale = (id, sellerId, sales, totalPrize) => {
   const query = {
-    text: 'INSERT INTO Sales(id, sellerId, productId, productName, prize, quantity, totalPrize) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *',
-    values: [id, sellerId, productId, productName, prize, quantity, totalPrize],
+    text: 'INSERT INTO Sales(id, sellerId, sales, totalPrize) VALUES($1, $2, $3, $4) RETURNING *',
+    values: [id, sellerId, sales, totalPrize],
   };
   pool.query(query);
 };
+
+const sales1 = [
+  { productId: 1, productName: 'red shoe', prize: 100, quantity: 2, totalPrize: 200 },
+  { productId: 2, productName: 'silver shoe', prize: 500, quantity: 10, totalPrize: 5000 },
+];
+const sales2 = [
+  { productId: 3, productName: 'green shoes', prize: 500, quantity: 10, totalPrize: 5000 },
+  { productId: 2, productName: 'silver shoe', prize: 500, quantity: 10, totalPrize: 5000 },
+];
+const sales3 = [
+  { productId: 1, productName: 'red shoe', prize: 100, quantity: 2, totalPrize: 200 },
+  { productId: 3, productName: 'green shoe', prize: 500, quantity: 5, totalPrize: 2500 },
+];
 
 migrateUser(1, 'admin', 'admin', 'admin@gmail.com', 'admin', 'admin');
 migrateUser(2, 'chidimma', 'chidimma', 'chidimma@gmail.com', 'chidimma', 'attendant');
@@ -37,9 +50,9 @@ migrateProduct(2, 'silver shoe', 'This is a very beautiful shoe', 'imageurl.jpg'
 migrateProduct(3, 'green shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 500, 150, 1, 'ladies');
 migrateProduct(4, 'green shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 500, 150, 1, 'ladies');
 
-migrateSale(1, 3, 2, 'red shoe', 100, 2, 200);
-migrateSale(2, 2, 3, 'silver shoe', 500, 1, 500);
-migrateSale(3, 3, 3, 'green shoe', 500, 10, 5000);
+migrateSale(1, 3, JSON.stringify(sales1), 200);
+migrateSale(2, 2, JSON.stringify(sales2), 500);
+migrateSale(3, 3, JSON.stringify(sales3), 5000);
 
 pool.query('ALTER SEQUENCE users_id_seq RESTART WITH 100');
 pool.query('ALTER SEQUENCE sales_id_seq RESTART WITH 100');
