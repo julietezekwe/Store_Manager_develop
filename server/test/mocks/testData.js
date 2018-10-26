@@ -94,34 +94,31 @@ const productDetails = {
 
 const saleDetails = {
   emptyField: {
-    productId: '',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '2',
-  },
-  spacedField: {
-    productId: '    ',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '2',
+    sales: ' ',
   },
   validSale: {
-    productId: '3',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '2',
+    sales: [
+      { productId: '3',
+        productName: 'Sneakers',
+        prize: '10000',
+        quantity: '2' },
+    ],
   },
   invalidSale: {
-    productId: '30',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '2',
+    sales: [
+      { productId: '30',
+        productName: 'Sneakers',
+        prize: '1000',
+        quantity: '2' },
+    ],
   },
   invalidSale2: {
-    productId: '2',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '200',
+    sales: [
+      { productId: '3',
+        productName: 'Sneakers',
+        prize: '10000',
+        quantity: '20000' },
+    ],
   },
 };
 

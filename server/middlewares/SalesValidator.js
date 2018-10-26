@@ -9,7 +9,7 @@ class SalesValidator {
  * @memberof SalesValidator
  */
   static addSalesValidator(req, res, next) {
-    req.check('sales', 'Only Jpeg, Png or Gif is accepted image format').isArray();
+    req.check('sales', 'Please provide products to sale').isArray();
 
     const errors = req.validationErrors();
     const validationErrors = [];
