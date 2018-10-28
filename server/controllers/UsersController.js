@@ -28,7 +28,7 @@ class UsersController {
       text: 'SELECT id, name, username, email, role, joined FROM Users',
     };
     pool.query(query).then((users) => {
-      if (users.rowCount > 0) {
+      /* istanbul ignore next */if (users.rowCount > 0) {
         return res.status(200).json({
           UsersModel: users.rows,
           message: 'Success',
