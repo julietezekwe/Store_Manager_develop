@@ -3,13 +3,14 @@ import pool from '../../model/dbConfig';
   *Product sales check
   *@description Checks for product availability
   *@param  {Object} productId - request
-  *@param  {object} quantity - response
-  *@return {object} - product detail
+  *@param  {object} quantity - request
+  *@return {object} - productdetail totalPrize next()
   */
-const productsSales = (req, res, next) => {
+const productsSalesVerify = (req, res, next) => {
   const { sales } = req.body;
   let totalPrize = 0;
   let countSales = 0;
+  const productDetails = [];
   const count = sales.length;
   sales.map((sale) => {
     const { productId, quantity, prize } = sale;
@@ -30,17 +31,16 @@ const productsSales = (req, res, next) => {
       }
       totalPrize += Number(prize) * Number(quantity);
       newQuantity = Number(product.rows[0].quantity) - Number(quantity);
+      productDetails.push({ productId, newQuantity });
+
       countSales += 1;
-      pool.query({
-        text: 'UPDATE Products SET quantity = $1 WHERE id = $2',
-        values: [newQuantity, productId],
-      });
-      if (countSales === count) {
+      /* istanbul ignore next */if (countSales === count) {
         req.totalPrize = totalPrize;
+        req.productDetails = productDetails;
         return next();
       }
     });
   });
 };
 
-export default productsSales;
+export default productsSalesVerify;

@@ -69,11 +69,11 @@ const productDetails = {
     category: '',
   },
   spacedField: {
-    productName: 'uhhh',
+    productName: '    ',
     description: 'ogechi oooo mmmmm',
     image: 'imageurl.jpg',
     prize: '5000',
-    quantity: '  ',
+    quantity: '100',
     min: '10',
     category: 'flat',
   },
