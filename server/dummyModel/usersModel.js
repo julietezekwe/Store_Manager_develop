@@ -1,4 +1,4 @@
-const Users = [
+const usersModel = [
   {
     id: 1,
     name: 'Admin',
@@ -46,4 +46,4 @@ const Users = [
   },
 ];
 
-export default Users;
+export default usersModel;

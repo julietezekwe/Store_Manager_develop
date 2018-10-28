@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const secret = process.env.SECRETE_KEY;
-class verifyToken {
+class VerifyToken {
 /**
  * @description - Checks if the user authenticated
  * @param  {Object} req - request
@@ -12,7 +12,7 @@ class verifyToken {
  * @param {Object} next - Call back function
  * @return {object} - status code and error message or next()
  * @static
- * @memberof verifyToken
+ * @memberof VerifyToken
  */
 
   static authenticate(req, res, next) {
@@ -37,4 +37,4 @@ class verifyToken {
   }
 }
 
-export default verifyToken;
+export default VerifyToken;

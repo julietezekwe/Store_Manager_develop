@@ -23,6 +23,14 @@ const userDetails = {
     password: 'ogechi',
     role: 'attendant',
   },
+  update: {
+    id: 4,
+    name: 'chinedu Eze',
+    username: 'chinedu',
+    email: 'chinedu@gmail.com',
+    password: 'ogechi',
+    role: 'attendant',
+  },
   newAttendant: {
     name: 'Seyi Ibezim',
     username: 'ibezim',
@@ -61,11 +69,11 @@ const productDetails = {
     category: '',
   },
   spacedField: {
-    productName: 'uhhh',
+    productName: '    ',
     description: 'ogechi oooo mmmmm',
     image: 'imageurl.jpg',
     prize: '5000',
-    quantity: '  ',
+    quantity: '100',
     min: '10',
     category: 'flat',
   },
@@ -78,39 +86,39 @@ const productDetails = {
     min: '10',
     category: 'flat',
   },
+  updateCategory: {
+    category: 'flat',
+  },
 
 };
 
 const saleDetails = {
   emptyField: {
-    productId: '',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '2',
-  },
-  spacedField: {
-    productId: '    ',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '2',
+    sales: ' ',
   },
   validSale: {
-    productId: '3',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '2',
+    sales: [
+      { productId: '3',
+        productName: 'Sneakers',
+        prize: '10000',
+        quantity: '2' },
+    ],
   },
   invalidSale: {
-    productId: '30',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '2',
+    sales: [
+      { productId: '30',
+        productName: 'Sneakers',
+        prize: '1000',
+        quantity: '2' },
+    ],
   },
   invalidSale2: {
-    productId: '2',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '200',
+    sales: [
+      { productId: '3',
+        productName: 'Sneakers',
+        prize: '10000',
+        quantity: '20000' },
+    ],
   },
 };
 

@@ -1,4 +1,4 @@
-import ProductsModel from '../../dummyModel/ProductsModel';
+import productsModel from '../../dummyModel/productsModel';
 
 /**
   *Product sales check
@@ -10,12 +10,12 @@ import ProductsModel from '../../dummyModel/ProductsModel';
 const productsSales = (productId, quantity) => {
   let productDetail;
   let newQuantity;
-  ProductsModel.map((product, index) => {
+  productsModel.map((product, index) => {
     if (Number(product.id) === Number(productId)) {
       if (Number(product.quantity) >= Number(quantity)) {
         productDetail = product;
         newQuantity = Number(product.quantity) - Number(quantity);
-        ProductsModel[index].quantity = newQuantity;
+        productsModel[index].quantity = newQuantity;
         return true;
       } productDetail = 'The quantity is more than in stock';
     }

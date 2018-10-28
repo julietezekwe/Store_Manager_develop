@@ -1,4 +1,4 @@
-const Sales = [
+const salesModel = [
   {
     id: 1,
     sellerId: 3,
@@ -31,4 +31,4 @@ const Sales = [
   },
 ];
 
-export default Sales;
+export default salesModel;

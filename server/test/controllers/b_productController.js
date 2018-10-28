@@ -11,7 +11,7 @@ const {
   admin, attendant,
 } = userDetails;
 const {
-  emptyField, validProduct, spacedField,
+  emptyField, validProduct, spacedField, updateCategory,
 } = productDetails;
 describe('Products Endpoint API Test', () => {
   before((done) => {
@@ -69,6 +69,27 @@ describe('Products Endpoint API Test', () => {
         done();
       });
   });
+  it('it should not find product that does not exist', (done) => {
+    chai.request(app)
+      .get('/api/v1/products/not exist/search')
+      .set('Authorization', authToken2)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('no products found');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
+  it('it should find product that exist', (done) => {
+    chai.request(app)
+      .get('/api/v1/products/Red/search')
+      .set('Authorization', authToken2)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('Success');
+        expect(res.body).to.have.property('product');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
   it('it should not post product if user is not Admin', (done) => {
     chai.request(app)
       .post('/api/v1/products')
@@ -117,7 +138,7 @@ describe('Products Endpoint API Test', () => {
   });
   it('it should update product if user is Admin', (done) => {
     chai.request(app)
-      .put('/api/v1/products/5')
+      .put('/api/v1/products/4')
       .set('Authorization', authToken)
       .send(validProduct)
       .end((err, res) => {
@@ -126,7 +147,7 @@ describe('Products Endpoint API Test', () => {
         done();
       });
   });
-  it('it should update product if user is Admin', (done) => {
+  it('it should not update product if product does not exist', (done) => {
     chai.request(app)
       .put('/api/v1/products/40')
       .set('Authorization', authToken)
@@ -137,9 +158,31 @@ describe('Products Endpoint API Test', () => {
         done();
       });
   });
+  it('it should update product category ', (done) => {
+    chai.request(app)
+      .put('/api/v1/products/1/category')
+      .set('Authorization', authToken2)
+      .send(updateCategory)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('Successfully updated product category');
+        expect(res.status).to.equal(201);
+        done();
+      });
+  });
+  it('it should not update product category if product does not exist', (done) => {
+    chai.request(app)
+      .put('/api/v1/products/40/category')
+      .set('Authorization', authToken)
+      .send(updateCategory)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('Product does not exist');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
   it('it should delete product that exist', (done) => {
     chai.request(app)
-      .delete('/api/v1/products/5')
+      .delete('/api/v1/products/4')
       .set('Authorization', authToken)
       .end((err, res) => {
         expect(res.body.message).to.eql('Successfully deletes product');

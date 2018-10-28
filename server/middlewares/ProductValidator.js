@@ -1,4 +1,4 @@
-class productValidator {
+class ProductValidator {
   /**
  * @description - Checks the request parameters for creating new product are of the right formart
  * @param  {Object} req - request
@@ -6,18 +6,23 @@ class productValidator {
  * @param {Object} next - Call back function
  * @return {object} - status code and error message or next()
  * @static
- * @memberof productValidator
+ * @memberof ProductValidator
  */
 
   static addProductValidator(req, res, next) {
+    const {
+      productName, description, image, prize, quantity, min, category,
+    } = req.body;
+
     req.check('productName', 'Product name is required').notEmpty();
     req.check('description', 'Description is required').notEmpty();
     req.check('description', 'Description should be more than 5 words')
       .isLength({ min: 15 });
+    req.check('image', 'Image is required').notEmpty();
     req.check('image', 'Only Jpeg, Png or Gif is accepted image format').isImage(req.body.image);
-    req.check('prize', 'Unit Prize is required').notEmpty();
-    req.check('quantity', 'Quantity is required').notEmpty();
-    req.check('min', 'Minimum inventory is required').notEmpty();
+    req.check('prize', 'Unit Prize is required and must be integer').notEmpty().isInt();
+    req.check('quantity', 'Quantity is required and must be integer').notEmpty().isInt();
+    req.check('min', 'Minimum inventory is required and must be integer').notEmpty().isInt();
     req.check('category', 'Category is required').notEmpty();
 
     const errors = req.validationErrors();
@@ -28,9 +33,6 @@ class productValidator {
         errors: validationErrors,
       });
     }
-    const {
-      productName, description, image, prize, quantity, min, category,
-    } = req.body;
     let error = false;
     const fieldValues = [productName, description, image, prize, quantity, min, category];
     fieldValues.map((fieldValue) => {
@@ -48,4 +50,4 @@ class productValidator {
   }
 }
 
-export default productValidator;
+export default ProductValidator;

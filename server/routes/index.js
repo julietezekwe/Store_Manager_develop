@@ -2,13 +2,15 @@ import express from 'express';
 import UsersController from '../controllers/UsersController';
 import ProductsController from '../controllers/ProductsController';
 import SalesController from '../controllers/SalesController';
-import paramsChecker from '../middlewares/paramsChecker';
-import userValidator from '../middlewares/userValidator';
-import productValidator from '../middlewares/productValidator';
-import verifyToken from '../middlewares/verifyToken';
-import verifyAdmin from '../middlewares/verifyAdmin';
-import verifyAttendant from '../middlewares/verifyAttendant';
-import salesValidator from '../middlewares/salesValidator';
+import ParamsChecker from '../middlewares/ParamsChecker';
+import UserValidator from '../middlewares/UserValidator';
+import ProductValidator from '../middlewares/ProductValidator';
+import VerifyToken from '../middlewares/VerifyToken';
+import VerifyAdmin from '../middlewares/VerifyAdmin';
+import VerifyAttendant from '../middlewares/VerifyAttendant';
+import SalesValidator from '../middlewares/SalesValidator';
+import productsSalesVerify from '../controllers/helpers/productsSalesVerify';
+import productUpdate from '../controllers/helpers/productUpdate';
 
 // destructure controllers
 const {
@@ -16,20 +18,21 @@ const {
 } = UsersController;
 
 const {
-  addProduct, getProduct, getAllProducts, updateProduct, deleteProduct,
+  addProduct, getProduct, getAllProducts,
+  updateProduct, updateProductCategory, deleteProduct, searchProduct,
 } = ProductsController;
 
 const {
   addSaleRecord, getAllSalesRecords, getSaleRecord, getAttendantSaleRecord,
 } = SalesController;
 // deconstruct middlewares
-const { idChecker } = paramsChecker;
-const { createUserChecker, userLoginChecker } = userValidator;
-const { authenticate } = verifyToken;
-const { isAdmin } = verifyAdmin;
-const { isAttendant } = verifyAttendant;
-const { addProductValidator } = productValidator;
-const { addSalesValidator } = salesValidator;
+const { idChecker } = ParamsChecker;
+const { createUserChecker, userLoginChecker } = UserValidator;
+const { authenticate } = VerifyToken;
+const { isAdmin } = VerifyAdmin;
+const { isAttendant } = VerifyAttendant;
+const { addProductValidator } = ProductValidator;
+const { addSalesValidator } = SalesValidator;
 
 const router = express.Router();
 
@@ -39,17 +42,19 @@ router.get('/auth/:userId', authenticate, idChecker, getUser);
 router.post('/auth/createUser', authenticate, isAdmin, createUserChecker, createUser);
 router.put('/auth/:userId', authenticate, isAdmin, idChecker, createUserChecker, updateUser);
 router.post('/auth/login', userLoginChecker, loginUser);
-router.delete('/auth/:userId', authenticate, isAdmin, idChecker, deleteUser);
+router.delete('/auth/:userId', idChecker, authenticate, isAdmin, deleteUser);
 
 // products endpoints
 router.post('/products', authenticate, isAdmin, addProductValidator, addProduct);
 router.get('/products/:productId', idChecker, authenticate, getProduct);
 router.get('/products', authenticate, getAllProducts);
-router.put('/products/:productId', authenticate, isAdmin, addProductValidator, updateProduct);
-router.delete('/products/:productId', authenticate, isAdmin, idChecker, deleteProduct);
+router.put('/products/:productId', idChecker, authenticate, isAdmin, addProductValidator, updateProduct);
+router.put('/products/:productId/category', idChecker, authenticate, updateProductCategory);
+router.delete('/products/:productId', idChecker, authenticate, isAdmin, deleteProduct);
+router.get('/products/:searchString/search', authenticate, searchProduct);
 
 // sales record enpoints
-router.post('/sales', authenticate, isAttendant, addSalesValidator, addSaleRecord);
+router.post('/sales', authenticate, isAttendant, addSalesValidator, productsSalesVerify, productUpdate, addSaleRecord);
 router.get('/sales', authenticate, isAdmin, getAllSalesRecords);
 router.get('/sales/:salesId', idChecker, authenticate, getSaleRecord);
 router.get('/user/sales', authenticate, getAttendantSaleRecord);
