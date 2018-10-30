@@ -11,7 +11,7 @@ class ProductValidator {
 
   static addProductValidator(req, res, next) {
     const {
-      productName, description, image, prize, quantity, min, category,
+      productName, description, image, prize, quantity, min,
     } = req.body;
 
     req.check('productName', 'Product name is required').notEmpty();
@@ -23,7 +23,7 @@ class ProductValidator {
     req.check('prize', 'Unit Prize is required and must be integer').notEmpty().isInt();
     req.check('quantity', 'Quantity is required and must be integer').notEmpty().isInt();
     req.check('min', 'Minimum inventory is required and must be integer').notEmpty().isInt();
-    req.check('category', 'Category is required').notEmpty();
+
 
     const errors = req.validationErrors();
     const validationErrors = [];
@@ -34,13 +34,46 @@ class ProductValidator {
       });
     }
     let error = false;
-    const fieldValues = [productName, description, image, prize, quantity, min, category];
+    const fieldValues = [productName, description, image, prize, quantity, min];
     fieldValues.map((fieldValue) => {
       if (fieldValue.trim() === '') {
         error = true;
       }
     });
     if (error) {
+      return res.status(400).json({
+        message: 'Please fill in all fields',
+        error: true,
+      });
+    }
+    return next();
+  }
+
+  /**
+ * @description - Checks the request parameters for adding product to a category are correct
+ * @param  {Object} req - request
+ * @param  {object} res - response
+ * @param {Object} next - Call back function
+ * @return {object} - status code and error message or next()
+ * @static
+ * @memberof ProductValidator
+ */
+
+  static productCategoryValidator(req, res, next) {
+    const { categoryName } = req.body;
+
+    req.check('categoryName', 'Category name is required').notEmpty();
+
+    const errors = req.validationErrors();
+    const validationErrors = [];
+    if (errors) {
+      errors.map(err => validationErrors.push(err.msg));
+      return res.status(400).json({
+        errors: validationErrors,
+      });
+    }
+
+    if (categoryName.trim() === '') {
       return res.status(400).json({
         message: 'Please fill in all fields',
         error: true,

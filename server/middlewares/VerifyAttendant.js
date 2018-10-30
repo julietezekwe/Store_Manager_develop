@@ -14,7 +14,7 @@ class VerifyAttendant {
 
     if (role !== 'attendant') {
       return (
-        res.status(401).json({
+        res.status(403).json({
           message: 'You are not an Attendant',
           error: true,
         })

@@ -14,7 +14,7 @@ class VerifyAdmin {
 
     if (role !== 'admin') {
       return (
-        res.status(401).json({
+        res.status(403).json({
           message: 'You are not an Admin',
           error: true,
         })
