@@ -11,7 +11,7 @@ const {
   admin, attendant,
 } = userDetails;
 const {
-  emptyField, validProduct, spacedField, updateCategory,
+  emptyField, validProduct, spacedField, updateCategory, invalidImage,
 } = productDetails;
 describe('Products Endpoint API Test', () => {
   before((done) => {
@@ -121,6 +121,17 @@ describe('Products Endpoint API Test', () => {
         expect(res.body.errors[0]).to.eql('Description is required');
         expect(res.body.errors[1]).to.eql('Description should be more than 5 words');
         expect(res.body.errors[2]).to.eql('Category is required');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+  it('it should not post product with with wrong image url', (done) => {
+    chai.request(app)
+      .post('/api/v1/products')
+      .set('Authorization', authToken)
+      .send(invalidImage)
+      .end((err, res) => {
+        expect(res.body.errors[0]).to.eql('Only Jpeg, Png or Gif is accepted image format');
         expect(res.status).to.equal(400);
         done();
       });

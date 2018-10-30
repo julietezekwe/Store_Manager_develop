@@ -27,6 +27,14 @@ const migrateSale = (id, sellerId, sales, totalPrize) => {
   pool.query(query);
 };
 
+const migrateCategory = (id, categoryName) => {
+  const query = {
+    text: 'INSERT INTO Categories(id, categoryName) VALUES($1, $2) RETURNING *',
+    values: [id, categoryName],
+  };
+  pool.query(query);
+};
+
 const sales1 = [
   { productId: 1, productName: 'red shoe', prize: 100, quantity: 2, totalPrize: 200 },
   { productId: 2, productName: 'silver shoe', prize: 500, quantity: 10, totalPrize: 5000 },
@@ -54,6 +62,11 @@ migrateSale(1, 3, JSON.stringify(sales1), 200);
 migrateSale(2, 2, JSON.stringify(sales2), 500);
 migrateSale(3, 3, JSON.stringify(sales3), 5000);
 
+migrateCategory(1, 'Flat');
+migrateCategory(2, 'Hills');
+migrateCategory(3, 'Ladies');
+
 pool.query('ALTER SEQUENCE users_id_seq RESTART WITH 100');
 pool.query('ALTER SEQUENCE sales_id_seq RESTART WITH 100');
 pool.query('ALTER SEQUENCE products_id_seq RESTART WITH 100');
+pool.query('ALTER SEQUENCE categories_id_seq RESTART WITH 100');
