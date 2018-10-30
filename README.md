@@ -60,10 +60,21 @@ stock.
 * Admin can delete a store attendant
 * Admin/store attendant can get all products
 * Admin/store attendant can get a specific product
-* Store attendant can add a sale order
-* Store attendant can add product to a category
+* Admin/store attendant can search a specific product
+* Store attendant can add sale orders
+* Store/Admin attendant can add product to a category
 * Admin can get all sale order records
 * Store attendant can view owned records
+* Store Attendant/Admin can view owned single sales records
+* Admin can add a category
+* Admin can update a category
+* Admin can delete a category
+* Admin/store attendant can get all categories
+* Admin/store attendant can get a specific category
+* Admin/store attendant can login
+* Store attendant can get personal detail
+
+
 
 
 ## How To Use
@@ -89,22 +100,35 @@ $ npm start
 
 ## API endpoints
 ```
-POST Request -> localhost:8080/api/v1/auth/createUser
-POST Request -> localhost:8080/api/v1/auth/login
-GET Request -> localhost:8080/api/v1/auth/:userId
-GET Request -> localhost:8080/api/v1/auth/users
-PUT Request -> localhost:8080/api/v1/auth/:userId
-DELETE Request -> localhost:8080/api/v1/auth/:userId
-POST Request -> localhost:8080/api/v1/products
-GET Request ->  localhost:8080/api/v1/products
-GET Request ->  localhost:8080/api/v1/products/:productId
-PUT Request ->  localhost:8080/api/v1/products/:productId
-PUT Request ->  localhost:8080/api/v1/products/:productId/category   
-DELETE Request ->  localhost:8080/api/v1/products/:productId 
-POST Request ->  localhost:8080/api/v1/sales   
-GET Request ->  localhost:8080/api/v1/sales
-GET Request -> localhost:8080/api/v1/sales/:saleId
-GET Request -> localhost:8080/api/v1/user/sales
+##USERS
+POST Request -> localhost:8000/api/v1/auth/createUser
+POST Request -> localhost:8000/api/v1/auth/login
+GET Request -> localhost:8000/api/v1/auth/:userId
+GET Request -> localhost:8000/api/v1/auth/users
+PUT Request -> localhost:8000/api/v1/auth/:userId
+DELETE Request -> localhost:8000/api/v1/auth/:userId
+
+##PRODUCTS
+POST Request -> localhost:8000/api/v1/products
+GET Request ->  localhost:8000/api/v1/products
+GET Request ->  localhost:8000/api/v1/products/:productId
+GET Request -<  localhost:8000/api/V1/products/:searchString/search
+PUT Request ->  localhost:8000/api/v1/products/:productId
+PUT Request ->  localhost:8000/api/v1/products/:productId/category   
+DELETE Request ->  localhost:8000/api/v1/products/:productId 
+
+##SALES
+POST Request ->  localhost:8000/api/v1/sales   
+GET Request ->  localhost:8000/api/v1/sales
+GET Request -> localhost:8000/api/v1/sales/:saleId
+GET Request -> localhost:8000/api/v1/user/sales
+
+##CATEGORIES
+POST Request -> localhost:8000/api/v1/categories
+GET Request -> localhost:8000/api/v1/categories
+GET Request -> localhost:8000/api/v1/categories/:categoryId
+PUT Request -> localhost:8000/api/v1/categories/:categoryId
+DELETE Request -> localhost:8000/api/v1/categories/:categoryId
 ```
 
 ## Tests

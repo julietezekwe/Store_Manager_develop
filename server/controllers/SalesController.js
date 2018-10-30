@@ -94,7 +94,7 @@ class SalesController {
         );
       }
       return (
-        res.status(401).json({ message: 'Unauthorized', error: true,
+        res.status(403).json({ message: 'You dont have access to this sale', error: true,
         })
       );
     }).catch(/* istanbul ignore next */ err => (res.status(500).json(err)));

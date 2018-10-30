@@ -26,7 +26,7 @@ const productsSalesVerify = (req, res, next) => {
       }
       if (product.rows[0].quantity < Number(quantity)) {
         return (
-          res.status(401).json({ message: `${product.rows[0].productname} quantity provided is more than in stock` })
+          res.status(403).json({ message: `${product.rows[0].productname} quantity provided is more than in stock` })
         );
       }
       totalPrize += Number(prize) * Number(quantity);

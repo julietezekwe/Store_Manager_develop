@@ -66,7 +66,6 @@ const productDetails = {
     prize: '1000',
     quantity: '100',
     min: '10',
-    category: '',
   },
   spacedField: {
     productName: '    ',
@@ -75,7 +74,6 @@ const productDetails = {
     prize: '5000',
     quantity: '100',
     min: '10',
-    category: 'flat',
   },
   validProduct: {
     productName: 'uhhh',
@@ -84,7 +82,14 @@ const productDetails = {
     prize: '5000',
     quantity: '12',
     min: '10',
-    category: 'flat',
+  },
+  updateProduct: {
+    productName: 'uhhooooh',
+    description: 'ogechi oooo mmmmm',
+    image: 'imageurl.jpg',
+    prize: '5000',
+    quantity: '12',
+    min: '10',
   },
   invalidImage: {
     productName: 'uhhh',
@@ -93,10 +98,12 @@ const productDetails = {
     prize: '5000',
     quantity: '12',
     min: '10',
-    category: 'flat',
   },
   updateCategory: {
-    category: 'flat',
+    categoryName: 'Flat',
+  },
+  wrongCategory: {
+    categoryName: 'flatosss',
   },
 
 };
