@@ -12,7 +12,6 @@ class SalesValidator {
     req.check('sales', 'Please provide products to sale').isArray().isLength({ min: 1 });
     req.checkBody('sales.*.productId', 'Product ID is required').exists();
     req.checkBody('sales.*.productName', 'Product Name is required').exists();
-    req.checkBody('sales.*.prize', 'Product Prize is required and Must be an Integer').notEmpty().isInt();
     req.checkBody('sales.*.quantity', 'Product Quantity is required and Must be an Integer').exists().isInt();
     const errors = req.validationErrors();
     const validationErrors = [];
@@ -26,9 +25,9 @@ class SalesValidator {
     let error = false;
     sales.forEach((sale) => {
       const {
-        productId, productName, prize, quantity,
+        productId, productName, quantity,
       } = sale;
-      const fieldValues = [productId, productName, prize, quantity];
+      const fieldValues = [productId, productName, quantity];
       fieldValues.map((fieldValue) => {
         if (fieldValue.toString().trim() === '') {
           error = true;

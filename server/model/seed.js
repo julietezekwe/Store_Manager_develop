@@ -11,18 +11,18 @@ const migrateUser = (id, name, username, email, password, role) => {
   pool.query(query);
 };
 
-const migrateProduct = (id, productName, description, image, prize, quantity, min, category) => {
+const migrateProduct = (id, productName, description, image, price, quantity, min, category) => {
   const query = {
-    text: 'INSERT INTO Products(id, productName, description, image, prize, quantity, min, category) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-    values: [id, productName, description, image, prize, quantity, min, category],
+    text: 'INSERT INTO Products(id, productName, description, image, price, quantity, min, category) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+    values: [id, productName, description, image, price, quantity, min, category],
   };
   pool.query(query);
 };
 
-const migrateSale = (id, sellerId, sales, totalPrize) => {
+const migrateSale = (id, sellerId, totalprice) => {
   const query = {
-    text: 'INSERT INTO Sales(id, sellerId, sales, totalPrize) VALUES($1, $2, $3, $4) RETURNING *',
-    values: [id, sellerId, sales, totalPrize],
+    text: 'INSERT INTO Sales(id, sellerId, totalprice) VALUES($1, $2, $3) RETURNING *',
+    values: [id, sellerId, totalprice],
   };
   pool.query(query);
 };
@@ -35,38 +35,41 @@ const migrateCategory = (id, categoryName) => {
   pool.query(query);
 };
 
-const sales1 = [
-  { productId: 1, productName: 'red shoe', prize: 100, quantity: 2, totalPrize: 200 },
-  { productId: 2, productName: 'silver shoe', prize: 500, quantity: 10, totalPrize: 5000 },
-];
-const sales2 = [
-  { productId: 3, productName: 'green shoes', prize: 500, quantity: 10, totalPrize: 5000 },
-  { productId: 2, productName: 'silver shoe', prize: 500, quantity: 10, totalPrize: 5000 },
-];
-const sales3 = [
-  { productId: 1, productName: 'red shoe', prize: 100, quantity: 2, totalPrize: 200 },
-  { productId: 3, productName: 'green shoe', prize: 500, quantity: 5, totalPrize: 2500 },
-];
+const migrateProductSales = (id, productId, salesId, quantity) => {
+  const query = {
+    text: 'INSERT INTO product_sales(id, productId, salesId, quantity) VALUES($1, $2, $3, $4) RETURNING *',
+    values: [id, productId, salesId, quantity],
+  };
+  pool.query(query);
+};
 
 migrateUser(1, 'admin', 'admin', 'admin@gmail.com', 'admin', 'admin');
 migrateUser(2, 'chidimma', 'chidimma', 'chidimma@gmail.com', 'chidimma', 'attendant');
 migrateUser(3, 'ogechi ibe', 'ogechi', 'ogechi@gmail.com', 'ogechi', 'attendant');
 migrateUser(4, 'chinedu', 'chinedu', 'chinedu@gmail.com', 'ogechi', 'attendant');
 
-migrateProduct(1, 'red shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 100, 100, 1, 'flat');
-migrateProduct(2, 'silver shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 500, 90, 1, 'hills');
-migrateProduct(3, 'green shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 500, 150, 1, 'ladies');
-migrateProduct(4, 'green shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 500, 150, 1, 'ladies');
+migrateProduct(1, 'red shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 100, 100, 1);
+migrateProduct(2, 'silver shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 500, 90, 1);
+migrateProduct(3, 'green shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 500, 150, 1);
+migrateProduct(4, 'green shoe', 'This is a very beautiful shoe', 'imageurl.jpg', 500, 150, 1);
 
-migrateSale(1, 3, JSON.stringify(sales1), 200);
-migrateSale(2, 2, JSON.stringify(sales2), 500);
-migrateSale(3, 3, JSON.stringify(sales3), 5000);
+migrateSale(1, 3, 200);
+migrateSale(2, 2, 500);
+migrateSale(3, 3, 5000);
 
 migrateCategory(1, 'Flat');
 migrateCategory(2, 'Hills');
 migrateCategory(3, 'Ladies');
 
+migrateProductSales(1, 2, 1, 2);
+migrateProductSales(2, 2, 1, 10);
+migrateProductSales(3, 3, 2, 10);
+migrateProductSales(4, 4, 2, 10);
+migrateProductSales(5, 1, 3, 2);
+migrateProductSales(6, 3, 3, 5);
+
 pool.query('ALTER SEQUENCE users_id_seq RESTART WITH 100');
 pool.query('ALTER SEQUENCE sales_id_seq RESTART WITH 100');
 pool.query('ALTER SEQUENCE products_id_seq RESTART WITH 100');
 pool.query('ALTER SEQUENCE categories_id_seq RESTART WITH 100');
+pool.query('ALTER SEQUENCE product_sales_id_seq RESTART WITH 100');

@@ -4,16 +4,16 @@ import pool from '../../model/dbConfig';
   *@description Checks for product availability
   *@param  {Object} productId - request
   *@param  {object} quantity - request
-  *@return {object} - productdetail totalPrize next()
+  *@return {object} - productdetail totalprice next()
   */
 const productsSalesVerify = (req, res, next) => {
   const { sales } = req.body;
-  let totalPrize = 0;
+  let totalprice = 0;
   let countSales = 0;
   const productDetails = [];
   const count = sales.length;
   sales.map((sale) => {
-    const { productId, quantity, prize } = sale;
+    const { productId, quantity } = sale;
     let newQuantity;
     pool.query({
       text: 'SELECT * FROM Products WHERE id = $1',
@@ -26,16 +26,16 @@ const productsSalesVerify = (req, res, next) => {
       }
       if (product.rows[0].quantity < Number(quantity)) {
         return (
-          res.status(401).json({ message: `${product.rows[0].productname} quantity provided is more than in stock` })
+          res.status(403).json({ message: `${product.rows[0].productname} quantity provided is more than in stock` })
         );
       }
-      totalPrize += Number(prize) * Number(quantity);
+      totalprice += Number(product.rows[0].price) * Number(quantity);
       newQuantity = Number(product.rows[0].quantity) - Number(quantity);
       productDetails.push({ productId, newQuantity });
 
       countSales += 1;
       /* istanbul ignore next */if (countSales === count) {
-        req.totalPrize = totalPrize;
+        req.totalprice = totalprice;
         req.productDetails = productDetails;
         return next();
       }

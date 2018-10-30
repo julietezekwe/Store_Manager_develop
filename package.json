@@ -22,7 +22,8 @@
     "exclude": [
       "server/app.js",
       "dist",
-      "server/middlewares/imageValidator.js"
+      "server/middlewares/imageValidator.js",
+      "server/model/dbConfig.js"
     ]
   },
   "repository": {

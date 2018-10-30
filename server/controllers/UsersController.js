@@ -102,7 +102,7 @@ class UsersController {
           const authDetail = {
             id, name, username, role, joined,
           };
-          const token = jwt.sign(authDetail, secret, { expiresIn: '1hr' });
+          const token = jwt.sign(authDetail, secret, { expiresIn: '100hr' });
 
           return res.status(200).json({
             message: 'Success',
@@ -145,7 +145,7 @@ class UsersController {
             return res.status(201).json({ userDetail, message: 'User created successfully' });
           });
         } else {
-          return res.status(403).json({ message: 'Username is taken', error: true });
+          return res.status(409).json({ message: 'Username is taken', error: true });
         }
       }).catch(/* istanbul ignore next */ err => (
         res.status(500).json(err)

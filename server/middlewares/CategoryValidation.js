@@ -10,8 +10,6 @@ class CategoryValidator {
    */
 
   static addCategoryValidator(req, res, next) {
-    const { categoryName } = req.body;
-
     req.check('categoryName', 'Category Name is required').notEmpty();
     const errors = req.validationErrors();
     const validationErrors = [];
@@ -21,12 +19,14 @@ class CategoryValidator {
         errors: validationErrors,
       });
     }
+    const categoryName = req.body.categoryName;
     if (categoryName.trim() === '') {
       return res.status(400).json({
         message: 'Please fill in all fields',
         error: true,
       });
     }
+    req.body.categoryName = categoryName.replace(/\s{2,}/g, ' ').trim();
     return next();
   }
 }
