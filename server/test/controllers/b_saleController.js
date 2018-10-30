@@ -12,7 +12,7 @@ const {
   admin, attendant, attendant2,
 } = userDetails;
 const {
-  emptyField, validSale, invalidSale, invalidSale2,
+  emptyField, emptyField1, validSale, invalidSale, invalidSale2,
 } = saleDetails;
 describe('Sales Endpoint API Test', () => {
   before((done) => {
@@ -108,17 +108,17 @@ describe('Sales Endpoint API Test', () => {
         done();
       });
   });
-  // it('it should not post sales with only spaces in the field', (done) => {
-  //   chai.request(app)
-  //     .post('/api/v1/sales')
-  //     .set('Authorization', authToken2)
-  //     .send(spacedField)
-  //     .end((err, res) => {
-  //       expect(res.body.message).to.eql('Please fill in all fields');
-  //       expect(res.status).to.equal(400);
-  //       done();
-  //     });
-  // });
+  it('it should not post sales with spaces in the field', (done) => {
+    chai.request(app)
+      .post('/api/v1/sales')
+      .set('Authorization', authToken2)
+      .send(emptyField1)
+      .end((err, res) => {
+        expect(res.body.message).to.eql('Please fill in all fields');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
   it('it should not post sales if user is not an attendant', (done) => {
     chai.request(app)
       .post('/api/v1/sales')

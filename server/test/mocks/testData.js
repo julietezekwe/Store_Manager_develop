@@ -86,6 +86,15 @@ const productDetails = {
     min: '10',
     category: 'flat',
   },
+  invalidImage: {
+    productName: 'uhhh',
+    description: 'ogechi oooo mmmmm',
+    image: 'imageurl',
+    prize: '5000',
+    quantity: '12',
+    min: '10',
+    category: 'flat',
+  },
   updateCategory: {
     category: 'flat',
   },
@@ -95,6 +104,14 @@ const productDetails = {
 const saleDetails = {
   emptyField: {
     sales: ' ',
+  },
+  emptyField1: {
+    sales: [
+      { productId: '  ',
+        productName: '   ',
+        prize: '10000',
+        quantity: '2' },
+    ],
   },
   validSale: {
     sales: [
@@ -122,5 +139,17 @@ const saleDetails = {
   },
 };
 
+const categoryDetails = {
+  emptyField: {
+    categoryName: '',
+  },
+  validCategory: {
+    categoryName: 'Mens',
+  },
+  spacedField: {
+    categoryName: '   ',
+  },
+};
 
-export { userDetails, productDetails, saleDetails };
+
+export { userDetails, productDetails, saleDetails, categoryDetails };

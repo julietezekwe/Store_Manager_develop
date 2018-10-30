@@ -121,7 +121,7 @@ class UsersController {
   }
   /**
   *Creats user
-  *@description Creates a new product
+  *@description Creates a new user
   *@static
   *@param  {Object} req - request
   *@param  {object} res - response
@@ -154,7 +154,7 @@ class UsersController {
 
   /**
   *Update user
-  *@description Creates a new product
+  *@description Updates a category
   *@static
   *@param  {Object} req - request
   *@param  {object} res - response
