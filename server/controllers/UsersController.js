@@ -102,7 +102,7 @@ class UsersController {
           const authDetail = {
             id, name, username, role, joined,
           };
-          const token = jwt.sign(authDetail, secret, { expiresIn: '1hr' });
+          const token = jwt.sign(authDetail, secret, { expiresIn: '100hr' });
 
           return res.status(200).json({
             message: 'Success',

@@ -40,12 +40,7 @@ class ProductsController {
 
   static addProduct(req, res) {
     const {
-      productName,
-      description,
-      image,
-      prize,
-      quantity,
-      min,
+      productName, description, image, price, quantity, min,
     } = req.body;
     let productDetail;
     pool.query({
@@ -56,8 +51,8 @@ class ProductsController {
         return res.status(409).json({ message: 'This product already exist, kindly update' });
       }
       const query = {
-        text: 'INSERT INTO Products(productName, description, image, prize, quantity, min) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
-        values: [productName, description, image, prize, quantity, min],
+        text: 'INSERT INTO Products(productName, description, image, price, quantity, min) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
+        values: [productName, description, image, price, quantity, min],
       };
       pool.query(query).then((product) => {
         productDetail = product.rows;
@@ -122,20 +117,28 @@ class ProductsController {
   */
 
   static updateProduct(req, res) {
-    const { productName, description, image, prize, quantity, min } = req.body;
+    const { productName, description, image, price, quantity, min } = req.body;
     const { productId } = req.params;
     let productDetail;
 
     pool.query({ text: 'SELECT id from Products where id = $1', values: [productId] })
       .then((found) => {
-        if (found.rowCount === 1) {
-          const query = {
-            text: 'UPDATE Products SET productName = $1, description = $2, image = $3, prize = $4, quantity = $5, min = $6 WHERE id = $7 RETURNING *',
-            values: [productName, description, image, prize, quantity, min, productId],
-          };
-          pool.query(query).then((product) => {
-            productDetail = product.rows[0];
-            return res.status(201).json({ productDetail, message: 'Successfully updated product' });
+        if (found.rowCount) {
+          pool.query({
+            text: 'SELECT productName FROM Products WHERE LOWER(productName) = LOWER($1)',
+            values: [productName],
+          }).then((foundOne) => {
+            if (foundOne.rowCount) {
+              return res.status(409).json({ message: 'This product already exist, kindly update' });
+            }
+            const query = {
+              text: 'UPDATE Products SET productName = $1, description = $2, image = $3, price = $4, quantity = $5, min = $6 WHERE id = $7 RETURNING *',
+              values: [productName, description, image, price, quantity, min, productId],
+            };
+            pool.query(query).then((product) => {
+              productDetail = product.rows[0];
+              return res.status(201).json({ productDetail, message: 'Successfully updated product' });
+            });
           });
         } else {
           return res.status(404).json({ message: 'Product does not exist', error: true });

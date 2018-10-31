@@ -217,6 +217,17 @@ describe('Products Endpoint API Test', () => {
           done();
         });
     });
+    it('it should not update product if name already exist', (done) => {
+      chai.request(app)
+        .put('/api/v1/products/2')
+        .set('Authorization', authToken)
+        .send(validProduct)
+        .end((err, res) => {
+          expect(res.body.message).to.eql('This product already exist, kindly update');
+          expect(res.status).to.equal(409);
+          done();
+        });
+    });
     it('it should not update product category  if category does not exist', (done) => {
       chai.request(app)
         .put('/api/v1/products/1/category')

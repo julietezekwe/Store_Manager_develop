@@ -67,6 +67,16 @@ describe('Sales Endpoint API Test', () => {
           done();
         });
     });
+    it('it should not get a sales that does not exist', (done) => {
+      chai.request(app)
+        .get('/api/v1/sales/90')
+        .set('Authorization', authToken2)
+        .end((err, res) => {
+          expect(res.body.message).to.eql('This sale does not exist');
+          expect(res.status).to.equal(404);
+          done();
+        });
+    });
     it('it should not get a sales if user is neither admin nor sale owner', (done) => {
       chai.request(app)
         .get('/api/v1/sales/1')
