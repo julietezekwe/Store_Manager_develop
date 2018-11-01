@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
 import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import routes from './routes/index';
 import imageValidator from './middlewares/imageValidator';
 
@@ -11,6 +12,7 @@ const swaggerDocument = require('../swagger.json');
 // Set up the express app
 const app = express();
 
+app.use(cors());
 // Parse incoming requests data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
