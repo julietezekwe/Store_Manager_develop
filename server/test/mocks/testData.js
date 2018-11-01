@@ -23,6 +23,14 @@ const userDetails = {
     password: 'ogechi',
     role: 'attendant',
   },
+  update: {
+    id: 4,
+    name: 'chinedu Eze',
+    username: 'chinedu',
+    email: 'chinedu@gmail.com',
+    password: 'ogechi',
+    role: 'attendant',
+  },
   newAttendant: {
     name: 'Seyi Ibezim',
     username: 'ibezim',
@@ -55,67 +63,100 @@ const productDetails = {
     productName: 'Red Shoes',
     description: '',
     image: 'imageurl.jpg',
-    prize: '1000',
+    price: '1000',
     quantity: '100',
     min: '10',
-    category: '',
   },
   spacedField: {
-    productName: 'uhhh',
+    productName: '    ',
     description: 'ogechi oooo mmmmm',
     image: 'imageurl.jpg',
-    prize: '5000',
-    quantity: '  ',
+    price: '5000',
+    quantity: '100',
     min: '10',
-    category: 'flat',
   },
   validProduct: {
     productName: 'uhhh',
     description: 'ogechi oooo mmmmm',
     image: 'imageurl.jpg',
-    prize: '5000',
+    price: '5000',
     quantity: '12',
     min: '10',
-    category: 'flat',
+  },
+  updateProduct: {
+    productName: 'uhhooooh',
+    description: 'ogechi oooo mmmmm',
+    image: 'imageurl.jpg',
+    price: '5000',
+    quantity: '12',
+    min: '10',
+  },
+  invalidImage: {
+    productName: 'uhhh',
+    description: 'ogechi oooo mmmmm',
+    image: 'imageurl',
+    price: '5000',
+    quantity: '12',
+    min: '10',
   },
   updateCategory: {
-    category: 'flat',
+    categoryName: 'Flat',
+  },
+  wrongCategory: {
+    categoryName: 'flatosss',
   },
 
 };
 
 const saleDetails = {
   emptyField: {
-    productId: '',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '2',
+    sales: ' ',
   },
-  spacedField: {
-    productId: '    ',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '2',
+  emptyField1: {
+    sales: [
+      { productId: '  ',
+        productName: '   ',
+        price: '10000',
+        quantity: '2' },
+    ],
   },
   validSale: {
-    productId: '3',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '2',
+    sales: [
+      { productId: '3',
+        productName: 'Sneakers',
+        price: '10000',
+        quantity: '2' },
+    ],
   },
   invalidSale: {
-    productId: '30',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '2',
+    sales: [
+      { productId: '30',
+        productName: 'Sneakers',
+        price: '1000',
+        quantity: '2' },
+    ],
   },
   invalidSale2: {
-    productId: '2',
-    productName: 'Sneakers',
-    prize: '1000',
-    quantity: '200',
+    sales: [
+      { productId: '3',
+        productName: 'Sneakers',
+        price: '10000',
+        quantity: '20000' },
+    ],
+  },
+};
+
+const categoryDetails = {
+  emptyField: {
+    categoryName: '',
+  },
+  validCategory: {
+    categoryName: 'Mens',
+  },
+  spacedField: {
+    categoryName: '   ',
   },
 };
 
 
-export { userDetails, productDetails, saleDetails };
+export { userDetails, productDetails, saleDetails, categoryDetails };

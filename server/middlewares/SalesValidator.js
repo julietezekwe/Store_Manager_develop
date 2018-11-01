@@ -9,10 +9,10 @@ class SalesValidator {
  * @memberof SalesValidator
  */
   static addSalesValidator(req, res, next) {
-    req.check('productId', 'Product ID is required').notEmpty();
-    req.check('productName', 'Product name is required').notEmpty();
-    req.check('prize', 'Unit Prize is required').notEmpty();
-    req.check('quantity', 'Quantity is required').notEmpty();
+    req.check('sales', 'Please provide products to sale').isArray().isLength({ min: 1 });
+    req.checkBody('sales.*.productId', 'Product ID is required').exists();
+    req.checkBody('sales.*.productName', 'Product Name is required').exists();
+    req.checkBody('sales.*.quantity', 'Product Quantity is required and Must be an Integer').exists().isInt();
     const errors = req.validationErrors();
     const validationErrors = [];
     if (errors) {
@@ -21,15 +21,18 @@ class SalesValidator {
         errors: validationErrors,
       });
     }
+    const { sales } = req.body;
     let error = false;
-    const {
-      productId, productName, prize, quantity,
-    } = req.body;
-    const fieldValues = [productId, productName, prize, quantity];
-    fieldValues.map((fieldValue) => {
-      if (fieldValue.toString().trim() === '') {
-        error = true;
-      }
+    sales.forEach((sale) => {
+      const {
+        productId, productName, quantity,
+      } = sale;
+      const fieldValues = [productId, productName, quantity];
+      fieldValues.map((fieldValue) => {
+        if (fieldValue.toString().trim() === '') {
+          error = true;
+        }
+      });
     });
     if (error) {
       return res.status(400).json({

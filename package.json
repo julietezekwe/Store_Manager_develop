@@ -8,7 +8,7 @@
   "main": "app.js",
   "scripts": {
     "build": "babel server -d dist/server ",
-    "test": "nyc mocha --exit --timeout 10000 ./server/test/**/*.js --compilers js:babel-core/register",
+    "test": "npm run migration && nyc mocha --exit --timeout 10000 ./server/test/**/*.js --compilers js:babel-core/register",
     "babel-node": "babel-node app --presets=env",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
@@ -21,8 +21,9 @@
   "nyc": {
     "exclude": [
       "server/app.js",
-      "server/middlewares/customValidator.js",
-      "dist"
+      "dist",
+      "server/middlewares/imageValidator.js",
+      "server/model/dbConfig.js"
     ]
   },
   "repository": {
@@ -44,6 +45,7 @@
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "chai-http": "^4.2.0",
+    "cors": "^2.8.4",
     "coveralls": "^3.0.2",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",

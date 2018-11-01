@@ -3,20 +3,23 @@ import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
 import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import routes from './routes/index';
-import customValidator from './middlewares/customValidator';
+import imageValidator from './middlewares/imageValidator';
 
 const swaggerDocument = require('../swagger.json');
 
 // Set up the express app
 const app = express();
 
+app.use(cors());
 // Parse incoming requests data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Validator to check requests
-app.use(expressValidator(customValidator));
+app.use(expressValidator(imageValidator));
+
 
 // Versioning and Routes
 app.use('/api/v1/', routes);

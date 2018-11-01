@@ -1,5 +1,4 @@
-import salesModel from '../dummyModel/salesModel';
-import productsSales from './helpers/productsSales';
+import pool from '../model/dbConfig';
 
 /**
  *
@@ -19,29 +18,32 @@ class SalesController {
 
   static addSaleRecord(req, res) {
     const sellerId = req.authData.id;
-    const { productId, productName, prize, quantity } = req.body;
-    const productDetail = productsSales(productId, quantity);
-    if (productDetail === undefined) {
-      return (
-        res.status(404).json({ message: 'This product does not exist' })
-      );
-    }
-    if (productDetail === 'The quantity is more than in stock') {
-      return (
-        res.status(401).json({ message: productDetail })
-      );
-    }
-    const totalPrize = Number(prize) * Number(quantity);
-    const id = salesModel.length + 1;
-    const saleDetail = {
-      id, sellerId, productId, productName, prize, quantity, totalPrize, created: new Date(),
+    const { sales } = req.body;
+    const { totalprice } = req;
+    let saleId;
+    const productCount = sales.length;
+    let count = 0;
+    const query = {
+      text: 'INSERT INTO Sales(sellerId, totalprice) VALUES($1, $2) RETURNING *',
+      values: [sellerId, totalprice],
     };
-    salesModel.push(saleDetail);
-    return (
-      res.status(201).json({
-        saleDetail, message: 'Successfully added sale(s)',
-      })
-    );
+    pool.query(query).then((sale) => {
+      saleId = sale.rows[0].id;
+      sales.map((product) => {
+        pool.query({
+          text: 'INSERT INTO product_sales(productId, salesId, quantity) VALUES($1, $2, $3)',
+          values: [product.productId, saleId, product.quantity],
+        });
+        count += 1;
+        if (count === productCount) {
+          return (
+            res.status(201).json({
+              message: 'Successfully added sale(s)',
+            })
+          );
+        }
+      });
+    }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
   }
   /**
     *Get all sales records
@@ -54,13 +56,18 @@ class SalesController {
     */
 
   static getAllSalesRecords(req, res) {
-    return (
-      res.status(200).json({
-        salesModel,
-        message: 'Success',
-        error: false,
-      })
-    );
+    let SalesModel;
+    const query = { text: 'SELECT ps.productId, p.productName, p.description, ps.quantity, p.price FROM product_sales AS ps JOIN Products AS p ON ps.productId = p.id' };
+    pool.query(query).then((Sales) => {
+      SalesModel = Sales.rows;
+      return (
+        res.status(200).json({
+          SalesModel,
+          message: 'Success',
+          error: false,
+        })
+      );
+    }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
   }
   /**
   *Get a sale record
@@ -75,27 +82,38 @@ class SalesController {
   static getSaleRecord(req, res) {
     const { id, role } = req.authData;
     const { salesId } = req.params;
-    let validUser = false;
     let saleDetail;
-    salesModel.map((sale) => {
-      if (sale.id === Number(salesId) && (sale.sellerId === Number(id) || role === 'admin')) {
-        saleDetail = sale;
-        validUser = true;
+    let query;
+    pool.query({ text: 'SELECT * FROM Sales WHERE id = $1', values: [salesId] }).then((saleId) => {
+      if (!saleId.rowCount) {
+        return res.status(404).json({ message: 'This sale does not exist' });
       }
-      return false;
+      /* istanbul ignore next */ if (role === 'admin') {
+        query = {
+          text: 'SELECT ps.productId, p.productName, p.description, ps.quantity, p.price FROM product_sales as ps JOIN Products as p ON ps.productId = p.id WHERE ps.salesId = $1',
+          values: [salesId],
+        };
+      } else {
+        query = {
+          text: 'SELECT * FROM Sales as s JOIN product_sales as ps ON s.id = ps.salesId WHERE s.id = $1 AND s.sellerId = $2',
+          values: [salesId, id],
+        };
+      }
+      pool.query(query).then((sale) => {
+        if (sale.rowCount > 0) {
+          saleDetail = sale.rows;
+          return (
+            res.status(200).json({
+              saleDetail, message: 'Success', error: false,
+            })
+          );
+        }
+        return (
+          res.status(403).json({ message: 'You dont have access to this sale', error: true,
+          })
+        );
+      }).catch(/* istanbul ignore next */ err => (res.status(500).json(err)));
     });
-
-    if (validUser) {
-      return (
-        res.status(200).json({
-          saleDetail, message: 'Success', error: false,
-        })
-      );
-    }
-    return (
-      res.status(401).json({ message: 'Unauthorized', error: true,
-      })
-    );
   }
   /**
   *Get all attendants sales records
@@ -109,29 +127,29 @@ class SalesController {
 
   static getAttendantSaleRecord(req, res) {
     const { id } = req.authData;
-    const saleDetail = [];
-    salesModel.map((sale) => {
-      if (sale.sellerId === Number(id)) {
-        saleDetail.push(sale);
+    let saleDetail;
+    const query = {
+      text: 'SELECT * FROM product_sales AS ps JOIN Sales as s ON ps.salesId = s.id JOIN Products as p ON p.id = ps.productId WHERE s.sellerId = $1',
+      values: [id],
+    };
+    pool.query(query).then((attendantsSale) => {
+      if (attendantsSale.rowCount > 0) {
+        saleDetail = attendantsSale.rows;
+        return (
+          res.status(200).json({
+            saleDetail,
+            message: 'Success',
+            error: false,
+          })
+        );
       }
-      return false;
-    });
-
-    if (saleDetail.length > 1) {
       return (
-        res.status(200).json({
-          saleDetail,
-          message: 'Success',
-          error: false,
+        res.status(404).json({
+          message: 'No sales made yet',
+          error: true,
         })
       );
-    }
-    return (
-      res.status(404).json({
-        message: 'No sales made yet',
-        error: true,
-      })
-    );
+    }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
   }
 }
 

@@ -41,6 +41,8 @@ class UserValidator {
         error: true,
       });
     }
+    req.body.username = username.replace(/\s{2,}/g, '').trim().toLowerCase();
+    req.body.password = password.replace(/\s{2,}/g, '').trim().toLowerCase();
     return next();
   }
   /**
@@ -54,6 +56,7 @@ class UserValidator {
  */
 
   static userLoginChecker(req, res, next) {
+    const { username, password } = req.body;
     req.check('username', 'Username is required').notEmpty();
     req.check('password', 'Password is required').notEmpty();
     req
@@ -68,6 +71,8 @@ class UserValidator {
         errors: validationErrors,
       });
     }
+    req.body.username = username.replace(/\s{2,}/g, '').trim().toLowerCase();
+    req.body.password = password.replace(/\s{2,}/g, '').trim().toLowerCase();
     return next();
   }
 }
