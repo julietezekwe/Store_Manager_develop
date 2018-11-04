@@ -27,7 +27,7 @@ const userDetails = {
     id: 4,
     name: 'chinedu Eze',
     username: 'chinedu',
-    email: 'chinedu@gmail.com',
+    email: 'chinedu1@gmail.com',
     password: 'ogechi',
     role: 'attendant',
   },
@@ -37,6 +37,13 @@ const userDetails = {
     password: 'seyiii',
     role: 'attendant',
     email: 'seyi@gmail.com',
+  },
+  newAttendant3: {
+    name: 'Seyi Ibezim',
+    username: 'ibezim',
+    password: 'seyiii',
+    role: 'manager',
+    email: 'seyi2@gmail.com',
   },
   emptyField: {
     name: '',
@@ -53,7 +60,7 @@ const userDetails = {
     email: 'seyi@gmail.com',
   },
   wrongPassword: {
-    username: 'ogechi',
+    email: 'ogechi@gmail.com',
     password: 'juljnjbx',
   },
 };
@@ -116,6 +123,18 @@ const saleDetails = {
     sales: [
       { productId: '  ',
         productName: '   ',
+        price: '10000',
+        quantity: '2' },
+    ],
+  },
+  multipleProduct: {
+    sales: [
+      { productId: '3',
+        productName: 'Sneakers',
+        price: '10000',
+        quantity: '2' },
+      { productId: '3',
+        productName: 'Sneakers',
         price: '10000',
         quantity: '2' },
     ],

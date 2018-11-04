@@ -137,7 +137,7 @@ class ProductsController {
             };
             pool.query(query).then((product) => {
               productDetail = product.rows[0];
-              return res.status(201).json({ productDetail, message: 'Successfully updated product' });
+              return res.status(200).json({ productDetail, message: 'Successfully updated product' });
             });
           });
         } else {
@@ -193,7 +193,6 @@ class ProductsController {
     const { categoryName } = req.body;
     const { productId } = req.params;
     let productDetail;
-
     pool.query({ text: 'SELECT id from Products where id = $1', values: [productId] })
       .then((found) => {
         if (found.rowCount === 1) {
@@ -203,7 +202,7 @@ class ProductsController {
           };
           pool.query(query).then((product) => {
             productDetail = product.rows[0];
-            return res.status(201).json({ productDetail, message: 'Successfully updated product category' });
+            return res.status(200).json({ productDetail, message: 'Successfully updated product category' });
           });
         } else {
           return res.status(404).json({ message: 'Product does not exist', error: true });

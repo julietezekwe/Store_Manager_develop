@@ -91,16 +91,16 @@ class UsersController {
   */
 
   static loginUser(req, res) {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     let userDetail;
-    const query = { text: 'SELECT * FROM users Where username = $1', values: [username] };
+    const query = { text: 'SELECT * FROM users Where email = $1', values: [email] };
     pool.query(query).then((user) => {
       if (user.rowCount) {
         userDetail = user.rows[0];
         if (bcrypt.compareSync(password, userDetail.password)) {
-          const { id, name, role, joined } = userDetail;
+          const { id, name, username, role, joined } = userDetail;
           const authDetail = {
-            id, name, username, role, joined,
+            id, name, username, email, role, joined,
           };
           const token = jwt.sign(authDetail, secret, { expiresIn: '100hr' });
 
@@ -133,7 +133,9 @@ class UsersController {
     const { name, username, email, password, role } = req.body;
     let userDetail;
     const hash = bcrypt.hashSync(password, 10);
-    pool.query({ text: 'SELECT username from Users where username = $1', values: [username] })
+    const roles = ['admin', 'attendant'].includes(role);
+    if (!roles) return res.status(404).json({ message: 'This role does not exist' });
+    pool.query({ text: 'SELECT email from Users where email = $1', values: [email] })
       .then((found) => {
         if (found.rowCount === 0) {
           const query = {
@@ -145,7 +147,7 @@ class UsersController {
             return res.status(201).json({ userDetail, message: 'User created successfully' });
           });
         } else {
-          return res.status(409).json({ message: 'Username is taken', error: true });
+          return res.status(409).json({ message: 'email is taken', error: true });
         }
       }).catch(/* istanbul ignore next */ err => (
         res.status(500).json(err)
@@ -167,16 +169,22 @@ class UsersController {
     const { userId } = req.params;
     let userDetail;
     const hash = bcrypt.hashSync(password, 10);
-    pool.query({ text: 'SELECT id from Users where id = $1', values: [userId] })
+    pool.query({ text: 'SELECT id FROM Users WHERE id = $1', values: [userId] })
       .then((found) => {
         if (found.rowCount === 1) {
-          const query = {
-            text: 'UPDATE Users SET name = $1, username = $2, email = $3, password = $4, role = $5 WHERE id = $6 RETURNING *',
-            values: [name, username, email, hash, role, userId],
-          };
-          pool.query(query).then((user) => {
-            userDetail = user.rows[0];
-            return res.status(201).json({ userDetail, message: 'User updated successfully' });
+          pool.query({
+            text: 'SELECT email FROM Users WHERE email = $1',
+            values: [email],
+          }).then((foundEmail) => {
+            if (foundEmail.rowCount) return res.status(409).json({ message: 'This email is taken' });
+            const query = {
+              text: 'UPDATE Users SET name = $1, username = $2, email = $3, password = $4, role = $5 WHERE id = $6 RETURNING *',
+              values: [name, username, email, hash, role, userId],
+            };
+            pool.query(query).then((user) => {
+              userDetail = user.rows[0];
+              return res.status(200).json({ userDetail, message: 'User updated successfully' });
+            });
           });
         } else {
           return res.status(404).json({ message: 'User does not exist', error: true });
