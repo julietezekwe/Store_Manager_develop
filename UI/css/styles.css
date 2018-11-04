@@ -142,7 +142,7 @@ select{
   width: 100%;
   height: 350px;
   margin:0;
-  background-image: url("../img/banner1.jpeg");
+  background-image: url("../img/banner.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
 }

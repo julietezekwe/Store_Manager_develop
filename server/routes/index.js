@@ -5,6 +5,7 @@ import SalesController from '../controllers/SalesController';
 import productsSalesVerify from '../controllers/helpers/productsSalesVerify';
 import productCategoryVerify from '../controllers/helpers/productCategoryVerify';
 import productUpdate from '../controllers/helpers/productUpdate';
+import uniqueProductChecker from '../controllers/helpers/salesproductCheck';
 import CategoriesController from '../controllers/CategoriesController';
 import ParamsChecker from '../middlewares/ParamsChecker';
 import UserValidator from '../middlewares/UserValidator';
@@ -46,12 +47,12 @@ const { addCategoryValidator } = CategoryValidator;
 const router = express.Router();
 
 // user endpoints
-router.get('/auth/users', authenticate, isAdmin, getAllUsers);
-router.get('/auth/:userId', authenticate, idChecker, getUser);
+router.get('/users', authenticate, isAdmin, getAllUsers);
+router.get('/users/:userId', authenticate, idChecker, getUser);
 router.post('/auth/createUser', authenticate, isAdmin, createUserChecker, createUser);
-router.put('/auth/:userId', authenticate, isAdmin, idChecker, createUserChecker, updateUser);
+router.put('/users/:userId', authenticate, isAdmin, idChecker, createUserChecker, updateUser);
 router.post('/auth/login', userLoginChecker, loginUser);
-router.delete('/auth/:userId', idChecker, authenticate, isAdmin, deleteUser);
+router.delete('/users/:userId', idChecker, authenticate, isAdmin, deleteUser);
 
 // products endpoints
 router.post('/products', authenticate, isAdmin, addProductValidator, addProduct);
@@ -63,7 +64,7 @@ router.delete('/products/:productId', idChecker, authenticate, isAdmin, deletePr
 router.get('/products/:searchString/search', authenticate, searchProduct);
 
 // sales record enpoints
-router.post('/sales', authenticate, isAttendant, addSalesValidator, productsSalesVerify, productUpdate, addSaleRecord);
+router.post('/sales', authenticate, isAttendant, addSalesValidator, uniqueProductChecker, productsSalesVerify, productUpdate, addSaleRecord);
 router.get('/sales', authenticate, isAdmin, getAllSalesRecords);
 router.get('/sales/:salesId', idChecker, authenticate, getSaleRecord);
 router.get('/user/sales', authenticate, getAttendantSaleRecord);

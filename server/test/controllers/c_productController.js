@@ -191,7 +191,7 @@ describe('Products Endpoint API Test', () => {
         .send(updateProduct)
         .end((err, res) => {
           expect(res.body.message).to.eql('Successfully updated product');
-          expect(res.status).to.equal(201);
+          expect(res.status).to.equal(200);
           done();
         });
     });
@@ -213,7 +213,7 @@ describe('Products Endpoint API Test', () => {
         .send(updateCategory)
         .end((err, res) => {
           expect(res.body.message).to.eql('Successfully updated product category');
-          expect(res.status).to.equal(201);
+          expect(res.status).to.equal(200);
           done();
         });
     });

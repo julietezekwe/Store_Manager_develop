@@ -8,7 +8,7 @@ let authToken2;
 chai.use(chaiHttp);
 const { expect } = chai;
 const {
-  admin, attendant, update, newAttendant, wrongPassword, emptyField, spacedField,
+  admin, attendant, update, newAttendant, wrongPassword, emptyField, spacedField, newAttendant3,
 } = userDetails;
 describe('Users Endpoint API Test', () => {
   before((done) => {
@@ -39,7 +39,7 @@ describe('Users Endpoint API Test', () => {
     });
     it('it should not get all users if user not admin', (done) => {
       chai.request(app)
-        .get('/api/v1/auth/users')
+        .get('/api/v1/users')
         .set('Authorization', authToken2)
         .end((err, res) => {
           expect(res.body.message).to.eql('You are not an Admin');
@@ -49,7 +49,7 @@ describe('Users Endpoint API Test', () => {
     });
     it('should not get a user that does not exist', (done) => {
       chai.request(app)
-        .get('/api/v1/auth/50')
+        .get('/api/v1/users/50')
         .set('Authorization', authToken2)
         .end((err, res) => {
           expect(res.body.message).to.eql('No user found');
@@ -59,7 +59,7 @@ describe('Users Endpoint API Test', () => {
     });
     it('should get a user that exist', (done) => {
       chai.request(app)
-        .get('/api/v1/auth/3')
+        .get('/api/v1/users/3')
         .set('Authorization', authToken2)
         .end((err, res) => {
           expect(res.body.message).to.eql('Success');
@@ -70,7 +70,7 @@ describe('Users Endpoint API Test', () => {
     it('should not get a user that does with wrong token', (done) => {
       const wrongToken = `${authToken}somthing wronh`;
       chai.request(app)
-        .get('/api/v1/auth/50')
+        .get('/api/v1/users/50')
         .set('Authorization', wrongToken)
         .end((err, res) => {
           expect(res.body.message).to.eql('Kindly sign in');
@@ -80,7 +80,7 @@ describe('Users Endpoint API Test', () => {
     });
     it('should not get a user for non authenticated user', (done) => {
       chai.request(app)
-        .get('/api/v1/auth/1')
+        .get('/api/v1/users/1')
         .end((err, res) => {
           expect(res.body.message).to.eql('Kindly sign in');
           expect(res.status).to.equal(401);
@@ -89,7 +89,7 @@ describe('Users Endpoint API Test', () => {
     });
     it('it should get all users if user is admin', (done) => {
       chai.request(app)
-        .get('/api/v1/auth/users')
+        .get('/api/v1/users')
         .set('Authorization', authToken)
         .end((err, res) => {
           expect(res.body.message).to.eql('Success');
@@ -122,13 +122,13 @@ describe('Users Endpoint API Test', () => {
           done();
         });
     });
-    it('not create a user if username is not unique', (done) => {
+    it('not create a user if email is not unique', (done) => {
       chai.request(app)
         .post('/api/v1/auth/createUser')
         .set('Authorization', authToken)
         .send(admin)
         .end((err, res) => {
-          expect(res.body.message).to.eql('Username is taken');
+          expect(res.body.message).to.eql('email is taken');
           expect(res.status).to.equal(409);
           done();
         });
@@ -159,7 +159,7 @@ describe('Users Endpoint API Test', () => {
     it('it should not login user that does not exist', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
-        .send({ username: 'add', password: 'ijeomaa' })
+        .send({ email: 'add@gmail.com', password: 'ijeomaa' })
         .end((err, res) => {
           expect(res.body.message).to.eql('User does not exist');
           expect(res.status).to.equal(404);
@@ -189,23 +189,45 @@ describe('Users Endpoint API Test', () => {
           done();
         });
     });
+    it('should not create a user if role does not exist', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/createUser')
+        .set('Authorization', authToken)
+        .send(newAttendant3)
+        .end((err, res) => {
+          expect(res.body.message).to.eql('This role does not exist');
+          expect(res.status).to.equal(404);
+          done();
+        });
+    });
   });
   describe('PUT REQUESTS', () => {
     it('should update a user successfully', (done) => {
       chai.request(app)
-        .put('/api/v1/auth/4')
+        .put('/api/v1/users/4')
         .set('Authorization', authToken)
         .send(update)
         .end((err, res) => {
           expect(res.body.message).to.eql('User updated successfully');
           expect(res.body).to.have.property('userDetail');
-          expect(res.status).to.equal(201);
+          expect(res.status).to.equal(200);
+          done();
+        });
+    });
+    it('should not update a user if email is taken', (done) => {
+      chai.request(app)
+        .put('/api/v1/users/4')
+        .set('Authorization', authToken)
+        .send(update)
+        .end((err, res) => {
+          expect(res.body.message).to.eql('This email is taken');
+          expect(res.status).to.equal(409);
           done();
         });
     });
     it('should not update a user that does not exist', (done) => {
       chai.request(app)
-        .put('/api/v1/auth/10')
+        .put('/api/v1/users/10')
         .set('Authorization', authToken)
         .send(update)
         .end((err, res) => {
@@ -218,7 +240,7 @@ describe('Users Endpoint API Test', () => {
   describe('DELETE REQUESTS', () => {
     it('should delete a user', (done) => {
       chai.request(app)
-        .delete('/api/v1/auth/4')
+        .delete('/api/v1/users/4')
         .set('Authorization', authToken)
         .send(update)
         .end((err, res) => {
@@ -229,7 +251,7 @@ describe('Users Endpoint API Test', () => {
     });
     it('should not delete a user that does not exist', (done) => {
       chai.request(app)
-        .delete('/api/v1/auth/10')
+        .delete('/api/v1/users/10')
         .set('Authorization', authToken)
         .send(update)
         .end((err, res) => {

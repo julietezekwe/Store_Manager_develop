@@ -118,16 +118,31 @@ class CategoriesController {
     const { categoryName } = req.body;
     const { categoryId } = req.params;
     let categoryDetail;
-    pool.query({ text: 'SELECT id from Categories where id = $1', values: [categoryId] })
+    let oldCategory;
+    pool.query({ text: 'SELECT * from Categories where id = $1', values: [categoryId] })
       .then((found) => {
         if (found.rowCount === 1) {
-          const query = {
-            text: 'UPDATE Categories SET categoryName = $1 WHERE id = $2 RETURNING *',
-            values: [categoryName, categoryId],
-          };
-          pool.query(query).then((category) => {
-            categoryDetail = category.rows[0];
-            return res.status(201).json({ categoryDetail, message: 'Category updated successfully' });
+          oldCategory = found.rows[0].categoryname;
+
+          pool.query({
+            text: 'SELECT categoryName FROM Categories WHERE categoryName = $1',
+            values: [categoryName],
+          }).then((foundCat) => {
+            if (foundCat.rowCount) {
+              return res.status(409).json({ message: 'This category name already exists' });
+            }
+            pool.query({
+              text: 'UPDATE Products SET category = $1 WHERE category = $2',
+              values: [categoryName, oldCategory],
+            });
+            const query = {
+              text: 'UPDATE Categories SET categoryName = $1 WHERE id = $2 RETURNING *',
+              values: [categoryName, categoryId],
+            };
+            pool.query(query).then((category) => {
+              categoryDetail = category.rows[0];
+              return res.status(200).json({ categoryDetail, message: 'Category updated successfully' });
+            });
           });
         } else {
           return res.status(404).json({ message: 'Category does not exist', error: true });
@@ -149,27 +164,40 @@ class CategoriesController {
 
   static deleteCategory(req, res) {
     const { categoryId } = req.params;
-    const query = {
-      text: 'DELETE FROM Categories Where id = $1',
+    let oldCategory;
+    pool.query({
+      text: 'SELECT * FROM Categories WHERE id = $1',
       values: [categoryId],
-    };
-    pool.query(query).then((category) => {
-      const { rowCount } = category;
-      if (rowCount > 0) {
+    }).then((found) => {
+      if (!found.rowCount) {
         return (
-          res.status(200).json({
-            message: 'Successfully deleted category',
-            error: false,
+          res.status(404).json({
+            message: 'Category does not exist',
+            error: true,
           })
         );
       }
-      return (
-        res.status(404).json({
-          message: 'Category does not exist',
-          error: true,
-        })
-      );
-    }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
+      oldCategory = found.rows[0].categoryname;
+      pool.query({
+        text: 'UPDATE Products SET category = $1 WHERE category = $2',
+        values: ['Not Set', oldCategory],
+      });
+      const query = {
+        text: 'DELETE FROM Categories Where id = $1',
+        values: [categoryId],
+      };
+      pool.query(query).then((category) => {
+        const { rowCount } = category;
+        if (rowCount > 0) {
+          return (
+            res.status(200).json({
+              message: 'Successfully deleted category',
+              error: false,
+            })
+          );
+        }
+      }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
+    });
   }
 }
 

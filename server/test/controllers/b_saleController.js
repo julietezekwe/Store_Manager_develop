@@ -12,7 +12,7 @@ const {
   admin, attendant, attendant2,
 } = userDetails;
 const {
-  emptyField, emptyField1, validSale, invalidSale, invalidSale2,
+  emptyField, emptyField1, validSale, invalidSale, invalidSale2, multipleProduct,
 } = saleDetails;
 describe('Sales Endpoint API Test', () => {
   before((done) => {
@@ -173,6 +173,17 @@ describe('Sales Endpoint API Test', () => {
         .end((err, res) => {
           expect(res.body.message).to.eql('Successfully added sale(s)');
           expect(res.status).to.equal(201);
+          done();
+        });
+    });
+    it('it should not post sales if product appear more tha  once', (done) => {
+      chai.request(app)
+        .post('/api/v1/sales')
+        .set('Authorization', authToken2)
+        .send(multipleProduct)
+        .end((err, res) => {
+          expect(res.body.message).to.eql('Product can oly appear once, please increase the quantity');
+          expect(res.status).to.equal(400);
           done();
         });
     });

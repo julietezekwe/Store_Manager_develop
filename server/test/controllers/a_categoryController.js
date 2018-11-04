@@ -108,7 +108,18 @@ describe('Categories Endpoint API Test', () => {
         .send(validCategory)
         .end((err, res) => {
           expect(res.body.message).to.eql('Category updated successfully');
-          expect(res.status).to.equal(201);
+          expect(res.status).to.equal(200);
+          done();
+        });
+    });
+    it('it should not update if name exist ', (done) => {
+      chai.request(app)
+        .put('/api/v1/categories/2')
+        .set('Authorization', authToken)
+        .send(validCategory)
+        .end((err, res) => {
+          expect(res.body.message).to.eql('This category name already exists');
+          expect(res.status).to.equal(409);
           done();
         });
     });
