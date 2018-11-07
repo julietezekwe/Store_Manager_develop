@@ -32,7 +32,7 @@ describe('Products Endpoint API Test', () => {
   describe('GET REQUESTS', () => {
     it('it should get all product for authenticated user', (done) => {
       chai.request(app)
-        .get('/api/v1/products')
+        .get('/api/v1/All/products')
         .set('Authorization', authToken2)
         .end((err, res) => {
           expect(res.body.message).to.eql('Success');

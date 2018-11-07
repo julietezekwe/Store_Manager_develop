@@ -93,7 +93,7 @@ nav li {
     display: grid; 
     justify-content: center;
 }
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="email"] , input[type="password"] {
     width: 341px;
     height: 50px;
     margin-bottom: 26px;
