@@ -15,18 +15,34 @@ class ProductsController {
     *@memberof ProductsController
     */
   static getAllProducts(req, res) {
-    let ProductsModel;
-    const query = { text: 'SELECT * FROM Products' };
-    pool.query(query).then((Products) => {
-      ProductsModel = Products.rows;
-      return (
-        res.status(200).json({
-          ProductsModel,
-          message: 'Success',
-          error: false,
-        })
-      );
-    }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
+    if (req.params.categoryName !== 'All') {
+      const { categoryName } = req.params;
+      let ProductsModel;
+      const query = { text: 'SELECT * FROM Products WHERE LOWER(category) = LOWER($1)', values: [categoryName] };
+      pool.query(query).then((Products) => {
+        ProductsModel = Products.rows;
+        return (
+          res.status(200).json({
+            ProductsModel,
+            message: 'Success',
+            error: false,
+          })
+        );
+      }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
+    } else {
+      let ProductsModel;
+      const query = { text: 'SELECT * FROM Products' };
+      pool.query(query).then((Products) => {
+        ProductsModel = Products.rows;
+        return (
+          res.status(200).json({
+            ProductsModel,
+            message: 'Success',
+            error: false,
+          })
+        );
+      }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
+    }
   }
   /**
   *Add product
@@ -105,7 +121,6 @@ class ProductsController {
       }));
     }).catch(/* istanbul ignore next */err => (res.status(500).json(err)));
   }
-
   /**
   *Updates Product
   *@description Update product by ID

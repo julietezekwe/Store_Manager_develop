@@ -20,5 +20,3 @@ const toggleModalDelete= () => {
 const toggleModalEdit = () => {
     modalPanelEdit.classList.toggle("show-modal-panel");
 }
-
-

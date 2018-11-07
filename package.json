@@ -23,7 +23,8 @@
       "server/app.js",
       "dist",
       "server/middlewares/imageValidator.js",
-      "server/model/dbConfig.js"
+      "server/model/dbConfig.js",
+      "UI"
     ]
   },
   "repository": {

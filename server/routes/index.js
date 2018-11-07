@@ -57,7 +57,7 @@ router.delete('/users/:userId', idChecker, authenticate, isAdmin, deleteUser);
 // products endpoints
 router.post('/products', authenticate, isAdmin, addProductValidator, addProduct);
 router.get('/products/:productId', idChecker, authenticate, getProduct);
-router.get('/products', authenticate, getAllProducts);
+router.get('/:categoryName/products', authenticate, getAllProducts);
 router.put('/products/:productId/category', idChecker, authenticate, productCategoryValidator, productCategoryVerify, updateProductCategory);
 router.put('/products/:productId', idChecker, authenticate, isAdmin, addProductValidator, updateProduct);
 router.delete('/products/:productId', idChecker, authenticate, isAdmin, deleteProduct);

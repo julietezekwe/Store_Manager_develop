@@ -57,7 +57,7 @@ class SalesController {
 
   static getAllSalesRecords(req, res) {
     let SalesModel;
-    const query = { text: 'SELECT ps.productId, p.productName, p.description, ps.quantity, p.price FROM product_sales AS ps JOIN Products AS p ON ps.productId = p.id' };
+    const query = { text: 'SELECT ps.productId, p.productName, p.description,  ps.quantity, p.price, u.name, s.created_at FROM product_sales AS ps JOIN Sales AS s ON s.id = ps.salesId JOIN Users AS u ON u.id = s.sellerId JOIN Products AS p ON ps.productId = p.id' };
     pool.query(query).then((Sales) => {
       SalesModel = Sales.rows;
       return (
@@ -129,7 +129,7 @@ class SalesController {
     const { id } = req.authData;
     let saleDetail;
     const query = {
-      text: 'SELECT * FROM product_sales AS ps JOIN Sales as s ON ps.salesId = s.id JOIN Products as p ON p.id = ps.productId WHERE s.sellerId = $1',
+      text: 'SELECT ps.productId, ps.quantity, p.productName, p.price, s.created_at, ps.salesId FROM product_sales AS ps JOIN Sales as s ON ps.salesId = s.id JOIN Products as p ON p.id = ps.productId WHERE s.sellerId = $1',
       values: [id],
     };
     pool.query(query).then((attendantsSale) => {
