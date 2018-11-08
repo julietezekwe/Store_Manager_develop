@@ -29,6 +29,7 @@ class ProductValidator {
       errors.map(err => validationErrors.push(err.msg));
       return res.status(400).json({
         errors: validationErrors,
+        error: true,
       });
     }
     let error = false;
@@ -69,6 +70,7 @@ class ProductValidator {
       errors.map(err => validationErrors.push(err.msg));
       return res.status(400).json({
         errors: validationErrors,
+        error: true,
       });
     }
 

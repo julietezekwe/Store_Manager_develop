@@ -116,7 +116,7 @@ describe('Users Endpoint API Test', () => {
         .send(admin)
         .end((err, res) => {
           expect(res.body).to.be.a('object');
-          expect(res.body.message).eql('Success');
+          expect(res.body.message).eql('Successfully logged in');
           expect(res.body).to.have.property('token');
           expect(res.status).to.equal(200);
           done();

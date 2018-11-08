@@ -23,6 +23,7 @@ class UserValidator {
       errors.map(err => validationErrors.push(err.msg));
       return res.status(400).json({
         errors: validationErrors,
+        error: true,
       });
     }
     const {
@@ -70,6 +71,7 @@ class UserValidator {
       errors.map(err => validationErrors.push(err.msg));
       return res.status(400).json({
         errors: validationErrors,
+        error: true,
       });
     }
     req.body.username = email.replace(/\s{2,}/g, '').trim().toLowerCase();

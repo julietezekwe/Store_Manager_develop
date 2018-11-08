@@ -105,7 +105,7 @@ class UsersController {
           const token = jwt.sign(authDetail, secret, { expiresIn: '100hr' });
 
           return res.status(200).json({
-            message: 'Success',
+            message: 'Successfully logged in',
             token,
             authDetail,
           });
@@ -176,7 +176,7 @@ class UsersController {
             text: 'SELECT email FROM Users WHERE email = $1',
             values: [email],
           }).then((foundEmail) => {
-            if (foundEmail.rowCount) return res.status(409).json({ message: 'This email is taken' });
+            if (foundEmail.rowCount) return res.status(409).json({ message: 'This email is taken', error: true });
             const query = {
               text: 'UPDATE Users SET name = $1, username = $2, email = $3, password = $4, role = $5 WHERE id = $6 RETURNING *',
               values: [name, username, email, hash, role, userId],

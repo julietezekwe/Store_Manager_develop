@@ -19,6 +19,7 @@ class SalesValidator {
       errors.map(err => validationErrors.push(err.msg));
       return res.status(400).json({
         errors: validationErrors,
+        error: true,
       });
     }
     const { sales } = req.body;

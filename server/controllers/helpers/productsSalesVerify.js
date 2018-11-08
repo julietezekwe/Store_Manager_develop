@@ -21,12 +21,12 @@ const productsSalesVerify = (req, res, next) => {
     }).then((product) => {
       if (product.rowCount < 1) {
         return (
-          res.status(404).json({ message: 'This product does not exist' })
+          res.status(404).json({ message: 'This product does not exist', error: true })
         );
       }
       if (product.rows[0].quantity < Number(quantity)) {
         return (
-          res.status(403).json({ message: `${product.rows[0].productname} quantity provided is more than in stock` })
+          res.status(403).json({ message: `${product.rows[0].productname} quantity provided is more than in stock`, error: true })
         );
       }
       totalprice += Number(product.rows[0].price) * Number(quantity);

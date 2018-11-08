@@ -17,6 +17,7 @@ class CategoryValidator {
       errors.map(err => validationErrors.push(err.msg));
       return res.status(400).json({
         errors: validationErrors,
+        error: true,
       });
     }
     const categoryName = req.body.categoryName;

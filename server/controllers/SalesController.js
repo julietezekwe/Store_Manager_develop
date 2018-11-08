@@ -86,7 +86,7 @@ class SalesController {
     let query;
     pool.query({ text: 'SELECT * FROM Sales WHERE id = $1', values: [salesId] }).then((saleId) => {
       if (!saleId.rowCount) {
-        return res.status(404).json({ message: 'This sale does not exist' });
+        return res.status(404).json({ message: 'This sale does not exist', error: true });
       }
       /* istanbul ignore next */ if (role === 'admin') {
         query = {

@@ -64,7 +64,7 @@ class ProductsController {
       values: [productName],
     }).then((found) => {
       if (found.rowCount) {
-        return res.status(409).json({ message: 'This product already exist, kindly update' });
+        return res.status(409).json({ message: 'This product already exist, kindly update', error: true });
       }
       const query = {
         text: 'INSERT INTO Products(productName, description, image, price, quantity, min) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
@@ -144,7 +144,7 @@ class ProductsController {
             values: [productName],
           }).then((foundOne) => {
             if (foundOne.rowCount) {
-              return res.status(409).json({ message: 'This product already exist, kindly update' });
+              return res.status(409).json({ message: 'This product already exist, kindly update', error: true });
             }
             const query = {
               text: 'UPDATE Products SET productName = $1, description = $2, image = $3, price = $4, quantity = $5, min = $6 WHERE id = $7 RETURNING *',
@@ -152,7 +152,7 @@ class ProductsController {
             };
             pool.query(query).then((product) => {
               productDetail = product.rows[0];
-              return res.status(200).json({ productDetail, message: 'Successfully updated product' });
+              return res.status(200).json({ productDetail, message: 'Successfully updated product', error: false });
             });
           });
         } else {
